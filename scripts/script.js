@@ -9,7 +9,7 @@ const optionsElement = document.getElementById("options");
 const statusAnswerElement = document.getElementById("status-answer");
 const scoreElement = document.getElementById("score");
 const imgElement = document.getElementById("img");
-
+const totalQuestion = document.getElementById("p-total-question");
 
 const doneQuestions = [];
 let currentSection= 0; 
@@ -19,9 +19,7 @@ let score = 0;
 let yourAnswer = "";
 let isChecked = false;
 
-
-
-console.log('questions.length: '+questions.length);
+totalQuestion.textContent = questions.length+" Questions";
 
 sections[currentSection].style.display = 'flex';
 
@@ -40,8 +38,6 @@ btnSkip.addEventListener('click', function() {
   }while(previousQuestionIndex === currentQuestionIndex || doneQuestions.includes(currentQuestionIndex));
 
   displayQuestion();
-  console.log('previousQuestionIndex: '+previousQuestionIndex);
-  console.log('currentQuestionIndex: '+currentQuestionIndex);
 });
 
 
@@ -51,7 +47,6 @@ btnNext.addEventListener("click", function(){
   yourAnswer = "";
   isChecked = false;
   if(doneQuestions.length !== questions.length){
-    console.log('not done');
     while(doneQuestions.includes(currentQuestionIndex)){
       currentQuestionIndex = randomNumber();
     }
@@ -61,12 +56,10 @@ btnNext.addEventListener("click", function(){
     btnNext.style.display = "none";
     statusAnswerElement.style.display = "none";
   }else{
-    console.log('done');
     scoreElement.textContent = score+" / "+ questions.length;
     goSection(2);
   }
   diff = questions.length - doneQuestions.length;
-  console.log("diff: "+diff);
   if (diff === 1){
     btnSkip.style.display = "none";
   }
@@ -102,7 +95,7 @@ function displayQuestion(){
   questionElement.textContent = currentQuestion.question;
   optionsElement.innerHTML = "";
   if (currentQuestion.img === null){
-    console.log('null');
+    console.log('img-null');
   }
   imgElement.src = currentQuestion.img;
   yourAnswer = ""; //reset
@@ -146,9 +139,7 @@ function checkAnswer(selectedOption) {
     }else{
       showStatusAnswer("Wrong!");
     }
-    console.log(currentQuestionIndex);
     doneQuestions.push(currentQuestionIndex);
-    console.log(doneQuestions);
   }
 }
 
