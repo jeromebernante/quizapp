@@ -137,7 +137,10 @@ section ul.options{
   padding: 0;
 }
 section ul.options li{
+  display: flex;
+  flex-wrap: wrap;
   border: 1px solid gray;
+  max-width: 50%;
   min-width: 50%;
   padding: 1rem;
   list-style: none;
