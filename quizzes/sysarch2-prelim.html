@@ -27,6 +27,9 @@
 
     <section class="section">
       <box class="nav-question">
+        <p id="progress">
+          <!-- progress here -->
+        </p>
         <box id="status-answer"></box>
         <div id="btn-skip" class="button" >SKIP</div>
       </box>
@@ -36,7 +39,7 @@
       </p>
 
       <p id="explanation" class="p-explanation">
-        <!-- explanation -->sdsd
+        <!-- explanation -->
       </p>
 
       <div class="flex-col">
@@ -48,7 +51,7 @@
         <!-- Options will be populated here -->
       </ul>
 
-      <input type="text" id="input-answer" placeholder="your answer here...">
+      <input type="text" id="input-answer" placeholder="your answer here..." autocomplete="off">
       
       <box class="nav-question">
           <div id="btn-answer" class="button">Answer</div>
@@ -57,8 +60,11 @@
     </section>
 
     <section class="section result">
-      <p class="title">SYSARCH2 PRELIM</p>
+      <p class="title">SYSARCH2 PRELIM SCORE</p>
       <p id="score" class="score"></p>
+      <box class="box-btn-replay">
+        <img id="btn-replay" src="../images/icon-replay.png" alt="">
+      </box>
     </section>
 
     
@@ -98,21 +104,261 @@
   //   explanation: "",
   //   correctAnswer: "System Architecture"
   // },
+  // {
+  //   question: "__ include elements of both software and hardware and is used to enable design of such a composite system.",
+  //   img: "",
+  //   options: ["System Integration", "Integration and Architecture", "Architecture", "System Architecture"],
+  //   input: "false",
+  //   explanation: "",
+  //   correctAnswer: "System Architecture"
+  // },
+  // {
+  //   question: "H______ C________s one of The 5 components typically included in the system architecture of an information system.",
+  //   img: "",
+  //   options: ["", "", "", ""],
+  //   input: "true",
+  //   explanation: "\"Hardware Components\" This component refers to the physical equipment and devices that make up the information system. It includes servers, computers, storage devices, networking equipment, and any other hardware necessary for the system to function.",
+  //   correctAnswer: "Hardware Components"
+  // },
+  // {
+  //   question: "S______ C________s one of The 5 components typically included in the system architecture of an information system.",
+  //   img: "",
+  //   options: ["", "", "", ""],
+  //   input: "true",
+  //   explanation: "\"Software Components\" encompass the programs, applications, and operating systems that run on the hardware. This includes the software used for data processing, user interfaces, database management, and any other software elements required by the system.",
+  //   correctAnswer: "Software Components"
+  // },
+  // {
+  //   question: "P______ R________s one of The 5 components typically included in the system architecture of an information system.",
+  //   img: "",
+  //   options: ["", "", "", ""],
+  //   input: "true",
+  //   explanation: "\"People resources\" refer to the human element in the information system. This component includes individuals such as users, administrators, developers, and other personnel who interact with the system, manage it, or develop software for it.",
+  //   correctAnswer: "People Resources"
+  // },
+  // {
+  //   question: "D______s a__ S______ D_____s one of The 5 components typically included in the system architecture of an information system.",
+  //   img: "",
+  //   options: ["", "", "", ""],
+  //   input: "true",
+  //   explanation: "\"Databases and Storage Device\" This component focuses on the storage and management of data within the system. It includes databases, data storage devices (e.g., hard drives, SSDs), and data management software used to store, retrieve, and manipulate data.",
+  //   correctAnswer: "Databases and Storage Devices"
+  // },
+  // {
+  //   question: "N______ a__ C____________s C________s one of The 5 components typically included in the system architecture of an information system.",
+  //   img: "",
+  //   options: ["", "", "", ""],
+  //   input: "true",
+  //   explanation: "\"Network and Communications Components\" are essential for connecting different parts of the system and facilitating communication. This includes network infrastructure, protocols, routers, switches, and any communication channels used to transmit data between system components.",
+  //   correctAnswer: "Network and Communications Components"
+  // },
   {
-    question: "__ include elements of both software and hardware and is used to enable design of such a composite system.",
+    question: "__ is the process of bringing together the component subsystems into one system and ensuring that the subsystems function together as a cohesive whole.",
     img: "",
-    options: ["System Integration", "Integration and Architecture", "Architecture", "System Architecture"],
+    options: ["System Integration", "System Architecture"],
     input: "false",
     explanation: "",
-    correctAnswer: "System Architecture"
+    correctAnswer: "System Integration"
   },
   {
-    question: "H______ C_________ one of The 5 components typically included in the system architecture of an information system.",
+    question: "Which is true about System Integration Advantage?",
+    img: "",
+    options: ["Increased Access Difficulty ", "Increased Time processes", "Increased Employee", "Increased Productivity"],
+    input: "false",
+    explanation: "integrated systems allow for centralized control over the daily processes which adds to the efficiency of the entire workflow. A company get more work done in less time due to the fact that employees can use all apps and data they need from one entry point.",
+    correctAnswer: "Increased Productivity"
+  },
+  {
+    question: "Which is true about System Integration Advantage?",
+    img: "",
+    options: ["Increasing data complexity and causing delays", "Faster Decision-making", "Requiring additional approval layers for decisions", "Limiting access to relevant information for decision-makers"],
+    input: "false",
+    explanation: "data is no longer scattered across siloed storages. So, to perform analytics, you don't need to manually download and export it to the centralized repository. instead, with a holistic view of all information, you can extract useful business insights to make good decisions more rapidly.",
+    correctAnswer: "Faster Decision-making"
+  },
+  {
+    question: "Which is true about System Integration Advantage?",
+    img: "",
+    options: ["Reducing efficiency and increasing resource wastage", "Adding unnecessary complexity to processes", "Increasing overall operational expenses", "Cost-effectiveness"],
+    input: "false",
+    explanation: "more often than not, system integration comes at a lower cost than replacing all disjointed parts with a new single system. Not to mention the tricky process of implementing new computer infrastructures.",
+    correctAnswer: "Cost-effectiveness"
+  },
+  {
+    question: "Types of System Integration hint: LSI",
     img: "",
     options: ["", "", "", ""],
     input: "true",
-    explanation: "Hardware Components: This component refers to the physical equipment and devices that make up the information system. It includes servers, computers, storage devices, networking equipment, and any other hardware necessary for the system to function.",
-    correctAnswer: "Hardware Components"
+    explanation: "",
+    correctAnswer: "Legacy System Integration"
+  },
+  {
+    question: "Types of System Integration hint: EAI",
+    img: "",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "",
+    correctAnswer: "Enterprise Application Integration"
+  },
+  {
+    question: "Types of System Integration hint: TpSI",
+    img: "",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "",
+    correctAnswer: "Third-party System Integration"
+  },
+  {
+    question: "Types of System Integration hint: BtbI",
+    img: "",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "",
+    correctAnswer: "Business-to-business Integration"
+  },
+  {
+    question: "What does API stand for?",
+    img: "",
+    options: ["Advanced Program Integration", "Application Programming Interface", "Application Program Interaction", "Advanced Protocol Integration"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Application Programming Interface"
+  },
+  {
+    question: "1 of 10 Popular API examples HINT: T_____r API",
+    img: "",
+    options: ["", "", "", ""],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Twitter"
+  },
+  {
+    question: "1 of 10 Popular API examples HINT: C_____T API",
+    img: "",
+    options: ["", "", "", ""],
+    input: "false",
+    explanation: "",
+    correctAnswer: "ChatGPT"
+  },
+  {
+    question: "1 of 10 Popular API examples HINT: G_____ M__ API",
+    img: "",
+    options: ["", "", "", ""],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Google Map"
+  },
+  {
+    question: "1 of 10 Popular API examples HINT: D_____d API",
+    img: "",
+    options: ["", "", "", ""],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Discord"
+  },
+  {
+    question: "1 of 10 Popular API examples HINT: G____b API",
+    img: "",
+    options: ["", "", "", ""],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Github"
+  },
+  {
+    question: "1 of 10 Popular API examples HINT: P____l API",
+    img: "",
+    options: ["", "", "", ""],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Paypal"
+  },
+  {
+    question: "1 of 10 Popular API examples HINT: e_______e API",
+    img: "",
+    options: ["", "", "", ""],
+    input: "false",
+    explanation: "",
+    correctAnswer: "eCommerce"
+  },
+  {
+    question: "1 of 10 Popular API examples HINT: Y_____e API",
+    img: "",
+    options: ["", "", "", ""],
+    input: "false",
+    explanation: "",
+    correctAnswer: "YouTube"
+  },
+  {
+    question: "1 of 10 Popular API examples HINT: I_______m API",
+    img: "",
+    options: ["", "", "", ""],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Instagram"
+  },
+  {
+    question: "1 of 10 Popular API examples HINT: S___k API",
+    img: "",
+    options: ["", "", "", ""],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Slack"
+  },
+  {
+    question: "TYPES of API By USE CASE : that publicly available APIs that anyone can use to access a company's data.",
+    img: "",
+    options: ["Open APIs", "Internal APIs", "Partner APIs", "REST API"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Open APIs"
+  },
+  {
+    question: "TYPES of API By USE CASE : that APIs used within a company/organization to communicate information between internal apps.",
+    img: "",
+    options: ["Open APIs", "Internal APIs", "Partner APIs", "REST API"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Internal APIs"
+  },
+  {
+    question: "TYPES of API By USE CASE : APIs designed specifically for third-party developers/partners, and are more limited in access.",
+    img: "",
+    options: ["Open APIs", "Internal APIs", "Partner APIs", "REST API"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Partner APIs"
+  },
+  {
+    question: "TYPES of API By PROTOCOLS : a widely used architecture for building web service using HTTP methods like GET, POST, and DELETE format to interact with data resource. REST APIs typically return data in JSON or XML formal.",
+    img: "",
+    options: ["Internal APIs", "Partner APIs", "REST API", "SOAP API"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "REST API"
+  },
+  {
+    question: "TYPES of API By PROTOCOLS : a messaging protocol used to exchange structured data between web services. SOAP APIs use the XML format for data exchange, and they typically require more bandwidth and processing power than REST APIs. SOAP APIs support more advanced features like transaction, security, and reliability.",
+    img: "",
+    options: ["Internal APIs", "Partner APIs", "REST API", "SOAP API"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "SOAP API"
+  },
+  {
+    question: "TYPES of API By PROTOCOLS : a query language for APIs that was developed by Facebook. GraphQL APIs allow developers to retrieve only the data they need, using a single query. This can result in more efficient data retrieval and reduced network traffic.",
+    img: "",
+    options: ["REST API", "SOAP API", "GraphQL API", "Webhook API"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "GraphQL API"
+  },
+  {
+    question: "TYPES of API By PROTOCOLS : a way to send real-time data from one application to another. Webhook APIs use a simple HTTP POST request to sed data to a URL specified by the recipient application. The recipient application can then take action on the data in real-time. Webhook APIs are often even-driven application, such as chatbots or notification systems.",
+    img: "",
+    options: ["REST API", "SOAP API", "GraphQL API", "Webhook API"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Webhook API"
   },
 ];
 

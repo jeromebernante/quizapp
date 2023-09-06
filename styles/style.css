@@ -15,6 +15,10 @@
   border: 1px solid gray;
   cursor: pointer;
   padding: .5rem 1rem;
+  user-select: none;
+  -webkit-user-select: none; /* For Safari/Chrome */
+  -moz-user-select: none; /* For Firefox */
+  -ms-user-select: none; /* For Edge */
 }
 
 .flex-col, html{
@@ -53,6 +57,7 @@ footer{
   height: 2.5rem;
   margin-right: 1rem;
 }
+
 nav{
   background-color: white;
   width: 100%;
@@ -127,7 +132,6 @@ section .p-question {
   margin-bottom: 1rem;
 }
 section .p-explanation {
-  display: none;
   border: 1px solid gray;
   font-weight: bold;
   padding: 1rem;
@@ -181,11 +185,18 @@ section.result p.title, section.result p.score{
 }
 #img{
   width: 100%;
-  
 }
 
 #input-answer{
-  display: none;
   width: 100%;
   margin-bottom: 1rem;
+}
+.box-btn-replay{
+  display: flex;
+  justify-content: center;
+}
+#btn-replay{
+  width: 5rem;
+  height: 5rem;
+  cursor: pointer;
 }
