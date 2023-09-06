@@ -5,11 +5,15 @@ const btnSkip = document.getElementById('btn-skip');
 const btnAnswer = document.getElementById('btn-answer');
 const btnNext = document.getElementById('btn-next');
 const questionElement = document.getElementById("question");
+const explanationElement = document.getElementById("explanation");
 const optionsElement = document.getElementById("options");
+var inputAnswerElement = document.getElementById("input-answer");
 const statusAnswerElement = document.getElementById("status-answer");
 const scoreElement = document.getElementById("score");
 const imgElement = document.getElementById("img");
 const totalQuestion = document.getElementById("p-total-question");
+
+
 
 const doneQuestions = [];
 let currentSection= 0; 
@@ -42,6 +46,7 @@ btnSkip.addEventListener('click', function() {
 
 
 btnAnswer.addEventListener("click", () => checkAnswer(yourAnswer));
+
 
 btnNext.addEventListener("click", function(){
   yourAnswer = "";
@@ -101,12 +106,19 @@ function displayQuestion(){
   yourAnswer = ""; //reset
   isChecked = false;
 
-  currentQuestion.options.forEach((option, index) => {
-    const li = document.createElement("li");
-    li.textContent = option;
-    li.addEventListener("click", () => highlightYourAnswer(option));
-    optionsElement.appendChild(li);
-  });
+  console.log(currentQuestion.question);
+  if(currentQuestion.input === "true"){
+    inputAnswerElement.style.display = "block";
+  }else{
+    inputAnswerElement.style.display = "none";
+    currentQuestion.options.forEach((option, index) => {
+      const li = document.createElement("li");
+      li.textContent = option;
+      li.addEventListener("click", () => highlightYourAnswer(option));
+      optionsElement.appendChild(li);
+    });
+  }
+
 }
 
 function highlightYourAnswer(option){
@@ -123,24 +135,44 @@ function highlightYourAnswer(option){
       }
     });
   }
-
 }
 
+
+
 function checkAnswer(selectedOption) {
-  if(yourAnswer !== ""){
-    isChecked = true;
-    showButtonNext();
-    const currentQuestion = questions[currentQuestionIndex];
-    highlightCorrectAnswer(currentQuestion.correctAnswer);
-    showStatusAnswer();
-    if (selectedOption === currentQuestion.correctAnswer) {
-      score++;
-      showStatusAnswer("Correct!");
+  const currentQuestion = questions[currentQuestionIndex];
+  var inputAnswerValue = inputAnswerElement.value.trim();
+  if (currentQuestion.input === "true") {
+    if(inputAnswerValue != ""){
+      isChecked = true;
+      showButtonNext();
+      showStatusAnswer();
+      if (inputAnswerValue === currentQuestion.correctAnswer) {
+        score++;
+        showStatusAnswer("Correct!");
+      }else{
+        showStatusAnswer("Wrong!");
+      }
+      doneQuestions.push(currentQuestionIndex);
     }else{
-      showStatusAnswer("Wrong!");
+      console.log('input is empty');
     }
-    doneQuestions.push(currentQuestionIndex);
+  }else{
+    if(yourAnswer !== ""){
+      isChecked = true;
+      showButtonNext();
+      highlightCorrectAnswer(currentQuestion.correctAnswer);
+      showStatusAnswer();
+      if (selectedOption === currentQuestion.correctAnswer) {
+        score++;
+        showStatusAnswer("Correct!");
+      }else{
+        showStatusAnswer("Wrong!");
+      }
+      doneQuestions.push(currentQuestionIndex);
+    }
   }
+
 }
 
 function highlightCorrectAnswer(option){

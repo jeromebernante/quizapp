@@ -126,6 +126,14 @@ section .p-question {
   padding: 1rem;
   margin-bottom: 1rem;
 }
+section .p-explanation {
+  display: none;
+  border: 1px solid gray;
+  font-weight: bold;
+  padding: 1rem;
+  color: blue;
+  margin-bottom: 1rem;
+}
 section .img-question{
   max-height: 300px;
   margin-bottom: auto;
@@ -174,4 +182,10 @@ section.result p.title, section.result p.score{
 #img{
   width: 100%;
   
+}
+
+#input-answer{
+  display: none;
+  width: 100%;
+  margin-bottom: 1rem;
 }
