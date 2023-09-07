@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles/style.css">
+  <title>Quiz App By Jerome</title>
+</head>
+<body class="flex-col">
+  <nav class="flex-row">
+    <img class="icon" src="../images/icon-quiz.png" alt="">
+    <span>NET2 PRELIM</span>
+    <a href="../index.html"><img class="icon" src="../images/icon-back.png" alt=""></a>
+  </nav>
+  <main class="flex-col height-max">
+
+    <section class="section cover height-max">
+      <header>
+        <p>NET2 PRELIM</p>
+        <p id="p-total-question"></p>
+      </header>
+      <box>
+        <img id="btn-play" src="../images/icon-play.png" alt="">
+      </box>
+    </section>
+
+    <section class="section">
+      <box class="nav-question">
+        <p id="progress">
+          <!-- progress here -->
+        </p>
+        <box id="status-answer"></box>
+        <div id="btn-skip" class="button" >SKIP</div>
+      </box>
+
+      <p id="question" class="p-question">
+        <!-- question here -->
+      </p>
+
+      <p id="explanation" class="p-explanation">
+        <!-- explanation -->
+      </p>
+
+      <div class="flex-col">
+        <!-- image here -->
+        <img id="img" src="" alt="">
+      </div>
+
+      <ul id="options" class="options">
+        <!-- Options will be populated here -->
+      </ul>
+
+      <input type="text" id="input-answer" placeholder="your answer here..." autocomplete="off">
+      
+      <box class="nav-question">
+          <div id="btn-answer" class="button">Answer</div>
+          <div id="btn-next" class="button">Next</div>
+      </box>
+    </section>
+
+    <section class="section result">
+      <p class="title">NET2 PRELIM SCORE</p>
+      <p id="score" class="score"></p>
+      <box class="box-btn-replay">
+        <img id="btn-replay" src="../images/icon-replay.png" alt="">
+      </box>
+    </section>
+
+    
+  </main>
+</body>
+<script>
+  const questions = [
+  {
+    question: "Networking Components: _______ are computers that provide information to end devices.",
+    img: "",
+    options: ["Routers", "Clients", "Servers", "Switches"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Servers"
+  },
+  {
+    question: "Categories of Network Components",
+    img: "",
+    options: ["Routers, Firewalls, and Switches", "Computers, Printers, and Scanners", "Devices, Media, and Services", "Software, Hardware, and Data"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Devices, Media, and Services"
+  },
+  {
+    question: "An _____ is where a message originates from or where it is received. Data originates with an _____, flows through the network, and arrives at an end device.",
+    img: "",
+    options: ["Intermediate devices", "Network hub", "Network administrator", "End devices"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "End devices"
+  },
+  {
+    question: "this interconnects end devices. Example include switches, wireless access points, routers, and firewalls.",
+    img: "",
+    options: ["Intermediate devices", "Network hub", "Network administrator", "End devices"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Intermediate devices"
+  },
+  {
+    question: "Which of the following are examples of end devices in a network environment?",
+    img: "",
+    options: ["Routers and switches", "Servers and data centers", "Desktop computer and laptop", "Cables and connectors"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Desktop computer and laptop"
+  },
+  {
+    question: "Which of the following devices are considered intermediary devices in a network setup?",
+    img: "",
+    options: ["Desktop computers and laptops", "Wireless routers and LAN switches", "Printers and IP phones", "Servers and data centers"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Wireless routers and LAN switches"
+  },
+  {
+    question: "Which of the following devices are Network Media?",
+    img: "",
+    options: ["LAN Media, WAN Media, Wireless Media", "Router Media, Switch Media, Fiber Media"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "LAN Media, WAN Media, Wireless Media"
+  },
+  {
+    question: "What are the two primary types of network topology?",
+    img: "",
+    options: ["Wired Topology and Wireless Topology", "Physical Topology and Logical Topology", "Star Topology and Bus Topology", "LAN Topology and WAN Topology"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Physical Topology and Logical Topology"
+  },
+  {
+    question: "Sizes of Network: This network connect a few computers to each other and the Internet.",
+    img: "",
+    options: ["Small Home Networks", "Small Office/Home Office", "Medium to Large Network", "World Wide Networks"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Small Home Networks"
+  },
+  {
+    question: "Sizes of Network: This network enables computer within a home or remote office to connect to a corporate network.",
+    img: "",
+    options: ["Small Home Networks", "Small Office/Home Office", "Medium to Large Network", "World Wide Networks"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Small Office/Home Office"
+  },
+  {
+    question: "Sizes of Network: This network have many locations with hundreds or thousands of interconnected computers.",
+    img: "",
+    options: ["Small Home Networks", "Small Office/Home Office", "Medium to Large Network", "World Wide Networks"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Medium to Large Network"
+  },
+  {
+    question: "Sizes of Network: This network connects hundreds of millions of computers world-wide - such as the internet.",
+    img: "",
+    options: ["Small Home Networks", "Small Office/Home Office", "Medium to Large Network", "World Wide Networks"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "World Wide Networks"
+  },
+  {
+    question: "Common types of networks: _____ is a network infrastructure that spans a small geographical area.",
+    img: "",
+    options: ["Local Area Network (LAN)", "Wide Area Network (WAN)", "The Internet", "Intranets and Extranets"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Local Area Network (LAN)"
+  },
+  {
+    question: "Common types of networks: _____ is a network infrastructure that spans a wide geographical area.",
+    img: "",
+    options: ["Local Area Network (LAN)", "Wide Area Network (WAN)", "The Internet", "Intranets and Extranets"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Wide Area Network (WAN)"
+  },
+  {
+    question: "is a worldwide collection of interconnected LANs and WANs.",
+    img: "",
+    options: ["Local Area Network (LAN)", "Wide Area Network (WAN)", "The Internet", "Intranets and Extranets"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "The Internet"
+  },
+  {
+    question: "refers to the technologies that support the infrastructure that moves data across the network.",
+    img: "",
+    options: ["Data Processing", "Network Architecture", "Data Encryption", "Routing Protocols"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Network Architecture"
+  },
+  {
+    question: "S______s are dedicated, specialized computers. It contains Central Processing Unit (CPU), Random Access Memory (RAM) and Operating System.",
+    img: "",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "Switches",
+    correctAnswer: "Switches"
+  },
+  {
+    question: "Parts of Operating System.",
+    img: "",
+    options: ["Software, Hardware, and Network", "Shell, Kernel, and Hardware", "Application, Database, and Middleware", "RAM, CPU, and GPU"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Shell, Kernel, and Hardware"
+  },
+  {
+    question: "Parts of Operating System: The user interface that allows users to request specific tasks from the computer. These requests can be made either through the CLI or GUI interfaces.",
+    img: "",
+    options: ["Kernel", "Hardware", "Shell", "BIOS"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Shell"
+  },
+  {
+    question: "Parts of Operating System: Communicates between the hardware and software of a computer and manages how hardware resources are used to meet software requirements.",
+    img: "",
+    options: ["Kernel", "Hardware", "Shell", "BIOS"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Kernel"
+  },
+  {
+    question: "Parts of Operating System: The physical part of a computer including underlying electronics.",
+    img: "",
+    options: ["Kernel", "Hardware", "Shell", "BIOS"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Hardware"
+  },
+  {
+    question: "is volatile memory used for temporary data storage.",
+    img: "",
+    options: ["RAM", "NVRAM", "VRAM", "Flash Memory"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "RAM"
+  },
+  {
+    question: "is typically used to store the startup configuration file. This is the configuration that the switch loads when it boots up. It ensures that the switch retains its configuration settings even after a power cycle.",
+    img: "",
+    options: ["RAM", "NVRAM", "VRAM", "Flash Memory"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "NVRAM"
+  },
+  {
+    question: "The switch's OS and firmware are typically stored in ?",
+    img: "",
+    options: ["RAM", "NVRAM", "VRAM", "Flash Memory"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Flash Memory"
+  },
+  {
+    question: "This mode allow a limited number of basic monitoring commands and is often referred to as view-only mode.",
+    img: "",
+    options: ["Switch>", "Switch#", "Switch(config)#", "Switch(config-if)#"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Switch>"
+  },
+  {
+    question: "This mode, be default, allows all monitoring commands as well as execution of configuration and management commands.",
+    img: "",
+    options: ["User EXEC Mode", "Privileged EXEC Mode"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "User EXEC Mode"
+  },
+  {
+    question: "This mode, be default, allows all monitoring commands as well as execution of configuration and management commands.",
+    img: "",
+    options: ["User EXEC Mode", "Privileged EXEC Mode"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Privileged EXEC Mode"
+  },
+  {
+    question: "User EXEC Mode",
+    img: "",
+    options: ["Switch>", "Switch#", "Switch(config)#", "Switch(config-if)#"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Switch>"
+  },
+  {
+    question: "Privileged EXEC Mode",
+    img: "",
+    options: ["Switch>", "Switch#", "Switch(config)#", "Switch(config-if)#"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Switch#"
+  },
+  {
+    question: "Global Configuration Mode",
+    img: "",
+    options: ["Switch>", "Switch#", "Switch(config)#", "Switch(config-if)#"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Switch(config)#"
+  },
+  {
+    question: "Global Interface Mode",
+    img: "",
+    options: ["Switch#", "Switch(config)#", "Switch(config-if)#", "Switch(config-line)#"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Switch(config-if)#"
+  },
+  {
+    question: "Global Line Mode",
+    img: "",
+    options: ["Switch#", "Switch(config)#", "Switch(config-if)#", "Switch(config-line)#"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Switch(config-line)#"
+  },
+  {
+    question: "User EXEC Mode to Privileged EXEC Mode",
+    img: "../images/question-cisco01.png",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "enable",
+    correctAnswer: "enable"
+  },
+];
+
+</script>
+<script src="../scripts/script.js"></script>
+</html>
+
+
