@@ -273,7 +273,7 @@
     correctAnswer: "Switch>"
   },
   {
-    question: "This mode, be default, allows all monitoring commands as well as execution of configuration and management commands.",
+    question: "This mode allow a limited number of basic monitoring commands and is often referred to as view-only mode.",
     img: "",
     options: ["User EXEC Mode", "Privileged EXEC Mode"],
     input: "false",
@@ -329,13 +329,126 @@
     correctAnswer: "Switch(config-line)#"
   },
   {
-    question: "User EXEC Mode to Privileged EXEC Mode",
-    img: "../images/question-cisco01.png",
+    question: "In User EXEC Mode to Privileged EXEC Mode",
+    img: "../images/question-cisco-switchuser.png",
     options: ["", "", "", ""],
     input: "true",
     explanation: "enable",
     correctAnswer: "enable"
   },
+  {
+    question: "In Privileged-EXEC mode to User-EXEC mode",
+    img: "../images/question-cisco-switchprivileged.png",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "disable",
+    correctAnswer: "disable"
+  },
+  {
+    question: "In Privileged-EXEC mode to Global Configuration Mode",
+    img: "../images/question-cisco-switchprivileged.png",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "configure terminal",
+    correctAnswer: "configure terminal"
+  },
+  {
+    question: "In Global Configuration Mode to Privileged -EXEC Mode or go down 1 step",
+    img: "../images/question-cisco-switchconfig.png",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "exit",
+    correctAnswer: "exit"
+  },
+  {
+    question: "In Global Configuration Mode change the name Switch to Lab_A",
+    img: "../images/question-cisco-switchconfig.png",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "hostname Lab_A",
+    correctAnswer: "hostname Lab_A"
+  },
+  {
+    question: "In Global Configuration Mode configure an encrypted Privileged-EXEC Mode password. Password would be grc123",
+    img: "../images/question-cisco-lab_aconfig.png",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "enable secret grc123",
+    correctAnswer: "enable secret grc123"
+  },
+  {
+    question: "In Global Configuration Mode to line console",
+    img: "../images/question-cisco-lab_aconfig.png",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "line console 0",
+    correctAnswer: "line console 0"
+  },
+  {
+    question: "Configure line console password. Password would be letmein",
+    img: "../images/question-cisco-lab_aline.png",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "password letmein",
+    correctAnswer: "password letmein"
+  },
+  {
+    question: "After you config line console password to letmein what is next?",
+    img: "../images/question-cisco-lab_alineletmein.png",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "login",
+    correctAnswer: "login"
+  },
+  {
+    question: "in Global Line Mode to line vty",
+    img: "../images/question-cisco-lab_aconfig.png",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "line vty 0 15",
+    correctAnswer: "line vty 0 15"
+  },
+  {
+    question: "Configure vty line password. Password would be remote123",
+    img: "../images/question-cisco-lab_aconfig.png",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "password remote123",
+    correctAnswer: "password remote123"
+  },
+  {
+    question: "After you config line vty password to remote123 what is next?",
+    img: "../images/question-cisco-lab_alineremote123.png",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "login",
+    correctAnswer: "login"
+  },
+  {
+    question: "Encrypt all clear text password",
+    img: "../images/question-cisco-lab_aconfig.png",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "service password-encryption",
+    correctAnswer: "service password-encryption"
+  },
+  {
+    question: "Configure message of the day banner with the message GRC personnel only!!!",
+    img: "../images/question-cisco-lab_aconfig.png",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "banner motd #GRC Personnel Only!!!#",
+    correctAnswer: "banner motd #GRC Personnel Only!!!#"
+  },
+  {
+    question: "Save the configuration",
+    img: "../images/question-cisco-switchprivileged.png",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "copy running-config startup-config",
+    correctAnswer: "copy running-config startup-config"
+  },
+
 ];
 
 </script>

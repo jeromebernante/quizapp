@@ -200,3 +200,6 @@ section.result p.title, section.result p.score{
   height: 5rem;
   cursor: pointer;
 }
+ul li{
+  cursor: pointer;
+}
