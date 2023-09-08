@@ -241,7 +241,7 @@
     correctAnswer: "Hardware"
   },
   {
-    question: "is volatile memory used for temporary data storage.",
+    question: "Store running config, Volatile memory means it loses its contents when the switch is powered off or restarted.",
     img: "",
     options: ["RAM", "NVRAM", "VRAM", "Flash Memory"],
     input: "false",
@@ -249,7 +249,7 @@
     correctAnswer: "RAM"
   },
   {
-    question: "is typically used to store the startup configuration file. This is the configuration that the switch loads when it boots up. It ensures that the switch retains its configuration settings even after a power cycle.",
+    question: "Store startup-config. Non-volatile, which means it retains its contents even when the switch is powered off or rebooted.",
     img: "",
     options: ["RAM", "NVRAM", "VRAM", "Flash Memory"],
     input: "false",
@@ -257,7 +257,7 @@
     correctAnswer: "NVRAM"
   },
   {
-    question: "The switch's OS and firmware are typically stored in ?",
+    question: "Store switch's operating system (OS). It is non-volatile.",
     img: "",
     options: ["RAM", "NVRAM", "VRAM", "Flash Memory"],
     input: "false",
@@ -329,7 +329,7 @@
     correctAnswer: "Switch(config-line)#"
   },
   {
-    question: "In User EXEC Mode to Privileged EXEC Mode",
+    question: "In User EXEC Mode go to Privileged EXEC Mode",
     img: "../images/question-cisco-switchuser.png",
     options: ["", "", "", ""],
     input: "true",
@@ -337,7 +337,7 @@
     correctAnswer: "enable"
   },
   {
-    question: "In Privileged-EXEC mode to User-EXEC mode",
+    question: "In Privileged-EXEC mode go to User-EXEC mode",
     img: "../images/question-cisco-switchprivileged.png",
     options: ["", "", "", ""],
     input: "true",
@@ -345,7 +345,7 @@
     correctAnswer: "disable"
   },
   {
-    question: "In Privileged-EXEC mode to Global Configuration Mode",
+    question: "In Privileged-EXEC mode go to Global Configuration Mode",
     img: "../images/question-cisco-switchprivileged.png",
     options: ["", "", "", ""],
     input: "true",
@@ -353,7 +353,7 @@
     correctAnswer: "configure terminal"
   },
   {
-    question: "In Global Configuration Mode to Privileged -EXEC Mode or go down 1 step",
+    question: "In Global Configuration Mode go to Privileged -EXEC Mode or go down 1 step",
     img: "../images/question-cisco-switchconfig.png",
     options: ["", "", "", ""],
     input: "true",
@@ -377,7 +377,7 @@
     correctAnswer: "enable secret grc123"
   },
   {
-    question: "In Global Configuration Mode to line console",
+    question: "In Global Configuration Mode go to line console",
     img: "../images/question-cisco-lab_aconfig.png",
     options: ["", "", "", ""],
     input: "true",
@@ -393,15 +393,15 @@
     correctAnswer: "password letmein"
   },
   {
-    question: "After you config line console password to letmein what is next?",
-    img: "../images/question-cisco-lab_alineletmein.png",
+    question: "After you config line console password to letmein what command is next?",
+    img: "../images/question-cisco-lab_apasswordletmein.png",
     options: ["", "", "", ""],
     input: "true",
     explanation: "login",
     correctAnswer: "login"
   },
   {
-    question: "in Global Line Mode to line vty",
+    question: "in Global Configuration Mode go to line vty",
     img: "../images/question-cisco-lab_aconfig.png",
     options: ["", "", "", ""],
     input: "true",
@@ -410,14 +410,14 @@
   },
   {
     question: "Configure vty line password. Password would be remote123",
-    img: "../images/question-cisco-lab_aconfig.png",
+    img: "../images/question-cisco-lab_alinevty.png",
     options: ["", "", "", ""],
     input: "true",
     explanation: "password remote123",
     correctAnswer: "password remote123"
   },
   {
-    question: "After you config line vty password to remote123 what is next?",
+    question: "After you config line vty password to remote123 what command is next?",
     img: "../images/question-cisco-lab_alineremote123.png",
     options: ["", "", "", ""],
     input: "true",
@@ -447,6 +447,78 @@
     input: "true",
     explanation: "copy running-config startup-config",
     correctAnswer: "copy running-config startup-config"
+  },
+  {
+    question: "in Global Configuration Mode go to Interface VLAN 1",
+    img: "../images/question-cisco-switchconfig.png",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "interface VLAN 1",
+    correctAnswer: "interface VLAN 1"
+  },
+  {
+    question: "in Interface VLAN 1 configure the SWA IP address and subnet mask. Refer to the addressing table.",
+    img: "../images/question-cisco-swainterfacewithtable.png",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "ip address 10.10.10.2 255.255.255.0",
+    correctAnswer: "ip address 10.10.10.2 255.255.255.0"
+  },
+  {
+    question: "After you configure the IP address and subnet mask from Interface VLAN 1 what command is next?",
+    img: "../images/question-cisco-swainterfaceipaddress.png",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "no shutdown",
+    correctAnswer: "no shutdown"
+  },
+  {
+    question: "From Global Interface mode all the way to Global Configure Mode in one Command",
+    img: "../images/question-cisco-swainterface.png",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "end",
+    correctAnswer: "end"
+  },
+  {
+    question: "Configure the default gateway. Refer to the addressing table.",
+    img: "../images/question-cisco-swaconfigwithtable.png",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "ip default-gateway 10.10.10.1",
+    correctAnswer: "ip default-gateway 10.10.10.1"
+  },
+  {
+    question: "How to save your configure in Global Configure Mode without going back to User EXEC Privilege Mode",
+    img: "../images/question-cisco-swaconfig.png",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "do copy running-config startup-config",
+    correctAnswer: "do copy running-config startup-config"
+  },
+  {
+    question: "Configure the PC ip: Referring to the Addressing Table, configure the IP address",
+    img: "../images/question-cisco-pcipconfig.png",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "10.10.10.5",
+    correctAnswer: "10.10.10.5"
+  },
+  {
+    question: "Configure the PC ip: Referring to the Addressing Table, configure the Subnet Mask",
+    img: "../images/question-cisco-pcipsubnet.png",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "255.255.255.0",
+    correctAnswer: "255.255.255.0"
+  },
+  {
+    question: "Configure the PC ip: Referring to the Addressing Table, configure Default Gateway",
+    img: "../images/question-cisco-pcipgateway.png",
+    options: ["", "", "", ""],
+    input: "true",
+    explanation: "10.10.10.1",
+    correctAnswer: "10.10.10.1"
   },
 
 ];
