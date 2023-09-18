@@ -233,3 +233,4 @@ function showExplanation(){
     explanationElement.textContent = currentQuestion.explanation;
   }
 }
+
