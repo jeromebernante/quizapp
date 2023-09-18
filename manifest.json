@@ -5,7 +5,7 @@
   "start_url": "https://jeromebernante.github.io/quizapp/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "theme_color": "#ffffff",
   "icons": [
     {
       "src": "images/icon-quiz.png",
