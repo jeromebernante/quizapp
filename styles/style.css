@@ -209,5 +209,7 @@ section.result p.title, section.result p.score{
   cursor: pointer;
 }
 ul li{
+  display: flex;
+  justify-content: center;
   cursor: pointer;
 }

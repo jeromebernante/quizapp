@@ -22,16 +22,17 @@
       </header>
       <main>
         <h1>CONTENTS</h1>
-        <p>Tint, Tone, Shade</p>
-        <p>Color Harmony</p>
         <p>Color Wheel</p>
+        <p>Tint, Tone, Shade</p>
+        <p>Color Harmonies</p>
         <p>Complementary colors</p>
         <p>Analogous colors</p>
-        <p>Triadic color harmonies</p>
+        <p>Triadic color harmony</p>
         <p>Split-complementary colors</p>
-        <p>Tetradic color harmony</p>
-        <p>Monochromatic color schemes</p>
-        <p>Achromatic color schemes</p>
+        <p>Tetradic colors</p>
+        <p>Monochromatic colors</p>
+        <p>Achromatic colors</p>
+        <p>Warm and Cool colors</p>
       </main>
       <box>
         <img id="btn-play" src="../images/icon-play.png" alt="">
@@ -86,121 +87,579 @@
 <script>
   const questions = [
   {
-    question: "What are the Primary colors",
-    img: "",
-    options: ["Green, Blue, Red", "Violet, Orange, Green", "Red, Yellow, Blue", "Blue, Violet, Violet "],
+    question: "Color Wheel?",
+    img: "../images/colorwheel2.png",
+    options: ["YES","NO"],
     input: "false",
     explanation: "",
-    correctAnswer: "Red, Yellow, Blue"
+    correctAnswer: "YES"
   },
   {
-    question: "What are the Secondary color?",
+    question: "COLOR + WHITE is ?",
     img: "",
-    options: ["Green, Blue, Red", "Violet, Orange, Green", "Red, Yellow, Blue", "Blue, Violet, Violet "],
+    options: ["TINT","TONE","SHADE"],
     input: "false",
     explanation: "",
-    correctAnswer: "Violet, Orange, Green"
+    correctAnswer: "TINT"
   },
   {
-    question: "When you mix two primary colors together, what do you get?",
+    question: "COLOR + GRAY is ?",
     img: "",
-    options: ["A secondary color", "A tertiary color", "A primary color", "A neutral color"],
+    options: ["TINT","TONE","SHADE"],
     input: "false",
     explanation: "",
-    correctAnswer: "A secondary color"
+    correctAnswer: "TONE"
   },
   {
-    question: "What is Red?",
+    question: "COLOR + BLACK is ?",
     img: "",
-    options: ["A primary color", "A secondary color", "A tertiary color",  "A neutral color"],
+    options: ["TINT","TONE","SHADE"],
     input: "false",
     explanation: "",
-    correctAnswer: "A primary color"
+    correctAnswer: "SHADE"
   },
   {
-    question: "What is Yellow?",
+    question: "refers to a color that has been altered by adding both black and white (gray) to the original hue.",
     img: "",
-    options: ["A primary color", "A secondary color", "A tertiary color",  "A neutral color"],
+    options: ["TINT","TONE","SHADE"],
     input: "false",
     explanation: "",
-    correctAnswer: "A primary color"
+    correctAnswer: "TONE"
   },
   {
-    question: "What is Blue?",
+    question: "This results in a desaturated, muted version of the color.",
     img: "",
-    options: ["A primary color", "A secondary color", "A tertiary color",  "A neutral color"],
+    options: ["TINT","TONE","SHADE"],
     input: "false",
     explanation: "",
-    correctAnswer: "A primary color"
+    correctAnswer: "TONE"
   },
   {
-    question: "What is Violet?",
+    question: "Typically less vibrant and intense than the pure hue.",
     img: "",
-    options: ["A primary color", "A secondary color", "A tertiary color",  "A neutral color"],
+    options: ["TINT","TONE","SHADE"],
     input: "false",
     explanation: "",
-    correctAnswer: "A secondary color"
+    correctAnswer: "TONE"
   },
   {
-    question: "What is Orange?",
+    question: "Adding gray to a color reduces its saturation and can create a more subtle and sophisticated appearance.",
     img: "",
-    options: ["A primary color", "A secondary color", "A tertiary color",  "A neutral color"],
+    options: ["TINT","TONE","SHADE"],
     input: "false",
     explanation: "",
-    correctAnswer: "A secondary color"
+    correctAnswer: "TONE"
   },
   {
-    question: "What is the result of mixing a primary color with a secondary color?",
+    question: "specifically refers to the darker version of a color that is created by adding black to the original hue.",
     img: "",
-    options: ["A primary color", "A tertiary color", " A secondary color", "A neutral color"],
+    options: ["TINT","TONE","SHADE"],
     input: "false",
     explanation: "",
-    correctAnswer: "A tertiary color"
+    correctAnswer: "SHADE"
   },
   {
-    question: "How many tertiary colors are there?",
+    question: "When you add black to a color, it not only becomes darker but may also appear more muted or subdued.",
     img: "",
-    options: ["3", "6", "9", "12"],
+    options: ["TINT","TONE","SHADE"],
     input: "false",
     explanation: "",
-    correctAnswer: "6"
+    correctAnswer: "SHADE"
   },
   {
-    question: "When you mix red, yellow, and blue what color do you get?",
+    question: "commonly used in art and design to create depth, shadows, and contrast.",
     img: "",
-    options: ["Black", "White", "Brown", "Gray"],
+    options: ["TINT","TONE","SHADE"],
     input: "false",
     explanation: "",
-    correctAnswer: "Brown"
+    correctAnswer: "SHADE"
   },
   {
-    question: "When you mix red and yellow what color do you get?",
+    question: "is the opposite of shade. ",
     img: "",
-    options: ["Blue", "Violet", "Orange", "Green"],
+    options: ["TINT","TONE","SHADE"],
     input: "false",
     explanation: "",
-    correctAnswer: "Orange"
+    correctAnswer: "TINT"
   },
   {
-    question: "When you mix yellow and blue what color do you get?",
+    question: "It refers to the lighter version of a color that is created by adding white to the original hue. ",
     img: "",
-    options: ["Blue", "Violet", "Orange", "Green"],
+    options: ["TINT","TONE","SHADE"],
     input: "false",
     explanation: "",
-    correctAnswer: "Green"
+    correctAnswer: "TINT"
   },
   {
-    question: "When you mix blue and red what color do you get?",
+    question: "a color makes it brighter and less saturated.",
     img: "",
-    options: ["Blue", "Violet", "Orange", "Green"],
+    options: ["TINTING","TONING","SHADING"],
     input: "false",
     explanation: "",
-    correctAnswer: "Violet"
+    correctAnswer: "TINTING"
   },
   {
-    question: "it is common for the primary color to be listed first for naming a tertiary color?",
+    question: "often used to create highlights, softness, and a sense of illumination in artwork or design.",
     img: "",
-    options: ["True", "False"],
+    options: ["TINT","TONE","SHADE"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "TINT"
+  },
+  {
+    question: "are pairs of colors that are opposite each other on the color wheel.",
+    img: "",
+    options: [
+    "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Complementary colors"
+  },
+  {
+    question: "When used together, they create strong visual contrast and make each other appear more vibrant.",
+    img: "",
+    options: [
+    "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Complementary colors"
+  },
+  {
+    question: "harmonies are dynamic and eye-catching.",
+    img: "",
+    options: [
+    "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Complementary colors"
+  },
+  {
+    question: "pairs include RED and GREEN, BLUE and ORANGE, and YELLOW and PURPLE.",
+    img: "",
+    options: [
+    "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Complementary colors"
+  },
+  {
+    question: "colors are adjacent to each other on the color wheel. ",
+    img: "",
+    options: [
+    "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Analogous colors"
+  },
+  {
+    question: "are often used to create a smooth and cohesive visual flow.",
+    img: "",
+    options: [
+    "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Analogous colors"
+  },
+  {
+    question: "a scheme using yellow, yellow-green, and green is?",
+    img: "",
+    options: [
+      "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Analogous colors"
+  },
+  {
+    question: "involve three colors that are equally spaced around the color wheel, forming an equilateral triangle. ",
+    img: "",
+    options: [
+      "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Triadic colors"
+  },
+  {
+    question: "are balanced and offer a wide range of contrast and visual interest. ",
+    img: "",
+    options: [
+      "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Triadic colors"
+  },
+  {
+    question: "include red, blue, and yellow or orange, green, and purple.",
+    img: "",
+    options: [
+      "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Triadic colors"
+  },
+  {
+    question: "similar to complementary colors but with a variation. ",
+    img: "",
+    options: [
+      "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Split-complementary colors"
+  },
+  {
+    question: "Instead of choosing the exact opposite color, you select a color and then the two colors adjacent to its complement. ",
+    img: "",
+    options: [
+      "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Split-complementary colors"
+  },
+  {
+    question: "This results in a balanced yet less intense contrast.",
+    img: "",
+    options: [
+      "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Split-complementary colors"
+  },
+  {
+    question: "if the base color is red, the _____ scheme might include green and blue-green.",
+    img: "",
+    options: [
+      "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Split-complementary colors"
+  },
+  {
+    question: "involves two pairs of complementary colors, creating a rectangle on the color wheel.",
+    img: "",
+    options: [
+      "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Tetradic colors"
+  },
+  {
+    question: "This scheme offers a wide range of color options and allows for both contrast and harmony. ",
+    img: "",
+    options: [
+      "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Tetradic colors"
+  },
+  {
+    question: "This scheme offers a wide range of color options and allows for both contrast and harmony. ",
+    img: "",
+    options: [
+      "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Tetradic colors"
+  },
+  {
+    question: "schemes use variations in lightness and saturation of a single color.",
+    img: "",
+    options: [
+      "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Monochromatic colors"
+  },
+  {
+    question: "This approach creates a sense of harmony and simplicity.",
+    img: "",
+    options: [
+      "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Monochromatic colors"
+  },
+  {
+    question: "It's often used to create elegant and minimalist designs.",
+    img: "",
+    options: [
+      "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Monochromatic colors"
+  },
+  {
+    question: "For instance, different shades and tints of blue",
+    img: "",
+    options: [
+      "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Monochromatic colors"
+  },
+  {
+    question: "schemes are devoid of color and consist only of black, white, and various shades of gray.",
+    img: "",
+    options: [
+      "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Achromatic colors"
+  },
+  {
+    question: "They are neutral and are often used for a clean and sophisticated look. ",
+    img: "",
+    options: [
+      "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Achromatic colors"
+  },
+  {
+    question: "schemes can be paired with a single accent color for emphasis.",
+    img: "",
+    options: [
+      "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Achromatic colors"
+  },
+  {
+    question: "Combining ______ colors can create a balanced and visually appealing contrast.",
+    img: "",
+    options: [
+      "Complementary colors",
+      "Analogous colors",
+      "Triadic colors",
+      "Split-complementary colors",
+      "Tetradic colors",
+      "Monochromatic colors",
+      "Achromatic colors",
+      "Warm and Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Warm and Cool colors"
+  },
+  {
+    question: "red, orange, yellow",
+    img: "",
+    options: [
+      "Warm colors ",
+      "Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Warm colors "
+  },
+  {
+    question: "blue, green, purple",
+    img: "",
+    options: [
+      "Warm colors ",
+      "Cool colors",
+    ],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Cool colors"
+  },
+  {
+    question: "Color harmonies provide a framework for creating pleasing color combinations and are a valuable tool for anyone working with colors in a creative context. ",
+    img: "",
+    options: [
+      "True",
+      "False",
+    ],
     input: "false",
     explanation: "",
     correctAnswer: "True"
