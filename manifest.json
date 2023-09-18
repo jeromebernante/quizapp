@@ -1,0 +1,16 @@
+{
+  "name": "Quiz App",
+  "short_name": "Quiz App",
+  "description": "Quiz App create by Jerome Bernante ",
+  "start_url": "https://jeromebernante.github.io/quizapp/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "images/icon-quiz.png",
+      "sizes": "192x192",
+      "type": "images/png"
+    }
+  ]
+}
