@@ -103,8 +103,6 @@ card.reviewer a{
   text-decoration: none;
   color: black;
 }
-
-
 section{
   display: none;
   flex-direction: column;
