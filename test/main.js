@@ -62,3 +62,30 @@ document.addEventListener('DOMContentLoaded', function () {
   const testNotificationButton = document.getElementById('testNotificationButton');
   testNotificationButton.addEventListener('click', testNotification);
 });
+
+// ... (existing code)
+
+// Function to simulate a push notification
+function simulatePushNotification() {
+    const pushData = {
+      title: 'Test Notification',
+      body: 'This is a test notification sent when the web page is closed.',
+      icon: 'icon.png',
+    };
+  
+    navigator.serviceWorker.ready
+      .then(function (serviceWorkerRegistration) {
+        serviceWorkerRegistration.showNotification(pushData.title, pushData);
+      })
+      .catch(function (error) {
+        console.error('Error sending push notification:', error);
+      });
+  }
+  
+  document.addEventListener('DOMContentLoaded', function () {
+    // ... (existing code)
+  
+    const testNotificationButton = document.getElementById('testNotificationButton');
+    testNotificationButton.addEventListener('click', simulatePushNotification);
+  });
+  
