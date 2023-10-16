@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/images/icon-logo.png" type="image/png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="../styles/style.css">
+  <title>Quiz App By Jerome</title>
+</head>
+<body class="flex-col">
+  <nav class="flex-row">
+    <img class="icon" src="../images/icon-quiz.png" alt="">
+    <span>ARTAPP</span>
+    <a href="../index.html"><img class="icon" src="../images/icon-back.png" alt=""></a>
+  </nav>
+  <main class="flex-col">
+
+    <section class="section cover">
+      <header>
+        <p>ARTAPP</p>
+        <p id="p-total-question"></p>
+      </header>
+      <main>
+        <h1>CONTENTS</h1>
+        <p>Element of art</p>
+        <p>Art Style</p>
+        <p>Purpose of Arts</p>
+      </main>
+      <box>
+        <img id="btn-play" src="../images/icon-play.png" alt="">
+      </box>
+    </section>
+
+    <section class="section">
+      <box class="nav-question">
+        <p id="progress">
+          <!-- progress here -->
+        </p>
+        <box id="status-answer"></box>
+        <div id="btn-skip" class="button" >SKIP</div>
+      </box>
+
+      <p id="question" class="p-question">
+        <!-- question here -->
+      </p>
+
+      <p id="explanation" class="p-explanation">
+        <!-- explanation -->
+      </p>
+
+      <div class="flex-col">
+        <!-- image here -->
+        <img id="img" src="" alt="">
+      </div>
+
+      <ul id="options" class="options">
+        <!-- Options will be populated here -->
+      </ul>
+
+      <input type="text" id="input-answer" placeholder="your answer here..." autocomplete="off">
+
+      <box class="nav-question">
+          <div id="btn-answer" class="button">Answer</div>
+          <div id="btn-next" class="button">Next</div>
+      </box>
+    </section>
+
+    <section class="section result">
+      <p class="title">ARTAPP COLOR WHEEL SCORE</p>
+      <p id="score" class="score"></p>
+      <box class="box-btn-replay">
+        <img id="btn-replay" src="../images/icon-replay.png" alt="">
+      </box>
+    </section>
+
+    
+  </main>
+</body>
+<script>
+  const questions = [
+  {
+    question: "is the area between and around objects.",
+    img: "",
+    options: ["SPACE","FORM","SHAPE","LINE","TEXTURE","COLOR"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "SPACE"
+  },
+  {
+    question: "The _____ around the objects is often called negative _____, negative _____ has shape",
+    img: "",
+    options: ["SPACE","FORM","SHAPE","LINE","TEXTURE","COLOR"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "SPACE"
+  },
+  {
+    question: "_____ can also refer to the feeling of depth.",
+    img: "",
+    options: ["SPACE","FORM","SHAPE","LINE","TEXTURE","COLOR"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "SPACE"
+  },
+  {
+    question: "when we create the feeling of illusion of depth, we call it space.",
+    img: "",
+    options: ["SPACE","FORM","SHAPE","LINE","TEXTURE","COLOR"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "SPACE"
+  },
+  {
+    question: "are three-dimensional shapes expressing length, width, and depth.",
+    img: "",
+    options: ["SPACE","FORM","SHAPE","LINE","TEXTURE","COLOR"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "FORM"
+  },
+  {
+    question: "Balls, cylinders, boxes, and pyramids are ____s.",
+    img: "",
+    options: ["SPACE","FORM","SHAPE","LINE","TEXTURE","COLOR"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "FORM"
+  },
+  {
+    question: "_____ is a closed line.",
+    img: "",
+    options: ["SPACE","FORM","SHAPE","LINE","TEXTURE","COLOR"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "SHAPE"
+  },
+  {
+    question: "_____ can be geometric, like square and circles, or organic, like free-form or natural _____ .",
+    img: "",
+    options: ["SPACE","FORM","SHAPE","LINE","TEXTURE","COLOR"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "SHAPE"
+  },
+  {
+    question: "_____ are flat and can express length and width",
+    img: "",
+    options: ["SPACE","FORM","SHAPE","LINE","TEXTURE","COLOR"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "SHAPE"
+  },
+  {
+    question: "A _____ is a mark with greater length than width.",
+    img: "",
+    options: ["SPACE","FORM","SHAPE","LINE","TEXTURE","COLOR"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "LINE"
+  },
+  {
+    question: "_____ can be horizontal, vertical, or diagonal; straight or curved; thick or thin.",
+    img: "",
+    options: ["SPACE","FORM","SHAPE","LINE","TEXTURE","COLOR"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "LINE"
+  },
+  {
+    question: "_____ is the surface quality that can seen and felt.",
+    img: "",
+    options: ["SPACE","FORM","SHAPE","LINE","TEXTURE","COLOR"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "TEXTURE"
+  },
+  {
+    question: "_____ can be rough or smooth, soft or hard.",
+    img: "",
+    options: ["SPACE","FORM","SHAPE","LINE","TEXTURE","COLOR"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "TEXTURE"
+  },
+  {
+    question: "_____ do not always feel the way they look; for example, a drawing of a porcupine may look prickly, but if you touch the drawing, the paper is still smooth.",
+    img: "",
+    options: ["SPACE","FORM","SHAPE","LINE","TEXTURE","COLOR"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "TEXTURE"
+  },
+  {
+    question: "_____ is light reflected off of objects.",
+    img: "",
+    options: ["SPACE","FORM","SHAPE","LINE","TEXTURE","COLOR"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "COLOR"
+  },
+  {
+    question: "objects which are cut, lacerated mutilated",
+    img: "",
+    options: ["Mangling","Symbolism","Realism","Expressionism","Surrealism","Fauvism","Futurism","Elongation","Distortion"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Mangling"
+  },
+  {
+    question: "Visible of something invisible",
+    img: "",
+    options: ["Mangling","Symbolism","Realism","Expressionism","Surrealism","Fauvism","Futurism","Elongation","Distortion"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Symbolism"
+  },
+  {
+    question: "Attempt to portray the subject as it is.",
+    img: "",
+    options: ["Mangling","Symbolism","Realism","Expressionism","Surrealism","Fauvism","Futurism","Elongation","Distortion"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Realism"
+  },
+  {
+    question: "Shows emotional experience rather than physical reality",
+    img: "",
+    options: ["Mangling","Symbolism","Realism","Expressionism","Surrealism","Fauvism","Futurism","Elongation","Distortion"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Expressionism"
+  },
+  {
+    question: "Beyond ordinary experience or understanding it is often disorienting as a setting",
+    img: "",
+    options: ["Mangling","Symbolism","Realism","Expressionism","Surrealism","Fauvism","Futurism","Elongation","Distortion"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Surrealism"
+  },
+  {
+    question: "uses bright color",
+    img: "",
+    options: ["Mangling","Symbolism","Realism","Expressionism","Surrealism","Fauvism","Futurism","Elongation","Distortion"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Fauvism"
+  },
+  {
+    question: "capture the speed and force of modern industrial society.",
+    img: "",
+    options: ["Mangling","Symbolism","Realism","Expressionism","Surrealism","Fauvism","Futurism","Elongation","Distortion"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Futurism"
+  },
+  {
+    question: "to being lengthened or an extension.",
+    img: "",
+    options: ["Mangling","Symbolism","Realism","Expressionism","Surrealism","Fauvism","Futurism","Elongation","Distortion"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Elongation"
+  },
+  {
+    question: "is in misshapen or the regular shape is twisted out.",
+    img: "",
+    options: ["Mangling","Symbolism","Realism","Expressionism","Surrealism","Fauvism","Futurism","Elongation","Distortion"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Distortion"
+  },
+  {
+    question: "Sill or Mastery - term from italian word 'artis'",
+    img: "",
+    options: ["TRUE","FALSE"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "TRUE"
+  },
+  {
+    question: "pleasing relationship of belonging together that leads to unity",
+    img: "",
+    options: ["Harmony","Balance","Proportion","Rhythm"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Harmony"
+  },
+  {
+    question: "elements must be arranged with equilibrium",
+    img: "",
+    options: ["Harmony","Balance","Proportion","Rhythm"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Balance"
+  },
+  {
+    question: "comparison of size of different parts of an object arrangement.",
+    img: "",
+    options: ["Harmony","Balance","Proportion","Rhythm"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Proportion"
+  },
+  {
+    question: "continuous use of colors or pattern.",
+    img: "",
+    options: ["Harmony","Balance","Proportion","Rhythm"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Rhythm"
+  },
+  {
+    question: "giving proper importance to the parts or to the whole",
+    img: "",
+    options: ["Emphasis","Subject","Medium","Context"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Emphasis"
+  },
+  {
+    question: "is what depicted for your art",
+    img: "",
+    options: ["Emphasis","Subject","Medium","Context"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Subject"
+  },
+  {
+    question: "materials or color to use",
+    img: "",
+    options: ["Emphasis","Subject","Medium","Context"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Medium"
+  },
+  {
+    question: "Social cultural background",
+    img: "",
+    options: ["Emphasis","Subject","Medium","Context"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Context"
+  },
+  {
+    question: "To move away or separate from showing things as they really are.",
+    img: "",
+    options: ["Abstraction","Process","Product"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Abstraction"
+  },
+  {
+    question: "arrangement of aesthetic elements in an appealing and interesting matter.",
+    img: "",
+    options: ["Abstraction","Process","Product"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Process"
+  },
+  {
+    question: "Human creation",
+    img: "",
+    options: ["Abstraction","Process","Product"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Product"
+  },
+  {
+    question: "representation of reality",
+    img: "",
+    options: ["Limitation","Expression"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Limitation"
+  },
+  {
+    question: "express feeling, ideas, way of life, interest, etc..",
+    img: "",
+    options: ["Limitation","Expression"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Expression"
+  },
+  {
+    question: "Artworks perceive by eyes",
+    img: "",
+    options: ["Visual Arts","Music","Dance","Literature","Drama and Theater Arts"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Visual Arts"
+  },
+  {
+    question: "Pattern of sounds made by musical instruments voices or computers",
+    img: "",
+    options: ["Visual Arts","Music","Dance","Literature","Drama and Theater Arts"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Music"
+  },
+  {
+    question: "Series of graceful movements",
+    img: "",
+    options: ["Visual Arts","Music","Dance","Literature","Drama and Theater Arts"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Dance"
+  },
+  {
+    question: "written works",
+    img: "",
+    options: ["Visual Arts","Music","Dance","Literature","Drama and Theater Arts"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Literature"
+  },
+  {
+    question: "composition in prose or verse ",
+    img: "",
+    options: ["Visual Arts","Music","Dance","Literature","Drama and Theater Arts"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Drama and Theater Arts"
+  },
+  {
+    question: "one of 9 Purpose of Arts Pe______l",
+    img: "",
+    options: ["","","",""],
+    input: "true",
+    explanation: "Personal",
+    correctAnswer: "Personal"
+  },
+  {
+    question: "one of 9 Purpose of Arts E_______s",
+    img: "",
+    options: ["","","",""],
+    input: "true",
+    explanation: "Economics",
+    correctAnswer: "Economics"
+  },
+  {
+    question: "one of 9 Purpose of Arts H________l",
+    img: "",
+    options: ["","","",""],
+    input: "true",
+    explanation: "Historical",
+    correctAnswer: "Historical"
+  },
+  {
+    question: "one of 9 Purpose of Arts C______l",
+    img: "",
+    options: ["","","",""],
+    input: "true",
+    explanation: "Cultural",
+    correctAnswer: "Cultural"
+  },
+  {
+    question: "one of 9 Purpose of Arts R_______s",
+    img: "",
+    options: ["","","",""],
+    input: "true",
+    explanation: "Religious",
+    correctAnswer: "Religious"
+  },
+  {
+    question: "one of 9 Purpose of Arts A________s",
+    img: "",
+    options: ["","","",""],
+    input: "true",
+    explanation: "Aesthetics",
+    correctAnswer: "Aesthetics"
+  },
+  {
+    question: "one of 9 Purpose of Arts S_____l",
+    img: "",
+    options: ["","","",""],
+    input: "true",
+    explanation: "Social",
+    correctAnswer: "Social"
+  },
+  {
+    question: "one of 9 Purpose of Arts Ph______l",
+    img: "",
+    options: ["","","",""],
+    input: "true",
+    explanation: "Physical",
+    correctAnswer: "Physical"
+  },
+  {
+    question: "one of 9 Purpose of Arts Po_______l",
+    img: "",
+    options: ["","","",""],
+    input: "true",
+    explanation: "Political",
+    correctAnswer: "Political"
+  },
+
+];
+
+</script>
+<script src="../scripts/script.js"></script>
+</html>
