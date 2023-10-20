@@ -19,9 +19,15 @@
 
     <section class="section cover ">
       <header>
-        <p>NET2 OSI MODEL</p>
+        <p>NET2 NETWORK LAYER</p>
         <p id="p-total-question"></p>
       </header>
+      <main>
+        <h1>CONTENTS</h1>
+        <p>OSI Model</p>
+        <p>Network Layer Protocols</p>
+        <p>Characteristic of IP</p>
+      </main>
       <box>
         <img id="btn-play" src="../images/icon-play.png" alt="">
       </box>
@@ -74,6 +80,14 @@
 </body>
 <script>
   const questions = [
+  {
+    question: "OSI model?",
+    img: "../images/question-isomodel1.png",
+    options: ["TRUE", "FALSE"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "TRUE"
+  },
   {
     question: "What is the Layer 1 from OSI model?",
     img: "",
@@ -130,6 +144,245 @@
     explanation: "Application",
     correctAnswer: "Application"
   },
+  {
+    question: "OSI MODEL layer keywords: Network Process to Application",
+    img: "",
+    options: ["Application", "Presentation", "Session", "Transport","Network","Data Link","Physical"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Application"
+  },
+  {
+    question: "OSI MODEL layer keywords: Data Representation and Encryption",
+    img: "",
+    options: ["Application", "Presentation", "Session", "Transport","Network","Data Link","Physical"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Presentation"
+  },
+  {
+    question: "OSI MODEL layer keywords: Interhost Communication",
+    img: "",
+    options: ["Application", "Presentation", "Session", "Transport","Network","Data Link","Physical"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Session"
+  },
+  {
+    question: "OSI MODEL layer keywords: End-to-End Connections and Reliability",
+    img: "",
+    options: ["Application", "Presentation", "Session", "Transport","Network","Data Link","Physical"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Transport"
+  },
+  {
+    question: "OSI MODEL layer keywords: Path Determination and IP (Logical Addressing)",
+    img: "",
+    options: ["Application", "Presentation", "Session", "Transport","Network","Data Link","Physical"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Network"
+  },
+  {
+    question: "OSI MODEL layer keywords: MAC and LLC (Physical addressing)",
+    img: "",
+    options: ["Application", "Presentation", "Session", "Transport","Network","Data Link","Physical"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Data Link"
+  },
+  {
+    question: "OSI MODEL layer keywords: Media, Signal, and Binary Transmission",
+    img: "",
+    options: ["Application", "Presentation", "Session", "Transport","Network","Data Link","Physical"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Physical"
+  },
+  {
+    question: "OSI MODEL Data unit: Application",
+    img: "",
+    options: ["Data", "Segments", "Packets", "Frames","Bits"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Data"
+  },
+  {
+    question: "OSI MODEL Data unit: Presentation",
+    img: "",
+    options: ["Data", "Segments", "Packets", "Frames","Bits"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Data"
+  },
+  {
+    question: "OSI MODEL Data unit: Session",
+    img: "",
+    options: ["Data", "Segments", "Packets", "Frames","Bits"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Data"
+  },
+  {
+    question: "OSI MODEL Data unit: Transport",
+    img: "",
+    options: ["Data", "Segments", "Packets", "Frames","Bits"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Segments"
+  },
+  {
+    question: "OSI MODEL Data unit: Network",
+    img: "",
+    options: ["Data", "Segments", "Packets", "Frames","Bits"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Packets"
+  },
+  {
+    question: "OSI MODEL Data unit: Data Link",
+    img: "",
+    options: ["Data", "Segments", "Packets", "Frames","Bits"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Frames"
+  },
+  {
+    question: "OSI MODEL Data unit: Physical",
+    img: "",
+    options: ["Data", "Segments", "Packets", "Frames","Bits"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Bits"
+  },
+  {
+    question: "What part of layers in OSI model is Application/Data",
+    img: "",
+    options: ["Host Layers", "Media Layers"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Host Layers"
+  },
+  {
+    question: "What part of layers in OSI model is Presentation/Data",
+    img: "",
+    options: ["Host Layers", "Media Layers"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Host Layers"
+  },
+  {
+    question: "What part of layers in OSI model is Session/Data",
+    img: "",
+    options: ["Host Layers", "Media Layers"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Host Layers"
+  },
+  {
+    question: "What part of layers in OSI model is Transport/Segments",
+    img: "",
+    options: ["Host Layers", "Media Layers"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Host Layers"
+  },
+  {
+    question: "What part of layers in OSI model is Network/Packets",
+    img: "",
+    options: ["Host Layers", "Media Layers"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Media Layers"
+  },
+  {
+    question: "What part of layers in OSI model is Data Link/Frames",
+    img: "",
+    options: ["Host Layers", "Media Layers"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Media Layers"
+  },
+  {
+    question: "What part of layers in OSI model is Physical/Bits",
+    img: "",
+    options: ["Host Layers", "Media Layers"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Media Layers"
+  },
+  {
+    question: "NETWORK LAYER PROTOCOLS: Internet Protocol version 4 (IPv4)",
+    img: "",
+    options: ["Common Network Layer Protocols", "Legacy Network Layer Protocols"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Common Network Layer Protocols"
+  },
+  {
+    question: "NETWORK LAYER PROTOCOLS: Internet Protocol version 5 (IPv5)",
+    img: "",
+    options: ["Common Network Layer Protocols", "Legacy Network Layer Protocols"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Common Network Layer Protocols"
+  },
+  {
+    question: "NETWORK LAYER PROTOCOLS: Novell Internetwork Packet Exchange (IPX)",
+    img: "",
+    options: ["Common Network Layer Protocols", "Legacy Network Layer Protocols"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Legacy Network Layer Protocols"
+  },
+  {
+    question: "NETWORK LAYER PROTOCOLS: AppleTalk",
+    img: "",
+    options: ["Common Network Layer Protocols", "Legacy Network Layer Protocols"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Legacy Network Layer Protocols"
+  },
+  {
+    question: "NETWORK LAYER PROTOCOLS: Connectionless Network Service (CLNS.DECNet)",
+    img: "",
+    options: ["Common Network Layer Protocols", "Legacy Network Layer Protocols"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Legacy Network Layer Protocols"
+  },
+  {
+    question: "CHARACTERISTICS OF IP: No connection is established before sending data packets",
+    img: "",
+    options: ["Connectionless", "Best Effort (unreliable)", "Media Independent"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Connectionless"
+  },
+  {
+    question: "CHARACTERISTICS OF IP: No overhead is used to guarantee packet delivery",
+    img: "",
+    options: ["Connectionless", "Best Effort (unreliable)", "Media Independent"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Best Effort (unreliable)"
+  },
+  {
+    question: "CHARACTERISTICS OF IP: Operates Independently of the medium carrying the data.",
+    img: "",
+    options: ["Connectionless", "Best Effort (unreliable)", "Media Independent"],
+    input: "false",
+    explanation: "",
+    correctAnswer: "Media Independent"
+  },
+
+
+
+
+
+
+
 ];
 
 </script>
