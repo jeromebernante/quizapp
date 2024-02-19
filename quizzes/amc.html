@@ -1,212 +1,768 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="../images/icon-logo.png" type="image/png">
-  <link rel="manifest" href="../manifest.json">
-  <link rel="stylesheet" href="../styles/style.css">
-  <title>Quiz App By Jerome</title>
-</head>
-<body class="flex-col">
-  <nav class="flex-row">
-    <img class="icon" src="../images/icon-quiz.png" alt="">
-    <span>AMC week 01</span>
-    <a href="../index.html"><img class="icon" src="../images/icon-home.png" alt=""></a>
-  </nav>
-  <main class="flex-col height-max">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../images/icon-logo.png" type="image/png" />
+    <link rel="manifest" href="../manifest.json" />
+    <link rel="stylesheet" href="../styles/style.css" />
+    <title>Quiz App By Jerome</title>
+  </head>
+  <body class="flex-col">
+    <nav class="flex-row">
+      <img class="icon" src="../images/icon-quiz.png" alt="" />
+      <span>AMC</span>
+      <a href="../index.html"
+        ><img class="icon" src="../images/icon-home.png" alt=""
+      /></a>
+    </nav>
+    <main class="flex-col height-max">
+      <section class="section cover">
+        <header>
+          <p>Advance Mobile Computing</p>
+          <p id="p-total-question"></p>
+        </header>
+        <main>
+          <h1>CONTENTS</h1>
+          <p>MOBILE COMPUTING</p>
+          <p>Mobile Computing Components</p>
+        </main>
+        <box>
+          <img id="btn-play" src="../images/icon-play.png" alt="" />
+        </box>
+      </section>
 
-    <section class="section cover ">
-      <header>
-        <p>Advance Mobile Computing</p>
-        <p id="p-total-question"></p>
-      </header>
-      <main>
-        <h1>CONTENTS</h1>
-        <p>MOBILE COMPUTING</p>
-        <p>Mobile Computing Components</p>
-      </main>
-      <box>
-        <img id="btn-play" src="../images/icon-play.png" alt="">
-      </box>
-    </section>
+      <section class="section">
+        <box class="nav-question">
+          <p id="progress">
+            <!-- progress here -->
+          </p>
+          <box id="status-answer"></box>
+          <div id="btn-skip" class="button">SKIP</div>
+        </box>
 
-    <section class="section">
-      <box class="nav-question">
-        <p id="progress">
-          <!-- progress here -->
+        <p id="question" class="p-question">
+          <!-- question here -->
         </p>
-        <box id="status-answer"></box>
-        <div id="btn-skip" class="button" >SKIP</div>
-      </box>
 
-      <p id="question" class="p-question">
-        <!-- question here -->
-      </p>
+        <p id="explanation" class="p-explanation">
+          <!-- explanation -->
+        </p>
 
-      <p id="explanation" class="p-explanation">
-        <!-- explanation -->
-      </p>
+        <div class="flex-col">
+          <!-- image here -->
+          <img id="img" src="" alt="" />
+        </div>
 
-      <div class="flex-col">
-        <!-- image here -->
-        <img id="img" src="" alt="">
-      </div>
+        <ul id="options" class="options">
+          <!-- Options will be populated here -->
+        </ul>
 
-      <ul id="options" class="options">
-        <!-- Options will be populated here -->
-      </ul>
+        <input
+          type="text"
+          id="input-answer"
+          placeholder="your answer here..."
+          autocomplete="off"
+        />
 
-      <input type="text" id="input-answer" placeholder="your answer here..." autocomplete="off">
-      
-      <box class="nav-question">
+        <box class="nav-question">
           <div id="btn-answer" class="button">Answer</div>
           <div id="btn-next" class="button">Next</div>
-      </box>
-    </section>
+        </box>
+      </section>
 
-    <section class="section result">
-      <p class="title">SCORE</p>
-      <p id="score" class="score"></p>
-      <box class="box-btn-replay">
-        <img id="btn-replay" src="../images/icon-replay.png" alt="">
-      </box>
-    </section>
-
-    
-  </main>
-</body>
-<script>
-const questions = [
-  {
-    question: "Portable and typically feature wireless communication, allowing user to access information, communicate, and perform various tasks on the go.", //MULTIPLE CHOICES
-    img: "",
-    options: ["Mobile", "Computing"],
-    input: "false",
-    explanation: "",
-    correctAnswer: "Mobile"
-  },
-  {
-    question: "To process, store, and manage information using computers or computer-like devices.", //MULTIPLE CHOICES
-    img: "",
-    options: ["Mobile", "Computing"],
-    input: "false",
-    explanation: "",
-    correctAnswer: "Computing"
-  },
-  {
-    question: "M___ C___ : Is a technology that allows us to transmit data, audio, and video via devices that are not connected with any physical link.", //INPUT REQUIRE
-    img: "",
-    options: ["", "", "", ""],
-    input: "true",
-    explanation: "Mobile Computing",
-    correctAnswer: "Mobile Computing"
-  },
-  {
-    question: "1 of 3 Mobile Computing Components: M___ C___", //INPUT REQUIRE
-    img: "",
-    options: ["", "", "", ""],
-    input: "true",
-    explanation: "Mobile Communication",
-    correctAnswer: "Mobile Communication"
-  },
-  {
-    question: "1 of 3 Mobile Computing Components: M___ H___", //INPUT REQUIRE
-    img: "",
-    options: ["", "", "", ""],
-    input: "true",
-    explanation: "Mobile Hardware",
-    correctAnswer: "Mobile Hardware"
-  },
-  {
-    question: "1 of 3 Mobile Computing Components: M___ S___", //INPUT REQUIRE
-    img: "",
-    options: ["", "", "", ""],
-    input: "true",
-    explanation: "Mobile Software",
-    correctAnswer: "Mobile Software"
-  },
-  {
-    question: "capabilities allow users to access the internet, make phone calls, send text messages, and exchange data with other devices or services, facilitating seamless connectivity on the go.", //MULTIPLE CHOICES
-    img: "",
-    options: ["Mobile Communication", "Mobile Hardware", "Mobile Software"],
-    input: "false",
-    explanation: "",
-    correctAnswer: "Mobile Communication"
-  },
-  {
-    question: "Mobile devices utilize various communication technologies, such as cellular networks (3G, 4G, and 5G), Wi-Fi, Bluetooth, and NFC (Near Field Communication), to establish connections and transmit data.", //MULTIPLE CHOICES
-    img: "",
-    options: ["Mobile Communication", "Mobile Hardware", "Mobile Software"],
-    input: "false",
-    explanation: "",
-    correctAnswer: "Mobile Communication"
-  },
-  {
-    question: "It includes smartphones, tables, laptops, wearable devices, and other portable electronics devices.", //MULTIPLE CHOICES
-    img: "",
-    options: ["Mobile Communication", "Mobile Hardware", "Mobile Software"],
-    input: "false",
-    explanation: "",
-    correctAnswer: "Mobile Hardware"
-  },
-  {
-    question: "These devices feature compact sizes, lightweight designs, and build-in features like touchscreens, cameras, processors, memory, and various sensors (GPS, accelerometer, etc.).", //MULTIPLE CHOICES
-    img: "",
-    options: ["Mobile Communication", "Mobile Hardware", "Mobile Software"],
-    input: "false",
-    explanation: "",
-    correctAnswer: "Mobile Hardware"
-  },
-  {
-    question: "The hardware components work together to support mobile functionality, enabling users to interact with application and services, capture and process data, and perform a range of tasks while on the move.", //MULTIPLE CHOICES
-    img: "",
-    options: ["Mobile Communication", "Mobile Hardware", "Mobile Software"],
-    input: "false",
-    explanation: "",
-    correctAnswer: "Mobile Hardware"
-  },
-  {
-    question: "Mobile operating systems, such as Android, IOS, and Windows Mobile, provide the foundation for running mobile applications and managing device resources.", //MULTIPLE CHOICES
-    img: "",
-    options: ["Mobile Communication", "Mobile Hardware", "Mobile Software"],
-    input: "false",
-    explanation: "",
-    correctAnswer: "Mobile Software"
-  },
-  {
-    question: "Mobile application, commonly known as apps, are software programs developed to perform specific functions on mobile devices.", //MULTIPLE CHOICES
-    img: "",
-    options: ["Mobile Communication", "Mobile Hardware", "Mobile Software"],
-    input: "false",
-    explanation: "",
-    correctAnswer: "Mobile Software"
-  },
-  {
-    question: "They can be native apps, built for a specific operating system, or web-based/hybrid apps that run on multiple platforms.", //MULTIPLE CHOICES
-    img: "",
-    options: ["Mobile Communication", "Mobile Hardware", "Mobile Software"],
-    input: "false",
-    explanation: "",
-    correctAnswer: "Mobile Software"
-  },
-  {
-    question: "Mobile software development platforms and frameworks, such as Android Studio and Xcode, enable developers to create and customize mobile applications for different devices and operating systems.", //MULTIPLE CHOICES
-    img: "",
-    options: ["Mobile Communication", "Mobile Hardware", "Mobile Software"],
-    input: "false",
-    explanation: "",
-    correctAnswer: "Mobile Software"
-  },
-
-
-
-  
-];
-
-</script>
-<script src="../scripts/script.js"></script>
+      <section class="section result">
+        <p class="title">SCORE</p>
+        <p id="score" class="score"></p>
+        <box class="box-btn-replay">
+          <img id="btn-replay" src="../images/icon-replay.png" alt="" />
+        </box>
+      </section>
+    </main>
+  </body>
+  <script>
+    const questions = [
+      {
+        question:
+          "Portable and typically feature wireless communication, allowing user to access information, communicate, and perform various tasks on the go.", //MULTIPLE CHOICES
+        img: "",
+        options: ["Mobile", "Computing"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Mobile",
+      },
+      {
+        question:
+          "To process, store, and manage information using computers or computer-like devices.", //MULTIPLE CHOICES
+        img: "",
+        options: ["Mobile", "Computing"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Computing",
+      },
+      {
+        question:
+          "M___ C___ : Is a technology that allows us to transmit data, audio, and video via devices that are not connected with any physical link.", //INPUT REQUIRE
+        img: "",
+        options: ["", "", "", ""],
+        input: "true",
+        explanation: "Mobile Computing",
+        correctAnswer: "Mobile Computing",
+      },
+      {
+        question: "1 of 3 Mobile Computing Components: M___ C___", //INPUT REQUIRE
+        img: "",
+        options: ["", "", "", ""],
+        input: "true",
+        explanation: "Mobile Communication",
+        correctAnswer: "Mobile Communication",
+      },
+      {
+        question: "1 of 3 Mobile Computing Components: M___ H___", //INPUT REQUIRE
+        img: "",
+        options: ["", "", "", ""],
+        input: "true",
+        explanation: "Mobile Hardware",
+        correctAnswer: "Mobile Hardware",
+      },
+      {
+        question: "1 of 3 Mobile Computing Components: M___ S___", //INPUT REQUIRE
+        img: "",
+        options: ["", "", "", ""],
+        input: "true",
+        explanation: "Mobile Software",
+        correctAnswer: "Mobile Software",
+      },
+      {
+        question:
+          "capabilities allow users to access the internet, make phone calls, send text messages, and exchange data with other devices or services, facilitating seamless connectivity on the go.", //MULTIPLE CHOICES
+        img: "",
+        options: ["Mobile Communication", "Mobile Hardware", "Mobile Software"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Mobile Communication",
+      },
+      {
+        question:
+          "Mobile devices utilize various communication technologies, such as cellular networks (3G, 4G, and 5G), Wi-Fi, Bluetooth, and NFC (Near Field Communication), to establish connections and transmit data.", //MULTIPLE CHOICES
+        img: "",
+        options: ["Mobile Communication", "Mobile Hardware", "Mobile Software"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Mobile Communication",
+      },
+      {
+        question:
+          "It includes smartphones, tables, laptops, wearable devices, and other portable electronics devices.", //MULTIPLE CHOICES
+        img: "",
+        options: ["Mobile Communication", "Mobile Hardware", "Mobile Software"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Mobile Hardware",
+      },
+      {
+        question:
+          "These devices feature compact sizes, lightweight designs, and build-in features like touchscreens, cameras, processors, memory, and various sensors (GPS, accelerometer, etc.).", //MULTIPLE CHOICES
+        img: "",
+        options: ["Mobile Communication", "Mobile Hardware", "Mobile Software"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Mobile Hardware",
+      },
+      {
+        question:
+          "components work together to support mobile functionality, enabling users to interact with application and services, capture and process data, and perform a range of tasks while on the move.", //MULTIPLE CHOICES
+        img: "",
+        options: ["Mobile Communication", "Mobile Hardware", "Mobile Software"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Mobile Hardware",
+      },
+      {
+        question:
+          "Mobile operating systems, such as Android, IOS, and Windows Mobile, provide the foundation for running mobile applications and managing device resources.", //MULTIPLE CHOICES
+        img: "",
+        options: ["Mobile Communication", "Mobile Hardware", "Mobile Software"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Mobile Software",
+      },
+      {
+        question:
+          "Mobile application, commonly known as apps, are software programs developed to perform specific functions on mobile devices.", //MULTIPLE CHOICES
+        img: "",
+        options: ["Mobile Communication", "Mobile Hardware", "Mobile Software"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Mobile Software",
+      },
+      {
+        question:
+          "They can be native apps, built for a specific operating system, or web-based/hybrid apps that run on multiple platforms.", //MULTIPLE CHOICES
+        img: "",
+        options: ["Mobile Communication", "Mobile Hardware", "Mobile Software"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Mobile Software",
+      },
+      {
+        question:
+          "Mobile software development platforms and frameworks, such as Android Studio and Xcode, enable developers to create and customize mobile applications for different devices and operating systems.", //MULTIPLE CHOICES
+        img: "",
+        options: ["Mobile Communication", "Mobile Hardware", "Mobile Software"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Mobile Software",
+      },
+      {
+        question: "M___e C___g: Used in practically every aspect of daily life", //MULTIPLE CHOICES
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "Mobile Computing",
+        correctAnswer: "Mobile Computing",
+      },
+      {
+        question:
+          "M___e D___s: Has expanded in recent years, particularly during the COVID-19 pandemic", //MULTIPLE CHOICES
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "Mobile Devices",
+        correctAnswer: "Mobile Devices",
+      },
+      {
+        question:
+          "are examples of mobile computing that most of us are familiar with and use daily.", //MULTIPLE CHOICES
+        img: "",
+        options: ["Cellphones and Smartphones", "Computers and Laptops"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Cellphones and Smartphones",
+      },
+      {
+        question:
+          "M___e C___g: is something that the modern world would struggle to function without.", //MULTIPLE CHOICES
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "Mobile Computing",
+        correctAnswer: "Mobile Computing",
+      },
+      {
+        question: "Mobile Computing Applications: V___s/T___c", //MULTIPLE CHOICES
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "Vehicles/Traffic",
+        correctAnswer: "Vehicles/Traffic",
+      },
+      {
+        question: "Mobile Computing Applications: E___s s___s/S___s", //MULTIPLE CHOICES
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "Emergencies situations/Services",
+        correctAnswer: "Emergencies situations/Services",
+      },
+      {
+        question: "Mobile Computing Applications: I_ B___s", //MULTIPLE CHOICES
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "In Business",
+        correctAnswer: "In Business",
+      },
+      {
+        question: "Mobile Computing Applications: V___n o_ t__ c___t c___d", //MULTIPLE CHOICES
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "Verification of the credit card",
+        correctAnswer: "Verification of the credit card",
+      },
+      {
+        question: "Mobile Computing Applications: I_ E___n", //MULTIPLE CHOICES
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "In Education",
+        correctAnswer: "In Education",
+      },
+      {
+        question: "Mobile Computing Applications: W__/I___t a___s", //MULTIPLE CHOICES
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "Web/Internet access",
+        correctAnswer: "Web/Internet access",
+      },
+      {
+        question:
+          "Mobile Computing Advantages: Enabled user to work from anywhere as long as there is a connection established.", //MULTIPLE CHOICES
+        img: "",
+        options: [
+          "Location Flexibility",
+          "Saves time",
+          "Enhanced Productivity",
+          "Ease of research",
+          "Entertainment",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Location Flexibility",
+      },
+      {
+        question:
+          "Mobile Computing Advantages: Access all the important documents and files over a secure channel or portal and work as if they were on their computer.", //MULTIPLE CHOICES
+        img: "",
+        options: [
+          "Location Flexibility",
+          "Saves time",
+          "Enhanced Productivity",
+          "Ease of research",
+          "Entertainment",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Saves time",
+      },
+      {
+        question:
+          "Mobile Computing Advantages: Work efficiently and effectively.", //MULTIPLE CHOICES
+        img: "",
+        options: [
+          "Location Flexibility",
+          "Saves time",
+          "Enhanced Productivity",
+          "Ease of research",
+          "Entertainment",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Enhanced Productivity",
+      },
+      {
+        question:
+          "Mobile Computing Advantages: Collect and feed data from wherever they are without making unnecessary trips to and from the office to the fields.", //MULTIPLE CHOICES
+        img: "",
+        options: [
+          "Location Flexibility",
+          "Saves time",
+          "Enhanced Productivity",
+          "Ease of research",
+          "Entertainment",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Ease of research",
+      },
+      {
+        question:
+          "Mobile Computing Advantages: Easy to access a wide variety of movies, educational and informative material.", //MULTIPLE CHOICES
+        img: "",
+        options: [
+          "Location Flexibility",
+          "Saves time",
+          "Enhanced Productivity",
+          "Ease of research",
+          "Entertainment",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Entertainment",
+      },
+      {
+        question: "L___n F___y: 1 of 5 Mobile Computing Advantages.",
+        img: "",
+        options: ["", "", "", ""],
+        input: "true",
+        explanation: "Location Flexibility",
+        correctAnswer: "Location Flexibility",
+      },
+      {
+        question: "S___s t___e: 1 of 5 Mobile Computing Advantages.",
+        img: "",
+        options: ["", "", "", ""],
+        input: "true",
+        explanation: "Saves time",
+        correctAnswer: "Saves time",
+      },
+      {
+        question: "E___d P___y: 1 of 5 Mobile Computing Advantages.",
+        img: "",
+        options: ["", "", "", ""],
+        input: "true",
+        explanation: "Enhanced Productivity",
+        correctAnswer: "Enhanced Productivity",
+      },
+      {
+        question: "E___e o_ r___h: 1 of 5 Mobile Computing Advantages.",
+        img: "",
+        options: ["", "", "", ""],
+        input: "true",
+        explanation: "Ease of research",
+        correctAnswer: "Ease of research",
+      },
+      {
+        question: "E___t: 1 of 5 Mobile Computing Advantages.",
+        img: "",
+        options: ["", "", "", ""],
+        input: "true",
+        explanation: "Entertainment",
+        correctAnswer: "Entertainment",
+      },
+      {
+        question:
+          "1 of 5 Mobile Computing Security Issues is : Improper and unethical practices such as hacking, online fraud and malicious destruction.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "True",
+      },
+      {
+        question:
+          "1 of 5 Mobile Computing Security Issues is : Outsider gain access to steal vital data from companies.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "True",
+      },
+      {
+        question:
+          "1 of 5 Mobile Computing Security Issues is : Credential verification. As other users share username and passwords.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "True",
+      },
+      {
+        question: "Launched by Nippon Telegraph and Telephone in 1979.",
+        img: "",
+        options: ["1G", "2G", "3G", "4G", "5G"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "1G",
+      },
+      {
+        question:
+          "Motorola DynaTac provided 30 minutes of talk time and took roughly 10 hours to charge.",
+        img: "",
+        options: ["1G", "2G", "3G", "4G", "5G"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "1G",
+      },
+      {
+        question: "It is analogue Technology.",
+        img: "",
+        options: ["1G", "2G", "3G", "4G", "5G"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "1G",
+      },
+      {
+        question: "The max speed of __ is 2.4 KBPS.",
+        img: "",
+        options: ["1G", "2G", "3G", "4G", "5G"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "1G",
+      },
+      {
+        question:
+          "launched the Global System for Mobile Communications (GSM) in Finland in 1991.",
+        img: "",
+        options: ["1G", "2G", "3G", "4G", "5G"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "2G",
+      },
+      {
+        question:
+          "This technology introduced call and text encryption, plus data services like SMS, picture messages, and MMS.",
+        img: "",
+        options: ["1G", "2G", "3G", "4G", "5G"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "2G",
+      },
+      {
+        question:
+          '"Candy bar phones" also become popular during the __ era, with Nokia in the lead producing popular cell phones such as the Nokia 3210.',
+        img: "",
+        options: ["1G", "2G", "3G", "4G", "5G"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "2G",
+      },
+      {
+        question:
+          "The first global pre-commercial launch of the __ network was in Japan by NTT Docomo in 1998, and it was branded as FOMA. The first commercial launch of the technology happened on October 1, 2001 - also by NTT Docomo in Japan.",
+        img: "",
+        options: ["1G", "2G", "3G", "4G", "5G"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "3G",
+      },
+      {
+        question:
+          "Faster data-transmission speeds so the cell phone has more data-demanding ways like for video calling and mobile internet.",
+        img: "",
+        options: ["1G", "2G", "3G", "4G", "5G"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "3G",
+      },
+      {
+        question:
+          "The estimated speed of __ can be around 2 MBPS for non-moving devices and 384 Kbps for moving vehicles.",
+        img: "",
+        options: ["1G", "2G", "3G", "4G", "5G"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "3G",
+      },
+      {
+        question:
+          "Introduced for commercial use in Norway near the end of 2009, __ offered today's standard services.",
+        img: "",
+        options: ["1G", "2G", "3G", "4G", "5G"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "4G",
+      },
+      {
+        question: "Starting at a minimum of 12.5 Mbps.",
+        img: "",
+        options: ["1G", "2G", "3G", "4G", "5G"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "4G",
+      },
+      {
+        question:
+          "The best-selling cellphones included the iPhone 6 at 22.4 million units worldwide.",
+        img: "",
+        options: ["1G", "2G", "3G", "4G", "5G"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "4G",
+      },
+      {
+        question:
+          "It supports mobile web access like 3G, 3D, TV, Gaming services, HD mobile TV, Video conferencing, and other things that demand higher speeds.",
+        img: "",
+        options: ["1G", "2G", "3G", "4G", "5G"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "4G",
+      },
+      {
+        question:
+          "South Korea was the first country to offer __ in March 2019.",
+        img: "",
+        options: ["1G", "2G", "3G", "4G", "5G"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "5G",
+      },
+      {
+        question:
+          "The median __ download speed in Canada is 169.46 Mbps. That's already 205% faster than 4G!.",
+        img: "",
+        options: ["1G", "2G", "3G", "4G", "5G"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "5G",
+      },
+      {
+        question:
+          "__ also has a larger frequency range (between 30 Ghz and 300 GHz).",
+        img: "",
+        options: ["1G", "2G", "3G", "4G", "5G"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "5G",
+      },
+      {
+        question:
+          "Most Philippines operators launched 5G mobile networks in ___.",
+        img: "",
+        options: ["2018", "2019", "2020", "2021"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "2020",
+      },
+      {
+        question:
+          "___, one of the major telecommunications service providers, launched 5G technology in June 2019 for FIXED WIRELESS UNITS.",
+        img: "",
+        options: ["Smart", "Globe"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Smart",
+      },
+      {
+        question:
+          "___ launches 5G technology for mobile subscribers in February 2020 in metro manila.",
+        img: "",
+        options: ["Smart", "Globe"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Smart",
+      },
+      {
+        question:
+          "___, another major service provider launched 5G in July 2020.",
+        img: "",
+        options: ["Smart", "Globe"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Globe",
+      },
+      {
+        question:
+          "M___ C___ is the use of technology that allows us to communicate with others in different locations without the use of any physical connection (wires or cables). Mobile communication makes our life easier, and it saves time and effort.",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "Mobile Communication",
+        correctAnswer: "Mobile Communication",
+      },
+      {
+        question:
+          "M___ P___ (also called mobile cellular network, cell phone or hand phone) is an example of mobile communication (wireless communication). It is an electric device used for full duplex two way radio telecommunication over a cellular network of base stations known as cell sites.",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "Mobile Phone",
+        correctAnswer: "Mobile Phone",
+      },
+      {
+        question:
+          "1 of 3 Features of Mobile Communication: H___ c___ l___ b___",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "High capacity load balancing",
+        correctAnswer: "High capacity load balancing",
+      },
+      {
+        question: "1 of 3 Features of Mobile Communication: S___y",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "Scalability",
+        correctAnswer: "Scalability",
+      },
+      {
+        question: "1 of 3 Features of Mobile Communication: N___ m___ s___",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "Network management system",
+        correctAnswer: "Network management system",
+      },
+      {
+        question: "RBAC",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "Role based access control",
+        correctAnswer: "Role based access control",
+      },
+      {
+        question: "NAC",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "Network access control",
+        correctAnswer: "Network access control",
+      },
+      {
+        question: "DPI",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "Deep Packet Inspection",
+        correctAnswer: "Deep Packet Inspection",
+      },
+      {
+        question: "1 of 5 Advantages of Mobile Communication: F___y",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "Flexibility",
+        correctAnswer: "Flexibility",
+      },
+      {
+        question: "1 of 5 Advantages of Mobile Communication: C___ e___",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "Cost effectiveness",
+        correctAnswer: "Cost effectiveness",
+      },
+      {
+        question: "1 of 5 Advantages of Mobile Communication: S___d",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "Speed",
+        correctAnswer: "Speed",
+      },
+      {
+        question: "1 of 5 Advantages of Mobile Communication: A___y",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "Accessibility",
+        correctAnswer: "Accessibility",
+      },
+      {
+        question: "1 of 5 Advantages of Mobile Communication: C___ c___",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "Constant connectivity",
+        correctAnswer: "Constant connectivity",
+      },
+      {
+        question: "Hertz-Radio Communication",
+        img: "",
+        options: [
+          "1880",
+          "1897",
+          "1933",
+          "1938",
+          "1946",
+          "1956",
+          "1964",
+          "1969",
+          "1981",
+          "1982",
+          "1984",
+          "1986",
+          "1988",
+          "1992",
+          "1993",
+          "1994",
+          "1995",
+          "1996",
+          "1997",
+          "1999",
+        ],
+        input: "true",
+        explanation: "1880",
+        correctAnswer: "1880",
+      },
+      // ENDED at History of Wireless Communication
+    ];
+  </script>
+  <script src="../scripts/script.js"></script>
 </html>
-
-
