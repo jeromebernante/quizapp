@@ -98,7 +98,7 @@ function isPreviousAndCurrentTheSame(){
 function displayQuestion(){
 
   const currentQuestion = questions[currentQuestionIndex];
-  questionElement.textContent = currentQuestion.question;
+  questionElement.innerHTML = wrapText(currentQuestion.question);
   optionsElement.innerHTML = "";
   inputAnswerElement.style.display = "none";
   inputAnswerElement.value ="";
@@ -232,5 +232,9 @@ function showExplanation(){
     explanationElement.style.display = "block";
     explanationElement.textContent = currentQuestion.explanation;
   }
+}
+
+function wrapText(str) {
+  return str.split(/\r?\n/).join("<br>");
 }
 
