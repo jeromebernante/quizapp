@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../images/icon-logo.png" type="image/png" />
+    <link rel="manifest" href="../manifest.json" />
+    <link rel="stylesheet" href="../styles/style.css" />
+    <title>Quiz App By Jerome</title>
+  </head>
+  <body class="flex-col">
+    <nav class="flex-row">
+      <img class="icon" src="../images/icon-quiz.png" alt="" />
+      <span>RIZAL</span>
+      <a href="../index.html"
+        ><img class="icon" src="../images/icon-home.png" alt=""
+      /></a>
+    </nav>
+    <main class="flex-col height-max">
+      <section class="section cover">
+        <header>
+          <p>Rizal's Life & Works</p>
+          <p id="p-total-question"></p>
+        </header>
+        <main>
+          <h1>CONTENTS</h1>
+          <p>Midterm Reviewer:</p>
+        </main>
+        <box>
+          <img id="btn-play" src="../images/icon-play.png" alt="" />
+        </box>
+      </section>
+
+      <section class="section">
+        <box class="nav-question">
+          <p id="progress">
+            <!-- progress here -->
+          </p>
+          <box id="status-answer"></box>
+          <div id="btn-skip" class="button">SKIP</div>
+        </box>
+
+        <p id="question" class="p-question">
+          <!-- question here -->
+        </p>
+
+        <p id="explanation" class="p-explanation">
+          <!-- explanation -->
+        </p>
+
+        <div class="flex-col">
+          <!-- image here -->
+          <img id="img" src="" alt="" />
+        </div>
+
+        <ul id="options" class="options">
+          <!-- Options will be populated here -->
+        </ul>
+
+        <input
+          type="text"
+          id="input-answer"
+          placeholder="your answer here..."
+          autocomplete="off"
+        />
+
+        <box class="nav-question">
+          <div id="btn-answer" class="button">Answer</div>
+          <div id="btn-next" class="button">Next</div>
+        </box>
+      </section>
+
+      <section class="section result">
+        <p class="title">SCORE</p>
+        <p id="score" class="score"></p>
+        <box class="box-btn-replay">
+          <img id="btn-replay" src="../images/icon-replay.png" alt="" />
+        </box>
+      </section>
+    </main>
+  </body>
+  <script>
+    const questions = [
+      {
+        question: "THE FIRST HOMECOMING:\n\nWhen did Rizal arrive in Saigon?",
+        img: "",
+        options: [
+          "August 6, 1886",
+          "July 30, 1886",
+          "August 7, 1886",
+          "August 20, 1886",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "July 30, 1886",
+      },
+      {
+        question:
+          "THE FIRST HOMECOMING:\n\nWho was Rizal's first patient in his medical clinic?",
+        img: "",
+        options: [
+          "His father",
+          "His mother",
+          "His sibling",
+          "A wealthy villager",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "His mother",
+      },
+
+      {
+        question:
+          "THE FIRST HOMECOMING:\n\nWhat did Rizal construct for the youth of his town to discourage them from engaging in different forms of gambling?",
+        img: "",
+        options: [
+          "Building a school",
+          "Constructing a gymnasium",
+          "Establishing a hospital",
+          "Starting a charity organization",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Constructing a gymnasium",
+      },
+
+      {
+        question:
+          "THE FIRST HOMECOMING:\n\nWhat was the main obstacle that prevented Rizal from meeting Leonor during his six-month vacation?",
+        img: "",
+        options: [
+          "He was too busy with his medical practice",
+          "Conflicts between his parents and Leonor's family",
+          "Leonor was out of town",
+          "Rizal had lost contact with Leonor",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Conflicts between his parents and Leonor's family",
+      },
+
+      {
+        question:
+          "THE FIRST HOMECOMING:\n\nWhat profession did the community in Calamba associate with Rizal due to his medical practice?",
+        img: "",
+        options: ["Lawyer", "Engineer", "Doctor", "Teacher"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Doctor",
+      },
+
+      {
+        question:
+          "THE FIRST HOMECOMING:\n\nWhat miraculous act did Rizal perform for his first patient, who was the mother of Rizal?",
+        img: "",
+        options: [
+          "He cured her blindness.",
+          "He performed surgery on her.",
+          "He provided her with medicine.",
+          "He gave her a check-up.",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "He cured her blindness.",
+      },
+
+      {
+        question:
+          "NOLI ME TANGERE CONTROVERSY:\n\nWhy did Rizal's enemies persecute him?",
+        img: "",
+        options: [
+          "Because of his friendship with Don Jose Taviel de Andrade.",
+          "Because he fled the country to avoid danger.",
+          "Because he wrote a novel with subversive ideas against the church and Spanish government.",
+          "Because he joined a revolutionary group.",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer:
+          "Because he wrote a novel with subversive ideas against the church and Spanish government.",
+      },
+
+      {
+        question:
+          "NOLI ME TANGERE CONTROVERSY:\n\nWho was assigned as a bodyguard to protect Rizal from danger?",
+        img: "",
+        options: [
+          "Manila Archbishop Messenger, Pedro Payo.",
+          "Governor-General Emilio Terrero.",
+          "Spanish Lieutenant, Don Jose Taviel de Andrade.",
+          "UST Father Rector Gregorio Echevarria.",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Spanish Lieutenant, Don Jose Taviel de Andrade.",
+      },
+
+      {
+        question:
+          "NOLI ME TANGERE CONTROVERSY:\n\nWhat was the position of the powerful friars regarding Rizal's novel?",
+        img: "",
+        options: [
+          "They found it to be a masterpiece of literature.",
+          "They ignored it.",
+          "They put it under strict scrutiny and considered it heretical, impious, and scandalous.",
+          "They praised its contribution to society.",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "They put it under strict scrutiny and considered it heretical, impious, and scandalous.",
+      },
+
+      {
+        question:
+          "NOLI ME TANGERE CONTROVERSY:\n\nWhat did Governor-General Emilio Terrero do in response to the controversy surrounding Rizal's novel?",
+        img: "",
+        options: [
+          "He ordered Rizal's arrest.",
+          "He requested a copy of the novel from Rizal.",
+          "He ignored the issue.",
+          "He ignored the issue.",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "He requested a copy of the novel from Rizal",
+      },
+
+    ];
+  </script>
+  <script src="../scripts/script.js"></script>
+</html>
