@@ -113,11 +113,11 @@ function displayQuestion(){
   yourAnswer = ""; //reset
   isChecked = false;
 
-  console.log(currentQuestion.question);
   if(currentQuestion.input === "true"){
     inputAnswerElement.style.display = "block";
   }else{
-    currentQuestion.options.forEach((option, index) => {
+    const shuffledOptions = shuffle(currentQuestion.options);
+    shuffledOptions.forEach((option, index) => {
       const li = document.createElement("li");
       li.textContent = option;
       li.addEventListener("click", () => highlightYourAnswer(option));
@@ -125,6 +125,15 @@ function displayQuestion(){
     });
   }
 
+}
+
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 }
 
 function highlightYourAnswer(option){
