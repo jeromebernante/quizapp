@@ -556,6 +556,309 @@
           "PHP is designed to run efficiently on the server side, handling tasks such as generating dynamic content and interacting with databases.",
         correctAnswer: "Server-side",
       },
+      {
+        question:
+          "Which tool is a web server that displays your website on the internet and provides local development in XAMPP?",
+        img: "",
+        options: ["XAMPP", "Apache", "MySQL", "PHP", "Perl"],
+        input: "false",
+        explanation:
+          "Apache is a web server software that is included in XAMPP. It serves web pages over the internet and provides local development capabilities when used in conjunction with XAMPP.",
+        correctAnswer: "Apache",
+      },
+      {
+        question:
+          "Which tool is an open-source relational database management system used to create a database and store data?",
+        img: "",
+        options: ["XAMPP", "Apache", "MySQL", "PHP", "Perl"],
+        input: "false",
+        explanation:
+          "MySQL is a popular open-source relational database management system. It is commonly used with PHP to create dynamic websites and applications.",
+        correctAnswer: "MySQL",
+      },
+      {
+        question:
+          "Which tool is a scripting language widely used for web development and is open-source?",
+        img: "",
+        options: ["XAMPP", "Apache", "MySQL", "PHP", "Perl"],
+        input: "false",
+        explanation:
+          "PHP is a server-side scripting language that is commonly used for web development. It is open-source, meaning it can be freely modified and distributed.",
+        correctAnswer: "PHP",
+      },
+      {
+        question:
+          "Which tool is a programming language used for server-side scripting?",
+        img: "",
+        options: ["XAMPP", "Apache", "MySQL", "PHP", "Perl"],
+        input: "false",
+        explanation:
+          "Perl is a programming language commonly used for server-side scripting tasks, such as processing form data and generating dynamic web content.",
+        correctAnswer: "Perl",
+      },
+      {
+        question:
+          "PHP Basic Syntax\n\nWhat is the purpose of the PHP opening and closing tags?",
+        img: "",
+        options: [
+          "To specify comments in PHP code",
+          "To format text with variables",
+          "To include external PHP files",
+          "To specify the start and end of a PHP script",
+          "To create database tables",
+        ],
+        input: "false",
+        explanation:
+          "The PHP opening <?php and closing ?> tags are used to specify the start and end of a PHP script.",
+        correctAnswer: "To specify the start and end of a PHP script",
+      },
+      {
+        question:
+          "PHP Basic Syntax\n\nWhich PHP statement can be used to output both plain text and HTML code?",
+        img: "",
+        options: ["echo", "printf", "print", "display", "output"],
+        input: "false",
+        explanation:
+          "The PHP echo statement can be used to output both plain text and HTML code.",
+        correctAnswer: "echo",
+      },
+      {
+        question:
+          "PHP Basic Syntax\n\nConsider the following PHP code:\n\n<?php\n$name = 'John';\n$age = 30;\necho 'My name is $name and I am $age years old.';\n?>\n\nWhat will be the output of this code?",
+        img: "",
+        options: [
+          "My name is $name and I am $age years old.",
+          "My name is John and I am 30 years old.",
+          "My name is $name and I am $age years old.",
+          "My name is and I am years old.",
+          "An error will occur",
+        ],
+        input: "false",
+        explanation:
+          "The echo statement will output the string as it is, without replacing the variables $name and $age with their values.",
+        correctAnswer: "My name is $name and I am $age years old.",
+      },
+      {
+        question:
+          "PHP Basic Syntax\n\nWhich statement accurately describes PHP's handling of tabs and spaces?",
+        img: "",
+        options: [
+          "PHP requires strict indentation rules",
+          "PHP ignores tabs and spaces",
+          "PHP allows only tabs for indentation",
+          "PHP only accepts spaces for indentation",
+          "PHP is liberal about the use of tabs and spaces to improve script readability",
+        ],
+        input: "false",
+        explanation:
+          "PHP is liberal about the use of tabs and spaces within statements to improve the readability of a script.",
+        correctAnswer:
+          "PHP is liberal about the use of tabs and spaces to improve script readability",
+      },
+      {
+        question:
+          "PHP Basic Syntax\n\nWhich of the following statements about the PHP echo statement is true?",
+        img: "",
+        options: [
+          "It requires parentheses for every output",
+          "It cannot output HTML code",
+          "It can only output strings",
+          "It can be used with or without parentheses",
+          "It can only output integers",
+        ],
+        input: "false",
+        explanation:
+          "The PHP echo statement can be used with or without parentheses to output strings, variables, and HTML code.",
+        correctAnswer: "It can be used with or without parentheses",
+      },
+      {
+        question:
+          "PHP Basic Syntax\n\nConsider the following PHP code:\n\n<?php\n$num1 = 10;\n$num2 = 5;\necho $num1 + $num2;\n?>\n\nWhat will be the output of this code?",
+        img: "",
+        options: ["10 + 5", "15", "num1 + num2", "An error will occur", "105"],
+        input: "false",
+        explanation:
+          "The echo statement will output the result of the addition operation, which is 15.",
+        correctAnswer: "15",
+      },
+      {
+        question:
+          "PHP Basic Syntax\n\nIn PHP, which statement is used to output formatted text with variables?",
+        img: "",
+        options: ["print", "printf", "display", "echo", "formattedOutput"],
+        input: "false",
+        explanation:
+          "The printf statement in PHP is used to output formatted text with variables.",
+        correctAnswer: "printf",
+      },
+      {
+        question:
+          "PHP Basic Syntax\n\nWhich of the following is NOT true regarding the PHP print statement?",
+        img: "",
+        options: [
+          "It can be used with or without parentheses",
+          "It always appends a newline character",
+          "It returns 1 upon successful output",
+          "It is slower than the echo statement",
+          "It can be used interchangeably with echo",
+        ],
+        input: "false",
+        explanation:
+          "The print statement in PHP does not append a newline character by default; it only returns 1 upon successful output.",
+        correctAnswer: "It always appends a newline character",
+      },
+      {
+        question:
+          "PHP Basic Syntax\n\nWhich PHP statement is used to include the contents of one PHP file into another PHP file?",
+        img: "",
+        options: ["include", "require", "import", "load", "attach"],
+        input: "false",
+        explanation:
+          "The include statement in PHP is used to include the contents of one PHP file into another PHP file.",
+        correctAnswer: "include",
+      },
+      {
+        question:
+          "PHP Basic Syntax\n\nConsider the following PHP code:\n\n<?php\n$x = 5;\n$y = 10;\n$z = $x * $y;\necho $z;\n?>\n\nWhat will be the output of this code?",
+        img: "",
+        options: ["50", "15", "5 * 10", "An error will occur", "10"],
+        input: "false",
+        explanation:
+          "The echo statement will output the result of the multiplication operation, which is 50.",
+        correctAnswer: "50",
+      },
+      {
+        question:
+          "Tag and Comment\n\nWhat is the purpose of a PHP tag in a PHP script?",
+        img: "",
+        options: [
+          "To mark the beginning and end of a comment block",
+          "To denote the start and end of a PHP code block",
+          "To specify the character encoding of the script",
+          "To indicate the location of external libraries",
+        ],
+        input: "false",
+        explanation:
+          "A PHP tag marks the beginning and end of a block of PHP code.",
+        correctAnswer: "To denote the start and end of a PHP code block",
+      },
+      {
+        question:
+          "Tag and Comment\n\nWhen would you use a comment in PHP code?",
+        img: "",
+        options: [
+          "To execute specific code blocks",
+          "To skip the code for checking and debugging",
+          "To prevent syntax errors",
+          "To define function parameters",
+        ],
+        input: "false",
+        explanation:
+          "Comments in PHP are used to skip code for checking and debugging, among other purposes.",
+        correctAnswer: "To skip the code for checking and debugging",
+      },
+      {
+        question:
+          "Tag and Comment\n\nWhich of the following accurately describes a single-line comment in PHP?",
+        img: "",
+        options: [
+          "/ Comment /",
+          "# Comment #",
+          "// Comment",
+          "<!-- Comment -->",
+        ],
+        input: "false",
+        explanation: "A single-line comment in PHP starts with // or #.",
+        correctAnswer: "// Comment",
+      },
+      {
+        question:
+          "Tag and Comment\n\nWhat is the primary purpose of using comments in PHP code?",
+        img: "",
+        options: [
+          "To enhance code execution speed",
+          "To prevent other developers from accessing the code",
+          "To document and explain the code for better understanding",
+          "To improve code security",
+        ],
+        input: "false",
+        explanation:
+          "Comments in PHP are primarily used to document and explain the code for better understanding.",
+        correctAnswer:
+          "To document and explain the code for better understanding",
+      },
+      {
+        question:
+          "Tag and Comment\n\nWhich of the following is a valid syntax for a multiple-line comment in PHP?",
+        img: "",
+        options: ["/* Comment */", "# Comment #", "// Comment", "/ Comment /"],
+        input: "false",
+        explanation:
+          "A multiple-line comment in PHP starts with /* and ends with */.",
+        correctAnswer: "/* Comment */",
+      },
+      {
+        question:
+          "Case Sensitivity in PHP\n\nWhich of the following statements accurately describes PHP's treatment of variable names regarding case sensitivity?",
+        img: "",
+        options: [
+          "PHP variables are case-insensitive",
+          "PHP variables are case-sensitive",
+          "Variable names must always be in uppercase",
+          "Variable names must always be in lowercase",
+        ],
+        input: "false",
+        explanation:
+          "PHP variables are case-sensitive, meaning $variable and $Variable are considered different variables.",
+        correctAnswer: "PHP variables are case-sensitive",
+      },
+      {
+        question:
+          "Case Sensitivity in PHP\n\nWhat is the result of the following PHP code?\n\n<?php\n$variable = 'Hello';\n$Variable = 'World';\necho $variable . ' ' . $Variable;\n?>",
+        img: "",
+        options: [
+          "Hello World",
+          "World Hello",
+          "hello world",
+          "Error: variable already defined",
+          "No output",
+        ],
+        input: "false",
+        explanation:
+          "PHP treats $variable and $Variable as two different variables due to case sensitivity. Therefore, the output is 'Hello World'.",
+        correctAnswer: "Hello World",
+      },
+      {
+        question:
+          "Case Sensitivity in PHP\n\nWhich of the following is true regarding function names in PHP?",
+        img: "",
+        options: [
+          "Function names must always be in uppercase",
+          "Function names must always be in lowercase",
+          "PHP function names are case-insensitive",
+          "PHP function names are case-sensitive",
+        ],
+        input: "false",
+        explanation:
+          "PHP function names are not case-sensitive, meaning you can call a function using different casing and it will still work.",
+        correctAnswer: "PHP function names are case-insensitive",
+      },
+      {
+        question:
+          "Case Sensitivity in PHP\n\nWhat is the output of the following PHP code?\n\n<?php\nfunction test() {\n    echo 'Hello';\n}\nTEST();\n?>",
+        img: "",
+        options: [
+          "Hello",
+          "No output",
+          "Error: function test() already defined",
+          "Error: unknown function TEST()",
+        ],
+        input: "false",
+        explanation:
+          "PHP function names are case-insensitive, so calling TEST() will invoke the test() function, resulting in 'Hello' being echoed.",
+        correctAnswer: "Hello",
+      },
+      
     ];
   </script>
   <script src="../scripts/script.js"></script>
