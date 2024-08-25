@@ -1,0 +1,146 @@
+It is the program that focuses on the study of the utilization of both
+hardware and software technologies, involving planning, installing,
+customizing, operating, managing and administering,  and maintaining
+information technology infrastructure that provides computing solutions to
+address the needs of an organization. 
+
+_a. BS Information Technology
+b. BS Computer Science
+c. BS Computer Engineering
+d. BS Information Systems
+
+
+It is the Philippine government agency that covers both public and private
+higher education institutions as well as degree-granting programs in all
+post-secondary educational institutions in the country. 
+
+a. Bureau of Higher Education
+_b. Commission on Higher Education
+c. Department of Higher Education
+d. Committee on Higher Education
+
+
+Which course focuses the ICT program outcomes of preservation and
+promotion of Filipino historical and cultural heritage?  
+
+a. Mathematics in the Modern World
+b. Understanding the Self
+c. Web Designing
+_d. The Life and Works of Jose Rizal
+
+
+
+It is a career pathway that deals with one's ability and readiness to develop,
+organize and run a business enterprise, along with any of its uncertainties
+to make a profit.
+
+a. Graduate Studies
+b. Education / Academe
+_c. Entrepreneurship
+d. Government Service
+
+
+
+It is the ability to use technology to ﬁnd information, evaluate sources,
+create content, and communicate with others effectively.
+
+a. Financial literacy
+_b. Digital literacy
+c. Computer literacy
+d. Health literacy
+
+
+
+It is the function of the IT Department where rules are set on how the
+organization can use the company's technology, IT security and the data
+insurance.
+
+a. Infrastructure
+b. Procurement
+_c. Governance
+d. Functionality
+
+
+
+Which of the subject (course) aims to promote team work in computing
+project design and development? 
+
+_a. Capstone Project
+b. Physical Education
+c. NSTP
+d. Mathematics in the Modern World
+
+In the acronym ICT, what is the meaning of the letter C?
+a. Collaboration
+_b. Communication
+c. Collaborate
+d. Communicate
+
+
+Which of the BSIT graduate attributes is highlighted in our computer
+programming courses (subjects)?
+a. Knowledge for solving computer problems.
+b. Problem Analysis
+_c. Design and Development of Solutions
+d. Individual and Team Work
+
+
+It is the program that focuses on the discipline that embodies the science
+and technology of design, construction, implementation, and maintenance
+of software and hardware components of modern computing systems and
+computer-controlled equipment. Computer engineering has traditionally
+been viewed as a combination of both computer science (CS) and electrical
+engineering (EE).
+_a. BS Computer Engineering
+b. BS Information Systems
+c. BS Information Technology
+d. BS Computer Science
+
+
+It is the program that focuses on the application and effect of information
+technology to systems and organizations.
+a. BS Information Technology
+b. BS Computer Engineering
+_c. BS Information Systems
+d. BS Computer Science
+
+
+Which of the following is considered a drawback of computer literacy?
+a. Shorter turnaround time
+_b. Digital divide
+c. Better connectivity
+d. Increased job opportunity
+
+
+Which of the BSIT graduate attributes is highlighted in our subject, Social
+and Professional Issues (SPI)?  
+_a. Computing Professionalism and Social Responsibility
+b. Modern Tool Usage
+c. Knowledge for Solving Computing Problems
+d. Design and Development of Solutions
+
+
+It is the consortium whose primary purpose is to to contribute to the
+improvement of computing education worldwide through the mutual
+recognition of accredited academic computing programs that prepare
+graduates for professional practice.
+a. Dublin Accord
+b. Washington Accord
+_c. Seoul Accord
+d. Sydney Accord
+
+
+Which of the following is considered technologically-enhanced dishonesty?
+a. Tardiness
+_b. Catfishing
+c. Absenteeism
+d. Cyberbullying
+
+
+
+It is a practical confirmation that a given individual possesses competency
+in the field of information technology. 
+a. Civil Service Examination
+_b. IT Certification
+c.Bar Examination
+d. Job Interview

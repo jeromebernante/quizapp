@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../images/icon-logo.png" type="image/png" />
+    <link rel="manifest" href="../manifest.json" />
+    <link rel="stylesheet" href="../styles/style.css" />
+    <title>Quiz App By Jerome</title>
+  </head>
+  <body class="flex-col">
+    <nav class="flex-row">
+      <img class="icon" src="../images/icon-quiz.png" alt="" />
+      <span>SPI</span>
+      <a href="../index.html"
+        ><img class="icon" src="../images/icon-home.png" alt=""
+      /></a>
+    </nav>
+    <main class="flex-col height-max">
+      <section class="section cover">
+        <header>
+          <p>Social and Professional Issues</p>
+          <p id="p-total-question"></p>
+        </header>
+        <main>
+          <h1>CONTENTS</h1>
+          <p>Preliminary Reviewer</p>
+          <p></p>
+        </main>
+        <box>
+          <img id="btn-play" src="../images/icon-play.png" alt="" />
+        </box>
+      </section>
+
+      <section class="section">
+        <box class="nav-question">
+          <p id="progress">
+            <!-- progress here -->
+          </p>
+          <box id="status-answer"></box>
+          <div id="btn-skip" class="button">SKIP</div>
+        </box>
+
+        <p id="question" class="p-question">
+          <!-- question here -->
+        </p>
+
+        <p id="explanation" class="p-explanation">
+          <!-- explanation -->
+        </p>
+
+        <div class="flex-col">
+          <!-- image here -->
+          <img id="img" src="" alt="" />
+        </div>
+
+        <ul id="options" class="options">
+          <!-- Options will be populated here -->
+        </ul>
+
+        <input
+          type="text"
+          id="input-answer"
+          placeholder="your answer here..."
+          autocomplete="off"
+        />
+
+        <box class="nav-question">
+          <div id="btn-answer" class="button">Answer</div>
+          <div id="btn-next" class="button">Next</div>
+        </box>
+      </section>
+
+      <section class="section result">
+        <p class="title">SCORE</p>
+        <p id="score" class="score"></p>
+        <box class="box-btn-replay">
+          <img id="btn-replay" src="../images/icon-replay.png" alt="" />
+        </box>
+      </section>
+    </main>
+  </body>
+  <script>
+    const questions = [
+      {
+        question:
+          "I_________n T________y is the utilization of computers, networking, data storage and connected devices, along with the infrastructure and processes involved, to facilitate business or administrative solutions.",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "Information Technology",
+        correctAnswer: "Information Technology",
+      },
+      {
+        question:
+          "Graduate Attribute for BSIT <br><br>• Apply knowledge of computing, science, and mathematics to the discipline.<br>• Understand best practices and standards and their applications.",
+        img: "",
+        options: [
+          "Knowledge for Solving Computing Problems",
+          "Problem Analysis",
+          "Design and Development of Solutions",
+          "Modern Tool Usage",
+          "Individual and Team Work",
+          "Communication",
+          "Computing Professionalism and Social Responsibility",
+          "Life-long Learning",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Knowledge for Solving Computing Problems",
+      },
+      {
+        question:
+          "Graduate Attribute for BSIT <br><br>• Analyze complex problems, identify and define the computing requirements appropriate to its solution.<br>• Identify and analyze user needs and take them into account in the selection, creation, evaluation, and administration of computer-based systems.",
+        img: "",
+        options: [
+          "Knowledge for Solving Computing Problems",
+          "Problem Analysis",
+          "Design and Development of Solutions",
+          "Modern Tool Usage",
+          "Individual and Team Work",
+          "Communication",
+          "Computing Professionalism and Social Responsibility",
+          "Life-long Learning",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Problem Analysis",
+      },
+      {
+        question:
+          "Graduate Attribute for BSIT <br><br>• Design, implement, and evaluate computer-based systems, process, components, or programs to meet desired needs and requirements under various constraints.<br>• Integrate IT-based solutions into the user environments effectively.",
+        img: "",
+        options: [
+          "Knowledge for Solving Computing Problems",
+          "Problem Analysis",
+          "Design and Development of Solutions",
+          "Modern Tool Usage",
+          "Individual and Team Work",
+          "Communication",
+          "Computing Professionalism and Social Responsibility",
+          "Life-long Learning",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Design and Development of Solutions",
+      },
+      {
+        question:
+          "Graduate Attribute for BSIT <br><br>• Apply knowledge through the use of current technique, skills, tools, and practices necessary for the IT profession.",
+        img: "",
+        options: [
+          "Knowledge for Solving Computing Problems",
+          "Problem Analysis",
+          "Design and Development of Solutions",
+          "Modern Tool Usage",
+          "Individual and Team Work",
+          "Communication",
+          "Computing Professionalism and Social Responsibility",
+          "Life-long Learning",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Modern Tool Usage",
+      },
+      {
+        question:
+          "Graduate Attribute for BSIT <br><br>• Function effectively as a member or leader of a development team recognizing the different roles within a team to accomplish a common goal. <br>• Assist in the creation of an effective IT project plan.",
+        img: "",
+        options: [
+          "Knowledge for Solving Computing Problems",
+          "Problem Analysis",
+          "Design and Development of Solutions",
+          "Modern Tool Usage",
+          "Individual and Team Work",
+          "Communication",
+          "Computing Professionalism and Social Responsibility",
+          "Life-long Learning",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Individual and Team Work",
+      },
+      {
+        question:
+          "Graduate Attribute for BSIT <br><br>• Communication effectively with the computing community and with society at large about complex computing activities through logical writing, presentations, and clear instructions.",
+        img: "",
+        options: [
+          "Knowledge for Solving Computing Problems",
+          "Problem Analysis",
+          "Design and Development of Solutions",
+          "Modern Tool Usage",
+          "Individual and Team Work",
+          "Communication",
+          "Computing Professionalism and Social Responsibility",
+          "Life-long Learning",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Communication",
+      },
+      {
+        question:
+          "Graduate Attribute for BSIT <br><br>• Analyze the local and global impact of computing information technology on individuals, organizations, and society.<br>• Understand professional, ethical, legal, security, and social issues and responsibilities in the utilization of information technology.",
+        img: "",
+        options: [
+          "Knowledge for Solving Computing Problems",
+          "Problem Analysis",
+          "Design and Development of Solutions",
+          "Modern Tool Usage",
+          "Individual and Team Work",
+          "Communication",
+          "Computing Professionalism and Social Responsibility",
+          "Life-long Learning",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Computing Professionalism and Social Responsibility",
+      },
+      {
+        question:
+          "Graduate Attribute for BSIT <br><br>• Recognize the need for and engage in planning self-learning, and improving performance as an foundation for continuing professional development.",
+        img: "",
+        options: [
+          "Knowledge for Solving Computing Problems",
+          "Problem Analysis",
+          "Design and Development of Solutions",
+          "Modern Tool Usage",
+          "Individual and Team Work",
+          "Communication",
+          "Computing Professionalism and Social Responsibility",
+          "Life-long Learning",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Life-long Learning",
+      },
+      {
+        question:
+          "D_____l l______y, the ability to find, evaluate, and use information effectively through digital technology has profound impacts on individuals and society.",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "Digital literacy",
+        correctAnswer: "Digital literacy",
+      },
+      {
+        question:
+          "Digital Literacy in Society <br><br>Positive Effects <br>Digital literacy empowers individuals by providing access to information, education, and opportunities. It can bridge digital divides and promote social inclusion.",
+        img: "",
+        options: [
+          "Empowerment and Access",
+          "Economic Growth",
+          "Improved Education",
+          "Enhanced Communication",
+          "Civic Engagement",
+          "Healthcare Improvement",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Empowerment and Access",
+      },
+      {
+        question:
+          "Digital Literacy in Society <br><br>Positive Effects <br>A digitally literate workforce is essential for economic growth. It fosters innovation entrepreneurship, and competitiveness.",
+        img: "",
+        options: [
+          "Empowerment and Access",
+          "Economic Growth",
+          "Improved Education",
+          "Enhanced Communication",
+          "Civic Engagement",
+          "Healthcare Improvement",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Economic Growth",
+      },
+      {
+        question:
+          "Digital Literacy in Society <br><br>Positive Effects <br>Digital tools can enhance teaching and learning, offering personalized instruction interactive content, and access to global resources.",
+        img: "",
+        options: [
+          "Empowerment and Access",
+          "Economic Growth",
+          "Improved Education",
+          "Enhanced Communication",
+          "Civic Engagement",
+          "Healthcare Improvement",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Improved Education",
+      },
+      {
+        question:
+          "Digital Literacy in Society <br><br>Positive Effects <br>Digital platforms facilitate global communication, collaboration, and knowledge sharing.",
+        img: "",
+        options: [
+          "Empowerment and Access",
+          "Economic Growth",
+          "Improved Education",
+          "Enhanced Communication",
+          "Civic Engagement",
+          "Healthcare Improvement",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Enhanced Communication",
+      },
+      {
+        question:
+          "Digital Literacy in Society <br><br>Positive Effects <br>Digital literacy empowers citizens to participate in democratic processes, access government information, and hold leaders accountable.",
+        img: "",
+        options: [
+          "Empowerment and Access",
+          "Economic Growth",
+          "Improved Education",
+          "Enhanced Communication",
+          "Civic Engagement",
+          "Healthcare Improvement",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Civic Engagement",
+      },
+      {
+        question:
+          "Digital Literacy in Society <br><br>Positive Effects <br>Digital health tools can improve patient care, access to information, and remote healthcare services.",
+        img: "",
+        options: [
+          "Empowerment and Access",
+          "Economic Growth",
+          "Improved Education",
+          "Enhanced Communication",
+          "Civic Engagement",
+          "Healthcare Improvement",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Healthcare Improvement",
+      },
+      {
+        question:
+          "Digital Literacy in Society <br><br>Negative Effects <br>Digital Divide: Unequal access to technology and digital skills can exacerbate existing social and economic inequalities.",
+        img: "",
+        options: [
+          "Digital Divide",
+          "Misinformation and Disinformation",
+          "Privacy Concerns",
+          "Addiction and Mental Health",
+          "Cybercrime",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Digital Divide",
+      },
+      {
+        question:
+          "Digital Literacy in Society <br><br>Negative Effects <br>The spread of false information can undermine trust in institutions and fuel social division.",
+        img: "",
+        options: [
+          "Digital Divide",
+          "Misinformation and Disinformation",
+          "Privacy Concerns",
+          "Addiction and Mental Health",
+          "Cybercrime",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Misinformation and Disinformation",
+      },
+      {
+        question:
+          "Digital Literacy in Society <br><br>Negative Effects <br>Online activities generate vast amounts of personal data, raising concerns about privacy and surveillance.",
+        img: "",
+        options: [
+          "Digital Divide",
+          "Misinformation and Disinformation",
+          "Privacy Concerns",
+          "Addiction and Mental Health",
+          "Cybercrime",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Privacy Concerns",
+      },
+      {
+        question:
+          "Digital Literacy in Society <br><br>Negative Effects <br>Excessive screen time can lead to addiction, isolation, and negative impacts on mental health.",
+        img: "",
+        options: [
+          "Digital Divide",
+          "Misinformation and Disinformation",
+          "Privacy Concerns",
+          "Addiction and Mental Health",
+          "Cybercrime",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Addiction and Mental Health",
+      },
+      {
+        question:
+          "Digital Literacy in Society <br><br>Negative Effects <br>Digital literacy is essential for protecting individuals and organizations from cyber threats.",
+        img: "",
+        options: [
+          "Digital Divide",
+          "Misinformation and Disinformation",
+          "Privacy Concerns",
+          "Addiction and Mental Health",
+          "Cybercrime",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Cybercrime",
+      },
+      {
+        question:
+          "Digital Literacy in Society <br><br>Consequences of not having digital literacy<br>1. Limited access to information.<br>2. Reduced economic opportunities.<br>3. Hindered human development.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "True",
+      },
+      {
+        question:
+          "Digital Literacy in Society <br><br>Balancing the Impacts<br>• Promote digital inclusion<br>• Develop critical thinking skills<br>• Protect privacy<br>• Foster digital citizenship<br>• Invest in digital literacy education",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "True",
+      },
+      {
+        question:
+          "Some other terms related to digital literacy include computer literacy, ICT literacy, data literacy, or data fluency. In today’s world, being digitally literate is crucial for participating in educational opportunities, finding employment, and performing job-related tasks.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "True",
+      },
+      {
+        question:
+          "Digital Literacy<br><br>Positive Effects<br>• Empowerment and Access<br>• Economic Growth<br>• Improved Education<br>• Enhanced Communication<br>• Civic Engagement<br>• Healthcare Improvement",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "True",
+      },
+      {
+        question:
+          "Digital Literacy<br><br>Balancing the Impacts<br>• Promote digital inclusion<br>• Develop critical thinking skills<br>• Protect privacy<br>• Foster digital citizenship<br>• Invest in digital literacy education",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "True",
+      },
+      {
+        question:
+          "D_____l c_________p is the responsible use of technology by anyone who uses computers, the internet, and digital devices to engage with society on any level. It's about understanding how to use technology safely, responsibly, and ethically.",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "Digital citizenship",
+        correctAnswer: "Digital citizenship",
+      },
+      {
+        question:
+          "Skills expected from IT Graduates<br>Technical Skills (Hard skills)<br><br>• The ability to communicate intricate instructions and ideas more simply.<br>• Need to speak with clients, manufacturers or other office staff and translate complex information into layman's terms.<br>• Need to produce technical documentation, web content, or press releases depending on the job.",
+        img: "",
+        options: [
+          "Technical writing",
+          "Social media management",
+          "Coding",
+          "Network configuration",
+          "Hardware deployment",
+          "Operating system knowledge",
+          "Database management",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Technical writing",
+      },
+      {
+        question:
+          "Skills expected from IT Graduates<br>Technical Skills (Hard skills)<br><br>• Understanding how social media platforms work.<br>• Help companies with their content management system, search engine optimization and web analytics is very useful to many businesses.",
+        img: "",
+        options: [
+          "Technical writing",
+          "Social media management",
+          "Coding",
+          "Network configuration",
+          "Hardware deployment",
+          "Operating system knowledge",
+          "Database management",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Social media management",
+      },
+      {
+        question:
+          "Skills expected from IT Graduates<br>Technical Skills (Hard skills)<br><br>• Understanding code is necessary to complete software development projects and manage quality assurance.",
+        img: "",
+        options: [
+          "Technical writing",
+          "Social media management",
+          "Coding",
+          "Network configuration",
+          "Hardware deployment",
+          "Operating system knowledge",
+          "Database management",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Coding",
+      },
+      {
+        question:
+          "Skills expected from IT Graduates<br>Technical Skills (Hard skills)<br><br>• Knowing more than average about networks, you could become a network administrator.<br>• Administrators are responsible for setting up networks and administering them, which involves knowledge such as IP setup, wireless routers, cloud services and coding.",
+        img: "",
+        options: [
+          "Technical writing",
+          "Social media management",
+          "Coding",
+          "Network configuration",
+          "Hardware deployment",
+          "Operating system knowledge",
+          "Database management",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Network configuration",
+      },
+      {
+        question:
+          "Skills expected from IT Graduates<br>Technical Skills (Hard skills)<br><br>• Involves packing, unpacking, and setting up technical equipment.<br>• Knowing how to disconnect and re-assemble complex technology.",
+        img: "",
+        options: [
+          "Technical writing",
+          "Social media management",
+          "Coding",
+          "Network configuration",
+          "Hardware deployment",
+          "Operating system knowledge",
+          "Database management",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Hardware deployment",
+      },
+      {
+        question:
+          "Skills expected from IT Graduates<br>Technical Skills (Hard skills)<br><br>• Understanding how to work and fix various operating systems is an important IT skill.<br>• Having proficiency in multiple system software can increase one’s appeal to employers who may want to switch over to a new system in the future.",
+        img: "",
+        options: [
+          "Technical writing",
+          "Social media management",
+          "Coding",
+          "Network configuration",
+          "Hardware deployment",
+          "Operating system knowledge",
+          "Database management",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Operating system knowledge",
+      },
+      {
+        question:
+          "Skills expected from IT Graduates<br>Technical Skills (Hard skills)<br><br>• The ability to perform data entry or database usage.<br>• Requires the ability to read and use Standard Query Language (SQL).",
+        img: "",
+        options: [
+          "Technical writing",
+          "Social media management",
+          "Coding",
+          "Network configuration",
+          "Hardware deployment",
+          "Operating system knowledge",
+          "Database management",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Database management",
+      },
+      {
+        question:
+          "Skills expected from IT Graduates<br>Interpersonal Skills (Soft Skills)<br><br>• Communicate with supervisors and colleagues to help them with technical issues.<br>• Communication in form of emails or over-the-phone instruction.<br>• Active listening, processing, and giving feedback on complex subjects.",
+        img: "",
+        options: [
+          "Communication",
+          "Organization",
+          "Analytical abilities",
+          "Creativity",
+          "Project management",
+          "Tenacity",
+          "Problem-solving",
+          "Resourcefulness",
+          "Leadership",
+          "Flexibility",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Communication",
+      },
+      {
+        question:
+          "Skills expected from IT Graduates<br>Interpersonal Skills (Soft Skills)<br><br>• Organized workspace and computer make you more efficient and productive.<br>• Assessing the length of a project, prioritizing tasks, and sticking to timelines shows that you are systematic and good with time management.",
+        img: "",
+        options: [
+          "Communication",
+          "Organization",
+          "Analytical abilities",
+          "Creativity",
+          "Project management",
+          "Tenacity",
+          "Problem-solving",
+          "Resourcefulness",
+          "Leadership",
+          "Flexibility",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Organization",
+      },
+      {
+        question:
+          "Skills expected from IT Graduates<br>Interpersonal Skills (Soft Skills)<br><br>• Identify problems before they arise and analyze data to extract key information.",
+        img: "",
+        options: [
+          "Communication",
+          "Organization",
+          "Analytical abilities",
+          "Creativity",
+          "Project management",
+          "Tenacity",
+          "Problem-solving",
+          "Resourcefulness",
+          "Leadership",
+          "Flexibility",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Analytical abilities",
+      },
+      {
+        question:
+          "Skills expected from IT Graduates<br>Interpersonal Skills (Soft Skills)<br><br>• Introduce a new idea to improve a process or find an innovative way to fix a technological issue.",
+        img: "",
+        options: [
+          "Communication",
+          "Organization",
+          "Analytical abilities",
+          "Creativity",
+          "Project management",
+          "Tenacity",
+          "Problem-solving",
+          "Resourcefulness",
+          "Leadership",
+          "Flexibility",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Creativity",
+      },
+      {
+        question:
+          "Skills expected from IT Graduates<br>Interpersonal Skills (Soft Skills)<br><br>• Managing various responsibilities of multiple projects<br>• Creating a plan to reach specific goals and work through project setbacks with coworkers.",
+        img: "",
+        options: [
+          "Communication",
+          "Organization",
+          "Analytical abilities",
+          "Creativity",
+          "Project management",
+          "Tenacity",
+          "Problem-solving",
+          "Resourcefulness",
+          "Leadership",
+          "Flexibility",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Project management",
+      },
+      {
+        question:
+          "Skills expected from IT Graduates<br>Interpersonal Skills (Soft Skills)<br><br>• Persistent working through the challenge shows work ethic.<br>• Commitment to learning and growing as a professional to keep up with the evolution of technology.",
+        img: "",
+        options: [
+          "Communication",
+          "Organization",
+          "Analytical abilities",
+          "Creativity",
+          "Project management",
+          "Tenacity",
+          "Problem-solving",
+          "Resourcefulness",
+          "Leadership",
+          "Flexibility",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Tenacity",
+      },
+      {
+        question:
+          "Skills expected from IT Graduates<br>Interpersonal Skills (Soft Skills)<br><br>• Fixing colleague’s technical problems.",
+        img: "",
+        options: [
+          "Communication",
+          "Organization",
+          "Analytical abilities",
+          "Creativity",
+          "Project management",
+          "Tenacity",
+          "Problem-solving",
+          "Resourcefulness",
+          "Leadership",
+          "Flexibility",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Problem-solving",
+      },
+      {
+        question:
+          "Skills expected from IT Graduates<br>Interpersonal Skills (Soft Skills)<br><br>• Ability to find quick and clever ways to overcome difficulties.",
+        img: "",
+        options: [
+          "Communication",
+          "Organization",
+          "Analytical abilities",
+          "Creativity",
+          "Project management",
+          "Tenacity",
+          "Problem-solving",
+          "Resourcefulness",
+          "Leadership",
+          "Flexibility",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Resourcefulness",
+      },
+      {
+        question:
+          "Skills expected from IT Graduates<br>Interpersonal Skills (Soft Skills)<br><br>• Leading a team on a project, knowing how to effectively delegate tasks, set goals and resolve conflicts will be useful.",
+        img: "",
+        options: [
+          "Communication",
+          "Organization",
+          "Analytical abilities",
+          "Creativity",
+          "Project management",
+          "Tenacity",
+          "Problem-solving",
+          "Resourcefulness",
+          "Leadership",
+          "Flexibility",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Leadership",
+      },
+      {
+        question:
+          "Skills expected from IT Graduates<br>Interpersonal Skills (Soft Skills)<br><br>• The ability to quickly adapt to new circumstances as they arise.",
+        img: "",
+        options: [
+          "Communication",
+          "Organization",
+          "Analytical abilities",
+          "Creativity",
+          "Project management",
+          "Tenacity",
+          "Problem-solving",
+          "Resourcefulness",
+          "Leadership",
+          "Flexibility",
+        ],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Flexibility",
+      },
+      [
+        {
+          question:
+            "ACT #3: Reviewer for the Prelim<br><br> It is the program that focuses on the study of the utilization of both hardware and software technologies, involving planning, installing, customizing, operating, managing and administering, and maintaining information technology infrastructure that provides computing solutions to address the needs of an organization.",
+          img: "",
+          options: [
+            "BS Information Technology",
+            "BS Computer Science",
+            "BS Computer Engineering",
+            "BS Information Systems",
+          ],
+          input: "false",
+          explanation: "",
+          correctAnswer: "BS Information Technology",
+        },
+        {
+          question:
+            "ACT #3: Reviewer for the Prelim<br><br> It is the Philippine government agency that covers both public and private higher education institutions as well as degree-granting programs in all post-secondary educational institutions in the country.",
+          img: "",
+          options: [
+            "Bureau of Higher Education",
+            "Commission on Higher Education",
+            "Department of Higher Education",
+            "Committee on Higher Education",
+          ],
+          input: "false",
+          explanation: "",
+          correctAnswer: "Commission on Higher Education",
+        },
+        {
+          question:
+            "ACT #3: Reviewer for the Prelim<br><br> Which course focuses the ICT program outcomes of preservation and promotion of Filipino historical and cultural heritage?",
+          img: "",
+          options: [
+            "Mathematics in the Modern World",
+            "Understanding the Self",
+            "Web Designing",
+            "The Life and Works of Jose Rizal",
+          ],
+          input: "false",
+          explanation: "",
+          correctAnswer: "The Life and Works of Jose Rizal",
+        },
+        {
+          question:
+            "ACT #3: Reviewer for the Prelim<br><br> It is a career pathway that deals with one's ability and readiness to develop, organize and run a business enterprise, along with any of its uncertainties to make a profit.",
+          img: "",
+          options: [
+            "Graduate Studies",
+            "Education / Academe",
+            "Entrepreneurship",
+            "Government Service",
+          ],
+          input: "false",
+          explanation: "",
+          correctAnswer: "Entrepreneurship",
+        },
+        {
+          question:
+            "ACT #3: Reviewer for the Prelim<br><br> It is the ability to use technology to find information, evaluate sources, create content, and communicate with others effectively.",
+          img: "",
+          options: [
+            "Financial literacy",
+            "Digital literacy",
+            "Computer literacy",
+            "Health literacy",
+          ],
+          input: "false",
+          explanation: "",
+          correctAnswer: "Digital literacy",
+        },
+        {
+          question:
+            "ACT #3: Reviewer for the Prelim<br><br> It is the function of the IT Department where rules are set on how the organization can use the company's technology, IT security and the data insurance.",
+          img: "",
+          options: [
+            "Infrastructure",
+            "Procurement",
+            "Governance",
+            "Functionality",
+          ],
+          input: "false",
+          explanation: "",
+          correctAnswer: "Governance",
+        },
+        {
+          question:
+            "ACT #3: Reviewer for the Prelim<br><br> Which of the subject (course) aims to promote team work in computing project design and development?",
+          img: "",
+          options: [
+            "Capstone Project",
+            "Physical Education",
+            "NSTP",
+            "Mathematics in the Modern World",
+          ],
+          input: "false",
+          explanation: "",
+          correctAnswer: "Capstone Project",
+        },
+        {
+          question:
+            "ACT #3: Reviewer for the Prelim<br><br> In the acronym ICT, what is the meaning of the letter C?",
+          img: "",
+          options: [
+            "Collaboration",
+            "Communication",
+            "Collaborate",
+            "Communicate",
+          ],
+          input: "false",
+          explanation: "",
+          correctAnswer: "Communication",
+        },
+        {
+          question:
+            "ACT #3: Reviewer for the Prelim<br><br> Which of the BSIT graduate attributes is highlighted in our computer programming courses (subjects)?",
+          img: "",
+          options: [
+            "Knowledge for solving computer problems",
+            "Problem Analysis",
+            "Design and Development of Solutions",
+            "Individual and Team Work",
+          ],
+          input: "false",
+          explanation: "",
+          correctAnswer: "Design and Development of Solutions",
+        },
+        {
+          question:
+            "ACT #3: Reviewer for the Prelim<br><br> It is the program that focuses on the discipline that embodies the science and technology of design, construction, implementation, and maintenance of software and hardware components of modern computing systems and computer-controlled equipment. Computer engineering has traditionally been viewed as a combination of both computer science (CS) and electrical engineering (EE).",
+          img: "",
+          options: [
+            "BS Computer Engineering",
+            "BS Information Systems",
+            "BS Information Technology",
+            "BS Computer Science",
+          ],
+          input: "false",
+          explanation: "",
+          correctAnswer: "BS Computer Engineering",
+        },
+        {
+          question:
+            "ACT #3: Reviewer for the Prelim<br><br> It is the program that focuses on the application and effect of information technology to systems and organizations.",
+          img: "",
+          options: [
+            "BS Information Technology",
+            "BS Computer Engineering",
+            "BS Information Systems",
+            "BS Computer Science",
+          ],
+          input: "false",
+          explanation: "",
+          correctAnswer: "BS Information Systems",
+        },
+        {
+          question:
+            "ACT #3: Reviewer for the Prelim<br><br> Which of the following is considered a drawback of computer literacy?",
+          img: "",
+          options: [
+            "Shorter turnaround time",
+            "Digital divide",
+            "Better connectivity",
+            "Increased job opportunity",
+          ],
+          input: "false",
+          explanation: "",
+          correctAnswer: "Digital divide",
+        },
+        {
+          question:
+            "ACT #3: Reviewer for the Prelim<br><br> Which of the BSIT graduate attributes is highlighted in our subject, Social and Professional Issues (SPI)?",
+          img: "",
+          options: [
+            "Computing Professionalism and Social Responsibility",
+            "Modern Tool Usage",
+            "Knowledge for Solving Computing Problems",
+            "Design and Development of Solutions",
+          ],
+          input: "false",
+          explanation: "",
+          correctAnswer: "Computing Professionalism and Social Responsibility",
+        },
+        {
+          question:
+            "ACT #3: Reviewer for the Prelim<br><br> It is the consortium whose primary purpose is to contribute to the improvement of computing education worldwide through the mutual recognition of accredited academic computing programs that prepare graduates for professional practice.",
+          img: "",
+          options: [
+            "Dublin Accord",
+            "Washington Accord",
+            "Seoul Accord",
+            "Sydney Accord",
+          ],
+          input: "false",
+          explanation: "",
+          correctAnswer: "Seoul Accord",
+        },
+        {
+          question:
+            "ACT #3: Reviewer for the Prelim<br><br> Which of the following is considered technologically-enhanced dishonesty?",
+          img: "",
+          options: ["Tardiness", "Catfishing", "Absenteeism", "Cyberbullying"],
+          input: "false",
+          explanation: "",
+          correctAnswer: "Catfishing",
+        },
+        {
+          question:
+            "ACT #3: Reviewer for the Prelim<br><br> It is a practical confirmation that a given individual possesses competency in the field of information technology.",
+          img: "",
+          options: [
+            "Civil Service Examination",
+            "IT Certification",
+            "Bar Examination",
+            "Job Interview",
+          ],
+          input: "false",
+          explanation: "",
+          correctAnswer: "IT Certification",
+        },
+      ],
+    ];
+  </script>
+  <script src="../scripts/script.js"></script>
+</html>
