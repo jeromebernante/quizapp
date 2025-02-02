@@ -9,25 +9,64 @@
     <link rel="stylesheet" href="styles/style.css" />
     <title>Quiz App By Jerome</title>
   </head>
-  <body class="flex-col">
-    <nav class="flex-row">
-      <img class="icon" src="images/icon-quiz.png" alt="" />
-      <span>Quiz App</span>
+  <body class="flex-col w-100">
+    <nav class="flex-col w-100 bg-white">
+      <div class="max-w-768 flex-row row-center p-1 border-cup-gray">
+        <img class="h-2pt5 me-1" src="images/icon-quiz.png" alt="" />
+        <span>Quiz App</span>
+      </div>
     </nav>
-    <main class="flex-col">
 
-      <!-- <card class="reviewer flex-row">
-        <a class="flex-row" href="quizzes/IAS2.html">IAS2</a>
-      </card> -->
+    <main class="flex-col g-1 w-100 max-w-768 mt-1">
+      <!-- Search Input -->
+      <div class="w-100 p-1 bg-white border-gray">
+        <input
+          type="text"
+          id="searchInput"
+          class="w-100 p-1 border-gray rounded"
+          placeholder="Search for a quiz..."
+          onkeyup="filterQuizzes()"
+        />
+      </div>
+      <!-- Quiz List -->
+      <div id="quizList" class="flex-col g-1 w-100">
+        <card class="reviewer flex-row w-100 bg-white border-gray">
+          <a
+            class="flex-row a-simple w-100 p-1"
+            href="quizzes/IAS2_midterm.html"
+            >IAS2 MIDTERM</a
+          >
+        </card>
+      </div>
 
-      <card class="reviewer flex-row">
-        <a class="flex-row" href="quizzes/IAS2_midterm.html">IAS2 MIDTERM</a>
-      </card>
-      <card class="reviewer flex-row">
-        <a class="flex-row" href="quizzes/SPI.html">SPI</a>
-      </card>
-
+      <!-- No Results Message -->
+      <div
+        id="noResults"
+        class="w-100 p-1 text-center text-gray-500"
+        style="display: none; margin-top: -1rem;"
+      >
+        No quizzes found.
+      </div>
     </main>
-    <div id="output"></div>
+    <script>
+      function filterQuizzes() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let quizzes = document.querySelectorAll("#quizList card");
+        let noResults = document.getElementById("noResults");
+        let found = false;
+
+        quizzes.forEach((card) => {
+          let text = card.textContent.toLowerCase();
+          if (text.includes(input)) {
+            card.style.display = "flex";
+            found = true;
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        noResults.style.display = found ? "none" : "block";
+      }
+    </script>
   </body>
 </html>
