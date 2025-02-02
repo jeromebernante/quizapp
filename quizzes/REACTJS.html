@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../images/icon-logo.png" type="image/png" />
+    <link rel="manifest" href="../manifest.json" />
+    <link rel="stylesheet" href="../styles/style.css" />
+    <title>Quiz App By Jerome</title>
+  </head>
+  <body class="flex-col w-100">
+    <nav class="flex-col w-100 bg-white">
+      <div class="max-w-768 flex-row row-center p-1 border-cup-gray">
+        <img class="h-2pt5 me-1" src="../images/icon-quiz.png" alt="" />
+        <span>IAS2</span>
+        <a href="../index.html" class="ms-auto h-2pt5"><img class="h-100" src="../images/icon-home.png" alt=""/></a>
+      </div>
+    </nav>
+
+    <main class="flex-col mt-1 max-w-768 border-gray">
+      <section class="section cover">
+        <header>
+          <p>REACTJS</p>
+          <p id="p-total-question"></p>
+        </header>
+        <box>
+          <img id="btn-play" src="../images/icon-play.png" alt="" />
+        </box>
+      </section>
+
+      <section class="section">
+        <box class="nav-question">
+          <p id="progress">
+            <!-- progress here -->
+          </p>
+          <box id="status-answer"></box>
+          <div id="btn-skip" class="button">SKIP</div>
+        </box>
+
+        <p id="question" class="p-question">
+          <!-- question here -->
+        </p>
+
+        <p id="explanation" class="p-explanation">
+          <!-- explanation -->
+        </p>
+
+        <div class="flex-col">
+          <!-- image here -->
+          <img id="img" src="" alt="" />
+        </div>
+
+        <ul id="options" class="options p-1">
+          <!-- Options will be populated here -->
+        </ul>
+
+        <input
+          type="text"
+          id="input-answer"
+          placeholder="your answer here..."
+          autocomplete="off"
+        />
+
+        <box class="nav-question">
+          <div id="btn-answer" class="button">Answer</div>
+          <div id="btn-next" class="button">Next</div>
+        </box>
+      </section>
+
+      <section class="section result">
+        <p class="title">SCORE</p>
+        <p id="score" class="score"></p>
+        <box class="box-btn-replay">
+          <img id="btn-replay" src="../images/icon-replay.png" alt="" />
+        </box>
+      </section>
+    </main>
+  </body>
+  <script>
+    const questions = [
+      {
+        question:
+          "What does the Buffer.alloc() method do in Node.js?",
+        img: "",
+        options: ["Allocates a new buffer of the specified size", "Allocates a new buffer of the specified size and fills it with zeros", "Allocates a new buffer of the specified size and fills it with ones", "Allocates a new buffer of the specified size and fills it with random data"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Allocates a new buffer of the specified size",
+      },
+      {
+        question:
+          "What is the purpose of the React.js library?",
+        img: "",
+        options: ["To build user interfaces", "To build server-side applications", "To build databases", "To build APIs"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "To build user interfaces",
+      },
+      {
+        question: "Which method is used to convert a buffer into a string in Node.js?",
+        img: "",
+        options: ["buffer.toString()", "buffer.convertToString()", "buffer.string()", "buffer.convert()"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "buffer.toString()",
+      },
+      {
+        question: "How can you handle exceptions in asynchronous Node.js operations?",
+        img: "",
+        options: ["Using try/catch blocks", "Using if/else statements", "Using switch statements", "Using for loops"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Using try/catch blocks",
+      },
+      {
+        question: "Which core module in Node.js is used for file system operations?",
+        img: "",
+        options: ["fs", "http", "path", "url"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "fs",
+      },
+      {
+        question: "What is the purpose of the Node.js stream module?",
+        img: "",
+        options: ["To read and write data from streams", "To create and manage streams", "To convert streams into buffers", "To convert buffers into streams"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "To read and write data from streams",
+      },
+      {
+        question: "In Node.js, what is the event loop?",
+        img: "",
+        options: ["A mechanism that allows Node.js to perform non-blocking I/O operations", "A mechanism that allows Node.js to perform blocking I/O operations", "A mechanism that allows Node.js to perform synchronous I/O operations", "A mechanism that allows Node.js to perform asynchronous I/O operations"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "A mechanism that allows Node.js to perform asynchronous I/O operations",
+      },
+      {
+        question: "What does process.nextTick() do in Node.js?",
+        img: "",
+        options: ["Delay the execution of a callback function until the next tick of the event loop", "Execute a callback function immediately", "Delay the execution of a callback function until the next tick of the event loop", "Execute a callback function after a specified delay"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Delay the execution of a callback function until the next tick of the event loop",
+      },
+      {
+        question: "How do you create a simple server in Node.js using the http module?",
+        img: "",
+        options: ["http.createServer((req, res) => res.end('Hello, World!')).listen(3000)", "http.createServer((req, res) => res.send('Hello, World!')).listen(3000)", "http.createServer((req, res) => res.write('Hello, World!')).listen(3000)", "http.createServer((req, res) => res.write('Hello, World!')).listen(3000)"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "http.createServer((req, res) => res.end('Hello, World!')).listen(3000)",
+      }
+      ,{
+        question: "What is the callback pattern commonly used in Node.js for handling asynchronous operations?",
+        img: "",
+        options: ["Error-first callback", "Success-first callback", "Promise", "Async/await"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Error-first callback",
+      }
+      ,{
+        question: "Which of the following is a correct way to import a module in Node.js using ES6 syntax?",
+        img: "",
+        options: ["require('moduleName')", "import moduleName from 'moduleName'", "import { moduleName } from 'moduleName'", "import * as moduleName from 'moduleName'"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "import { moduleName } from 'moduleName'",
+      },
+      {
+        question: "Which method in the fs module is used to read the contents of a directory asynchronously in Node.js?",
+        img: "",
+        options: ["fs.readdir()", "fs.readDir()", "fs.readDirectory()", "fs.readDirAsync()"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "fs.readdir()",
+      },
+      {
+        question: "what does the util.promisify() method do in Node.js?",
+        img: "",
+        options: ["Converts a callback-based function into a Promise-based function", "Converts a Promise-based function into a callback-based function", "Converts a synchronous function into an asynchronous function", "Converts an asynchronous function into a synchronous function"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Converts a callback-based function into a Promise-based function",
+      },
+      {
+        question: "In Node.js, what are globals?",
+        img: "",
+        options: ["pre-defined objects available in all modules", "variables that are only available in the global scope", "functions that are available in all modules", "variables that are available in the global scope"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "pre-defined objects available in all modules",
+      },
+      {
+        question: "How does Node.js handle child processes?",
+        img: "",
+        options: ["By spawning new processes using child_process module", "By forking new processes using child_process module", "By creating new threads using child_process module", "By creating new workers using child_process module"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "By spawning new processes using child_process module",
+      },
+      {
+        question: "What is npm in the context of Node.js?",
+        img: "",
+        options: ["A package manager for Node.js", "A module bundler for Node.js", "A build tool for Node.js", "A testing framework for Node.js"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "A package manager for Node.js",
+      },
+      {
+        question: "What does npm init do in Node.js?",
+        img: "",
+        options: ["Initializes a new Node.js project", "Installs all dependencies for a Node.js project", "Creates a new Node.js module", "Updates all dependencies for a Node.js project"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Initializes a new Node.js project",
+      },
+      {
+        question: "What is the event emitter pattern in Node.js?",
+        img: "",
+        options: ["A design pattern that allows objects to emit and listen for events", "A design pattern that allows objects to emit and listen for errors", "A design pattern that allows objects to emit and listen for messages", "A design pattern that allows objects to emit and listen for data"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "A design pattern that allows objects to emit and listen for events",
+      },
+      {
+        question: "Which of the following is true about Node.js module?",
+        img: "",
+        options: ["Every file in node.js is a module", "Modules are objects", "Modules can be imported using require() function", "All of the above"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "All of the above",
+      },
+      {
+        question: "How does Node.js support multi-threading?",
+        img: "",
+        options: ["Using the cluster module to fork processes", "Using the child_process module to spawn new processes", "Using the worker_threads module to create worker threads", "All of the above"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "All of the above",
+      },
+      {
+        question: "What are environment variables in Node.js?",
+        img: "",
+        options: ["Variables that are available to the process object", "Variables that are available to the global object", "Variables that are available to all modules", "Variables that are available to the require object"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Variables that are available to the process object",
+      },
+      {
+        question: "Which Node.js module is used to monitor the file system for changes?",
+        img: "",
+        options: ["fs", "http", "path", "fs.watch"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "fs.watch",
+      },
+      {
+        question: "What is the use of the path module in Node.js?",
+        img: "",
+        options: ["To handle file paths", "To handle HTTP requests", "To handle file system operations", "To handle URL paths"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "To handle file paths",
+      },
+      {
+        question: "Which method would you use to read a file asynchronously in Node.js?",
+        img: "",
+        options: ["fs.readFile()", "fs.read()", "fs.readAsync()", "fs.readSync()"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "fs.readFile()", 
+      },
+      {
+        question: "What does the __dirname variable represent in Node.js?",
+        img: "",
+        options: ["The directory name of the current module", "The directory name of the current file", "The directory name of the current process", "The directory name of the current project"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "The directory name of the current module",
+      },
+      {
+        question: "In Node.js, what is a middleware function in the context of Express.js?",
+        img: "",
+        options: ["A function that has access to the request and response objects", "A function that is executed before the route handler", "A function that can modify the request and response objects", "All of the above"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "All of the above",
+      },
+      {
+        question: "What is process.env used for in Node.js?",
+        img: "",
+        options: ["To access environment variables", "To access process information", "To access file system information", "To access network information"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "To access environment variables",
+      },
+      {
+        question: "What does console.log() do in Node.js?",
+        img: "",
+        options: ["Prints a message to the console", "Prints a message to the screen", "Prints a message to the terminal", "Prints a message to the log file"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Prints a message to the console",
+      },
+      {
+        question: "How do you install a package globally in Node.js using npm?",
+        img: "",
+        options: ["npm install -g packageName", "npm install packageName -g", "npm install --global packageName", "npm install --g packageName"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "npm install -g packageName",
+      },
+      {
+        question: "What is a typical use case for the Node.js crypto module?",
+        img: "",
+        options: ["Encrypting and decrypting data", "Compressing and decompressing data", "Encoding and decoding data", "Parsing and formatting data"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Encrypting and decrypting data",
+      },
+      {
+        question: "How can you make HTTP POST request in Node.js using http module?",
+        img: "",
+        options: ["Using the http.request() method with the POST method", "Using the http.post() method", "Using the http.get() method with the POST method", "Using the http.post() method with the POST method"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Using the http.request() method with the POST method",
+      },
+      {
+        question: "Which module is used for making HTTP requests in Node.js?",
+        img: "",
+        options: ["http", "fs", "path", "url"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "http",
+      },
+      {
+        question: "What is the default scope for variables defined using var in a Node.js module?",
+        img: "",
+        options: ["Function scope", "Block scope", "Global scope", "Module scope"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Function scope",
+      },
+      {
+        question: "Which method is used to listen for specific event in an EventEmitter object in Node.js?",
+        img: "",
+        options: ["emitter.on()", "emitter.listen()", "emitter.emit()", "emitter.once()"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "emitter.on()",
+      },
+      {
+        question: "How do you check if a directory exists in Node.js?",
+        img: "",
+        options: ["fs.existsSync()", "fs.exists()", "fs.isDirectory()", "fs.isDir()"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "fs.existsSync()",
+      },
+      {
+        question: "What is the difference between fs.readFileSync and fs.readFile in Node.js?",
+        img: "",
+        options: ["fs.readFileSync is synchronous, while fs.readFile is asynchronous", "fs.readFileSync is asynchronous, while fs.readFile is synchronous", "fs.readFileSync reads the entire file at once, while fs.readFile reads the file in chunks", "fs.readFileSync reads the file in chunks, while fs.readFile reads the entire file at once"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "fs.readFileSync is synchronous, while fs.readFile is asynchronous",
+      },
+      {
+        question: "What is the purpose of the os module in Node.js?",
+        img: "",
+        options: ["To provide information about the operating system", "To provide information about the file system", "To provide information about the network", "To provide information about the process"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "To provide information about the operating system",
+      },
+      {
+        question: "Which stream method in Node.js writes data to a writeable stream?",
+        img: "",
+        options: ["write()", "read()", "pipe()", "end()"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "write()",
+      },
+      {
+        question: "How can you secure environment variables in a Node.js application?",
+        img: "",
+        options: ["Using a .env file", "Using the dotenv module", "Using environment variables", "All of the above"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "All of the above",
+      },
+      {
+        question: "What does the fs.stat() method do in Node.js?",
+        img: "",
+        options: ["Returns information about a file or directory", "Returns the contents of a file", "Returns the size of a file", "Returns the type of a file"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Returns information about a file or directory",
+      },
+      {
+        question: "Which of the following is true about Node.js modules?",
+        img: "",
+        options: ["Modules are reusable pieces of code", "Modules can be imported using require() function", "Modules can be exported using module.exports", "All of the above"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "All of the above",
+      },
+      {
+        question: "what is the difference between res.end() and res.send() in Express.js?",
+        img: "",
+        options: ["res.end() is used for ending HTTP response, which res.send() is specific to Express.js", "res.end() is specific to Express.js, while res.send() is used for ending HTTP response", "res.end() is used for ending HTTP response, while res.send() is specific to Express.js", "res.end() and res.send() are the same"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "res.end() is used for ending HTTP response, which res.send() is specific to Express.js",
+      },
+      {
+        question: "Which method is used to terminate a Node.js process?",
+        img: "",
+        options: ["process.exit()", "process.terminate()", "process.kill()", "process.end()"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "process.exit()",
+      },
+      {
+        question: "What is the use of the cluster module in Node.js",
+        img: "",
+        options: ["To create a cluster of Node.js processes", "To create a cluster of worker threads", "To create a cluster of child processes", "To create a cluster of worker processes"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "To create a cluster of Node.js processes",
+      },
+      {
+        question: "How can you parse a query string in Node.js?",
+        img: "",
+        options: ["Using the querystring module", "Using the url module", "Using the query module", "Using the string module"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Using the querystring module",
+      },
+      {
+        question: "What is the purpose of the setTimeout() function in Node.js?",
+        img: "",
+        options: ["To delay the execution of a callback function", "To execute a callback function immediately", "To repeat the execution of a callback function", "To cancel the execution of a callback function"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "To delay the execution of a callback function",
+      },
+      {
+        question: "How do you create a custom event in Node.js",
+        img: "",
+        options: ["By using the event module and emitting the event with emil()", "By using the event module and emitting the event with emit()", "By using the event module and emitting the event with emitEvent()", "By using the event module and emitting the event with emitCustom()"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "By using the event module and emitting the event with emit()",
+      },
+      {
+        question: "What is the purpose of the zlib module in Node.js?",
+        img: "",
+        options: ["To compress and decompress data", "To encrypt and decrypt data", "To encode and decode data", "To parse and format data"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "To compress and decompress data",
+      },
+      {
+        question: "What is the purpose of the global object in Node.js?",
+        img: "",
+        options: ["To provide global variables and functions", "To provide global modules", "To provide global constants", "To provide global classes"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "To provide global variables and functions",
+      },
+      {
+        question: "what happens when you call process.kill() in Node.js?",
+        img: "",
+        options: ["Terminates the Node.js process", "Sends a signal to the Node.js process", "Kills the Node.js process", "Ends the Node.js process"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Sends a signal to the Node.js process",
+      },
+      {
+        question: "How do you convert a string to a buffer in Node.js?",
+        img: "",
+        options: ["Buffer.from()", "Buffer.convert()", "Buffer.toBuffer()", "Buffer.fromString()"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Buffer.from()",
+        
+      }
+
+
+    ];
+  </script>
+  <script src="../scripts/script.js"></script>
+</html>
