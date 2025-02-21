@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../images/icon-logo.png" type="image/png" />
+    <link rel="manifest" href="../manifest.json" />
+    <link rel="stylesheet" href="../styles/style.css" />
+    <title>Quiz App By Jerome</title>
+  </head>
+  <body class="flex-col w-100">
+    <nav class="flex-col w-100 bg-white">
+      <div class="max-w-768 flex-row row-center p-1 border-cup-gray">
+        <img class="h-2pt5 me-1" src="../images/icon-quiz.png" alt="" />
+        <span>NETWORK IP</span>
+        <a href="../index.html" class="ms-auto h-2pt5"
+          ><img class="h-100" src="../images/icon-home.png" alt=""
+        /></a>
+      </div>
+    </nav>
+
+    <main class="flex-col mt-1 max-w-768 border-gray">
+      <section class="section cover">
+        <header>
+          <p>NETWORK IP</p>
+          <p id="p-total-question"></p>
+        </header>
+        <box>
+          <img id="btn-play" src="../images/icon-play.png" alt="" />
+        </box>
+      </section>
+
+      <section class="section">
+        <box class="nav-question">
+          <p id="progress">
+            <!-- progress here -->
+          </p>
+          <box id="status-answer"></box>
+          <div id="btn-skip" class="button">SKIP</div>
+        </box>
+
+        <p id="question" class="p-question">
+          <!-- question here -->
+        </p>
+
+        <p id="explanation" class="p-explanation">
+          <!-- explanation -->
+        </p>
+
+        <div class="flex-col">
+          <!-- image here -->
+          <img id="img" src="" alt="" />
+        </div>
+
+        <ul id="options" class="options p-1">
+          <!-- Options will be populated here -->
+        </ul>
+
+        <input
+          type="text"
+          id="input-answer"
+          placeholder="your answer here..."
+          autocomplete="off"
+        />
+
+        <box class="nav-question">
+          <div id="btn-answer" class="button">Answer</div>
+          <div id="btn-next" class="button">Next</div>
+        </box>
+      </section>
+
+      <section class="section result">
+        <p class="title">SCORE</p>
+        <p id="score" class="score"></p>
+        <box class="box-btn-replay">
+          <img id="btn-replay" src="../images/icon-replay.png" alt="" />
+        </box>
+      </section>
+    </main>
+  </body>
+  <script>
+    const questions = [
+      {
+        question: "What is the default subnet mask for a Class C network?",
+        img: "",
+        options: [
+          "255.0.0.0",
+          "255.255.0.0",
+          "255.255.255.0",
+          "255.255.255.255",
+        ],
+        input: "true",
+        explanation:
+          "Class C networks have a default subnet mask of 255.255.255.0, which allows 256 addresses (254 usable hosts).",
+        correctAnswer: "255.255.255.0",
+      },
+      {
+        question:
+          "What is the network address for the IP 192.168.0.1 with a /24 subnet mask?",
+        img: "",
+        options: ["192.168.0.0", "192.168.0.1", "192.168.0.255", "192.168.1.0"],
+        input: "true",
+        explanation:
+          "A /24 subnet mask means the first three octets remain unchanged, making the network address 192.168.0.0.",
+        correctAnswer: "192.168.0.0",
+      },
+      {
+        question:
+          "How many usable host IP addresses are available in a /24 network?",
+        img: "",
+        options: ["254", "256", "128", "512"],
+        input: "true",
+        explanation:
+          "A /24 network has 256 total addresses, but subtracting the network and broadcast addresses leaves 254 usable hosts.",
+        correctAnswer: "254",
+      },
+      {
+        question: "What is the broadcast address for a 192.168.0.0/24 network?",
+        img: "",
+        options: [
+          "192.168.0.255",
+          "192.168.1.255",
+          "192.168.0.0",
+          "192.168.0.1",
+        ],
+        input: "true",
+        explanation:
+          "The broadcast address for a /24 network is always the highest address in the subnet, which is 192.168.0.255.",
+        correctAnswer: "192.168.0.255",
+      },
+      {
+        question:
+          "Which IP address is the first usable host in the 192.168.0.0/24 subnet?",
+        img: "",
+        options: [
+          "192.168.0.0",
+          "192.168.0.1",
+          "192.168.0.254",
+          "192.168.0.255",
+        ],
+        input: "true",
+        explanation:
+          "The first usable host address is always the network address +1, which is 192.168.0.1.",
+        correctAnswer: "192.168.0.1",
+      },
+      {
+        question:
+          "Which IP address is the last usable host in the 192.168.0.0/24 subnet?",
+        img: "",
+        options: [
+          "192.168.0.254",
+          "192.168.0.255",
+          "192.168.0.1",
+          "192.168.0.0",
+        ],
+        input: "true",
+        explanation:
+          "The last usable host address is always the broadcast address -1, which is 192.168.0.254.",
+        correctAnswer: "192.168.0.254",
+      },
+      {
+        question: "What is the wildcard mask for a /24 subnet?",
+        img: "",
+        options: ["0.0.0.255", "255.255.255.0", "0.0.255.255", "255.255.0.0"],
+        input: "true",
+        explanation:
+          "The wildcard mask is calculated by subtracting the subnet mask from 255.255.255.255, resulting in 0.0.0.255 for a /24 subnet.",
+        correctAnswer: "0.0.0.255",
+      },
+      {
+        question: "Which class does the IP address 192.168.0.1 belong to?",
+        img: "",
+        options: ["Class A", "Class B", "Class C", "Class D"],
+        input: "true",
+        explanation:
+          "The first octet (192) falls within the range of Class C (192-223), making it a Class C address.",
+        correctAnswer: "Class C",
+      },
+      {
+        question:
+          "What is the formula to calculate the number of usable hosts in a subnet?",
+        img: "",
+        options: ["2^n", "2^n - 2", "2^n + 2", "n^2 - 2"],
+        input: "true",
+        explanation:
+          "The number of usable hosts is given by the formula `2^n - 2`, where `n` is the number of host bits (subtracting network and broadcast addresses).",
+        correctAnswer: "2^n - 2",
+      },
+      {
+        question:
+          "What is the CIDR notation for a subnet with a subnet mask of 255.255.255.0?",
+        img: "",
+        options: ["/16", "/24", "/30", "/32"],
+        input: "true",
+        explanation:
+          "A subnet mask of 255.255.255.0 corresponds to 24 network bits, which is represented as /24.",
+        correctAnswer: "/24",
+      },
+      {
+        question: "How many total IP addresses exist in a /24 subnet?",
+        img: "",
+        options: ["254", "256", "128", "512"],
+        input: "true",
+        explanation:
+          "A /24 subnet has 2^(32-24) = 256 total addresses, including network and broadcast addresses.",
+        correctAnswer: "256",
+      },
+      {
+        question: "What is the subnet mask for a /26 network?",
+        img: "",
+        options: [
+          "255.255.255.192",
+          "255.255.255.224",
+          "255.255.255.0",
+          "255.255.255.128",
+        ],
+        input: "true",
+        explanation:
+          "A /26 subnet mask corresponds to 255.255.255.192, which provides 4 subnets and 62 usable hosts per subnet.",
+        correctAnswer: "255.255.255.192",
+      },
+      {
+        question:
+          "How many subnets are created when using a /26 subnet mask instead of a /24?",
+        img: "",
+        options: ["2", "4", "8", "16"],
+        input: "true",
+        explanation:
+          "Using a /26 instead of a /24 means borrowing 2 more bits, creating 2^2 = 4 subnets.",
+        correctAnswer: "4",
+      },
+      {
+        question: "What is the formula to calculate the number of subnets?",
+        img: "",
+        options: ["2^n", "2^n - 2", "2^h - 2", "n^2"],
+        input: "true",
+        explanation:
+          "The number of subnets is given by `2^n`, where `n` is the number of borrowed bits beyond the default classful subnet mask.",
+        correctAnswer: "2^n",
+      },
+      {
+        question:
+          "Which command can be used to check the network configuration in Linux?",
+        img: "",
+        options: ["ip addr", "ifconfig", "netstat -r", "All of the above"],
+        input: "true",
+        explanation:
+          "Commands such as `ip addr`, `ifconfig`, and `netstat -r` can be used to check network configurations.",
+        correctAnswer: "All of the above",
+      },
+      {
+        question:
+          "What is the first usable host address in the 10.0.0.0/8 network?",
+        img: "",
+        options: ["10.0.0.0", "10.0.0.1", "10.255.255.255", "10.0.1.0"],
+        input: "true",
+        explanation:
+          "In a /8 network, the first usable host address is the network address +1, which is 10.0.0.1.",
+        correctAnswer: "10.0.0.1",
+      },
+      {
+        question: "What type of IP address is 192.168.1.100?",
+        img: "",
+        options: ["Public", "Private", "Loopback", "Multicast"],
+        input: "true",
+        explanation:
+          "The IP address 192.168.1.100 falls within the private Class C range (192.168.0.0 - 192.168.255.255).",
+        correctAnswer: "Private",
+      },
+    ];
+  </script>
+  <script src="../scripts/script.js"></script>
+</html>
