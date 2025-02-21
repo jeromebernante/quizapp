@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../images/icon-logo.png" type="image/png" />
+    <link rel="manifest" href="../manifest.json" />
+    <link rel="stylesheet" href="../styles/style.css" />
+    <title>Quiz App By Jerome</title>
+  </head>
+  <body class="flex-col w-100">
+    <nav class="flex-col w-100 bg-white">
+      <div class="max-w-768 flex-row row-center p-1 border-cup-gray">
+        <img class="h-2pt5 me-1" src="../images/icon-quiz.png" alt="" />
+        <span>LINUX 2-6</span>
+        <a href="../index.html" class="ms-auto h-2pt5"
+          ><img class="h-100" src="../images/icon-home.png" alt=""
+        /></a>
+      </div>
+    </nav>
+
+    <main class="flex-col mt-1 max-w-768 border-gray">
+      <section class="section cover">
+        <header>
+          <p>LINUX ESSENTIALS CHAPTER 2 - 6</p>
+          <p id="p-total-question"></p>
+        </header>
+        <box>
+          <img id="btn-play" src="../images/icon-play.png" alt="" />
+        </box>
+      </section>
+
+      <section class="section">
+        <box class="nav-question">
+          <p id="progress">
+            <!-- progress here -->
+          </p>
+          <box id="status-answer"></box>
+          <div id="btn-skip" class="button">SKIP</div>
+        </box>
+
+        <p id="question" class="p-question">
+          <!-- question here -->
+        </p>
+
+        <p id="explanation" class="p-explanation">
+          <!-- explanation -->
+        </p>
+
+        <div class="flex-col">
+          <!-- image here -->
+          <img id="img" src="" alt="" />
+        </div>
+
+        <ul id="options" class="options p-1">
+          <!-- Options will be populated here -->
+        </ul>
+
+        <input
+          type="text"
+          id="input-answer"
+          placeholder="your answer here..."
+          autocomplete="off"
+        />
+
+        <box class="nav-question">
+          <div id="btn-answer" class="button">Answer</div>
+          <div id="btn-next" class="button">Next</div>
+        </box>
+      </section>
+
+      <section class="section result">
+        <p class="title">SCORE</p>
+        <p id="score" class="score"></p>
+        <box class="box-btn-replay">
+          <img id="btn-replay" src="../images/icon-replay.png" alt="" />
+        </box>
+      </section>
+    </main>
+  </body>
+  <script>
+    const questions = [
+      {
+        question: "The most popular Linux platform for mobile phones is:",
+        img: "",
+        options: ["Slackware", "iOS", "MobileLinux", "BlackBerry", "Android"],
+        input: "false",
+        explanation:
+          "Android is built on a modified Linux kernel and is the most widely used mobile OS.",
+        correctAnswer: "Android",
+      },
+      {
+        question: "A long software release cycle is:",
+        img: "",
+        options: [
+          "Valued by businesses that want stability",
+          "Only offered by Red Hat and SUSE",
+          "Characterized by infrequent security fixes",
+          "Better because old hardware can be utilized beyond its service life",
+          "Makes programming more difficult since new features cannot be used",
+        ],
+        input: "false",
+        explanation:
+          "A long software release cycle is preferred by businesses that prioritize stability.",
+        correctAnswer: "Valued by businesses that want stability",
+      },
+      {
+        question: "SUSE is derived from which distribution?",
+        img: "",
+        options: [
+          "Debian",
+          "Slackware",
+          "Scientific Linux",
+          "Red Hat Enterprise Linux",
+          "Fedora",
+        ],
+        input: "false",
+        explanation:
+          "SUSE was originally based on Slackware before evolving into an independent distribution.",
+        correctAnswer: "Slackware",
+      },
+      {
+        question:
+          "Artificial intelligence has little potential for gains in efficiency, safety, and productivity.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation:
+          "AI has significant potential for improving efficiency, safety, and productivity in many fields.",
+        correctAnswer: "False",
+      },
+      {
+        question: "The release cycle:",
+        img: "",
+        options: [
+          "Should be long so that you have time before you need to upgrade",
+          "Describes how long software will be supported",
+          "Dictates how often software is updated",
+          "Should be short so you always have the freshest releases",
+          "Only has meaning for paid software",
+        ],
+        input: "false",
+        explanation:
+          "The release cycle determines how often software is updated with new versions and features.",
+        correctAnswer: "Dictates how often software is updated",
+      },
+      {
+        question: "A computer running Linux can:",
+        img: "",
+        options: [
+          "Serve a government agency",
+          "Function as a web server",
+          "Outperform proprietary systems at certain tasks",
+          "Be used to create new programs",
+          "All of the above",
+        ],
+        input: "false",
+        explanation:
+          "Linux is highly versatile and can serve all these functions.",
+        correctAnswer: "All of the above",
+      },
+      {
+        question:
+          "A network of inexpensive computers connected to sensors and controllers is called:",
+        img: "",
+        options: [
+          "Open source networking",
+          "Creative commons",
+          "Closed source computing",
+          "Internet of Things (IoT)",
+          "Relational database",
+        ],
+        input: "false",
+        explanation:
+          "The Internet of Things (IoT) refers to networks of connected devices that exchange data.",
+        correctAnswer: "Internet of Things (IoT)",
+      },
+      {
+        question:
+          "What does a distribution provide to add and remove software from the system?",
+        img: "",
+        options: [
+          "Bash",
+          "Partitioning tool",
+          "Application Programming Interface (API)",
+          "Package Manager",
+          "Compiler",
+        ],
+        input: "false",
+        explanation:
+          "A package manager is used to install, remove, and update software on a Linux system.",
+        correctAnswer: "Package Manager",
+      },
+      {
+        question:
+          "Which distributions are made by, or are clones of, RedHat? (choose two)",
+        img: "",
+        options: ["Debian", "CentOS", "Fedora", "Slackware", "Ubuntu"],
+        input: "false",
+        explanation:
+          "CentOS is a free clone of Red Hat Enterprise Linux (RHEL), and Fedora is an upstream distribution for RHEL.",
+        correctAnswer: ["CentOS", "Fedora"],
+      },
+      {
+        question:
+          "If a software release is in a state in that it has many new features that have not been rigorously tested, it is typically referred to as beta software.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation:
+          "Beta software includes new features but has not been fully tested for stability.",
+        correctAnswer: "True",
+      },
+      {
+        question: "The most popular Linux platform for mobile phones is:",
+        img: "",
+        options: ["Slackware", "IOS", "MobileLinux", "BlackBerry", "Android"],
+        input: "false",
+        explanation:
+          "Android is the most widely used Linux-based mobile platform.",
+        correctAnswer: "Android",
+      },
+      {
+        question: "A long software release cycle is:",
+        img: "",
+        options: [
+          "Valued by businesses that want stability",
+          "Only offered by Red Hat and SUSE",
+          "Characterized by infrequent security fixes",
+          "Better because old hardware can be utilized beyond its service life",
+          "Makes programming more difficult since new features cannot be used",
+        ],
+        input: "false",
+        explanation:
+          "A long release cycle provides stability, making it ideal for businesses.",
+        correctAnswer: "Valued by businesses that want stability",
+      },
+      {
+        question: "SUSE is derived from which distribution?",
+        img: "",
+        options: [
+          "Debian",
+          "Slackware",
+          "Scientific Linux",
+          "Red Hat Enterprise Linux",
+          "Fedora",
+        ],
+        input: "false",
+        explanation:
+          "SUSE was originally based on Slackware before developing its own independent system.",
+        correctAnswer: "Slackware",
+      },
+      {
+        question:
+          "Artificial intelligence has little potential for gains in efficiency, safety, and productivity.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation:
+          "AI has a huge impact on efficiency, safety, and productivity.",
+        correctAnswer: "False",
+      },
+      {
+        question: "The release cycle:",
+        img: "",
+        options: [
+          "Should be long so that you have time before you need to upgrade",
+          "Describes how long software will be supported",
+          "Dictates how often software is updated",
+          "Should be short so you always have the freshest releases",
+          "Only has meaning for paid software",
+        ],
+        input: "false",
+        explanation:
+          "The release cycle determines how often software is updated and supported.",
+        correctAnswer: "Dictates how often software is updated",
+      },
+      {
+        question: "A computer running Linux can:",
+        img: "",
+        options: [
+          "Serve a government agency",
+          "Function as a web server",
+          "Outperform proprietary systems at certain tasks",
+          "Be used to create new programs",
+          "All of the above",
+        ],
+        input: "false",
+        explanation:
+          "Linux is versatile and can be used for many different computing tasks.",
+        correctAnswer: "All of the above",
+      },
+      {
+        question:
+          "A network of inexpensive computers connected to sensors and controllers is called:",
+        img: "",
+        options: [
+          "Open source networking",
+          "Creative commons",
+          "Closed source computing",
+          "Internet of Things (IoT)",
+          "Relational database",
+        ],
+        input: "false",
+        explanation:
+          "IoT (Internet of Things) describes a network of smart devices connected to the internet.",
+        correctAnswer: "Internet of Things (IoT)",
+      },
+      {
+        question:
+          "What does a distribution provide to add and remove software from the system?",
+        img: "",
+        options: [
+          "Bash",
+          "Partitioning tool",
+          "Application Programming Interface (API)",
+          "Package Manager",
+          "Compiler",
+        ],
+        input: "false",
+        explanation:
+          "A package manager is responsible for installing, updating, and removing software in a Linux system.",
+        correctAnswer: "Package Manager",
+      },
+      {
+        question:
+          "Which distributions are made by, or are clones of, RedHat? (Choose two)",
+        img: "",
+        options: ["Debian", "CentOS", "Fedora", "Slackware", "Ubuntu"],
+        input: "false",
+        explanation: "CentOS and Fedora are directly related to Red Hat.",
+        correctAnswer: ["CentOS", "Fedora"],
+      },
+      {
+        question:
+          "If a software release has many new features that have not been rigorously tested, it is typically referred to as beta software.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation:
+          "Beta software is a pre-release version with new features still being tested.",
+        correctAnswer: "True",
+      },
+      {
+        question: "An interpreted programming language: (Choose two)",
+        img: "",
+        options: [
+          "Is converted into machine-specific instructions as the program runs",
+          "Requires a compilation step but no linking step",
+          "Takes fewer resources to run than a compiled language",
+          "Requires a linking step but no compilation step",
+          "Tends to offer more features than compiled languages",
+        ],
+        input: "false",
+        explanation:
+          "Interpreted languages are executed at runtime and often offer more flexibility.",
+        correctAnswer: [
+          "Is converted into machine-specific instructions as the program runs",
+          "Tends to offer more features than compiled languages",
+        ],
+      },
+      {
+        question:
+          "What can be done to prevent unauthorized users from accessing your computer remotely? (Choose two)",
+        img: "",
+        options: [
+          "Use strong passwords on all user accounts",
+          "Don't use wireless networks - only wired",
+          "Block third-party cookies",
+          "Block all cookies",
+          "Turn on a firewall",
+        ],
+        input: "false",
+        explanation:
+          "Strong passwords and firewalls help protect against unauthorized access.",
+        correctAnswer: [
+          "Use strong passwords on all user accounts",
+          "Turn on a firewall",
+        ],
+      },
+      {
+        question: "Linux source code is available to:",
+        img: "",
+        options: [
+          "Anyone who has the knowledge needed to access it",
+          "Employees of the FBI, CIA and NSA with top secret clearance",
+          "Only university researchers with a government grant",
+          "Only employees of the Linux Foundation",
+        ],
+        input: "false",
+        explanation:
+          "Linux is open-source, meaning its source code is available to anyone.",
+        correctAnswer: "Anyone who has the knowledge needed to access it",
+      },
+      {
+        question: "Source code refers to:",
+        img: "",
+        options: [
+          "The version of a program that the computer runs on the CPU",
+          "A human-readable version of computer software",
+          "The interface that software uses to talk to the kernel",
+          "The license that dictates how you may use and share the software",
+        ],
+        input: "false",
+        explanation:
+          "Source code is the human-readable form of a program, which is later compiled or interpreted into machine code.",
+        correctAnswer: "A human-readable version of computer software",
+      },
+      {
+        question: "Open source means: (choose two)",
+        img: "",
+        options: [
+          "You must support the software you share",
+          "You can modify the software's source code",
+          "You must share your changes",
+          "You can view the software's source code",
+          "You cannot charge anything for the software",
+        ],
+        input: "false",
+        explanation:
+          "Open source means the software's source code is available for viewing and modification, but you are not necessarily required to share changes.",
+        correctAnswer: [
+          "You can modify the software's source code",
+          "You can view the software's source code",
+        ],
+      },
+      {
+        question:
+          "The largest difference between the GPLv2 and BSD licenses is:",
+        img: "",
+        options: [
+          "Nothing, they are virtually identical",
+          "GPLv2 is not approved by the OSI",
+          "BSD has no copyleft provision",
+          "Only BSD allows commercial use",
+          "GPLv2 requires assigning copyright to the FSF",
+        ],
+        input: "false",
+        explanation:
+          "BSD is a permissive license with no copyleft provision, while GPLv2 requires that modifications be shared under the same license.",
+        correctAnswer: "BSD has no copyleft provision",
+      },
+      {
+        question: "A permissive free software license: (choose two)",
+        img: "",
+        options: [
+          "Places no restrictions on sharing modifications",
+          "Does not allow the software to be locked to certain hardware",
+          "Requires you share software changes but not binaries",
+          "Places the software in the public domain",
+          "Means you can use the software for anything you want",
+        ],
+        input: "false",
+        explanation:
+          "A permissive license allows unrestricted sharing and use, but does not automatically place software in the public domain.",
+        correctAnswer: [
+          "Places no restrictions on sharing modifications",
+          "Means you can use the software for anything you want",
+        ],
+      },
+      {
+        question: "A generic term for Open Source and Free Software is:",
+        img: "",
+        options: ["Libre Software", "SLOFF", "FLOSS", "OS/FS", "GPL"],
+        input: "false",
+        explanation:
+          "FLOSS (Free/Libre and Open Source Software) is a term that includes both Free Software and Open Source Software.",
+        correctAnswer: "FLOSS",
+      },
+      {
+        question:
+          "What does it mean when a work is placed in the public domain?",
+        img: "",
+        options: [
+          "The work was done by a government agency",
+          "The author has died",
+          "The author has relinquished the copyright on the work",
+          "You must redistribute changes to the software",
+          "You may not use the work for commercial purposes",
+        ],
+        input: "false",
+        explanation:
+          "Public domain means the author has given up copyright, allowing anyone to use it without restrictions.",
+        correctAnswer: "The author has relinquished the copyright on the work",
+      },
+      {
+        question: "Creative Commons licenses allow you to: (choose three)",
+        img: "",
+        options: [
+          "Receive royalties on the use of the work",
+          "Allow or disallow commercial use",
+          "Specify whether or not changes must be shared",
+          "Get a veto on where the work is used",
+          "Specify whether or not people may distribute changes",
+        ],
+        input: "false",
+        explanation:
+          "Creative Commons licenses let creators control commercial use, sharing of modifications, and redistribution rules.",
+        correctAnswer: [
+          "Allow or disallow commercial use",
+          "Specify whether or not changes must be shared",
+          "Specify whether or not people may distribute changes",
+        ],
+      },
+      {
+        question:
+          "If a podcast is licensed under the CC BY-ND license, you may: (choose two)",
+        img: "",
+        options: [
+          "Sell it as part of a compilation",
+          "Post it to your website",
+          "Use an interview or song from it for your own podcast",
+          "Add ads to it and post it to your website",
+          "Share it as long as you give credit to the author",
+        ],
+        input: "false",
+        explanation:
+          "CC BY-ND allows sharing with credit but does not permit modifications or commercial use without permission.",
+        correctAnswer: [
+          "Post it to your website",
+          "Share it as long as you give credit to the author",
+        ],
+      },
+      {
+        question: "The Creative Commons version of Public Domain licensing is:",
+        img: "",
+        options: [
+          "NoAttribution-ShareAlike (CC BY-SA)",
+          "Attribution-NonCommercial-ShareAlike (CC BY-NC-SA)",
+          "Attribution-NonCommercial (CC BY-NC)",
+          "Attribution (CC BY)",
+          "No Rights Reserved (CC0)",
+        ],
+        input: "false",
+        explanation:
+          "CC0 (No Rights Reserved) is the Creative Commons license that releases work into the public domain.",
+        correctAnswer: "No Rights Reserved (CC0)",
+      },
+      {
+        question:
+          "A pair of single quotes ( ' ) will prevent the shell from interpreting any metacharacter.",
+        options: ["True", "False"],
+        correctAnswer: "True",
+        explanation:
+          "Single quotes (' ') prevent all metacharacters from being interpreted by the shell.",
+      },
+      {
+        question:
+          'A pair of double quotes ( " ) will prevent the shell from interpreting any metacharacter.',
+        options: ["True", "False"],
+        correctAnswer: "False",
+        explanation:
+          "Double quotes prevent most metacharacters except for $, `, and \\.",
+      },
+      {
+        question:
+          "To be able to output messages to the screen, use the _______ command:",
+        options: ["type", "display", "print", "echo"],
+        correctAnswer: "echo",
+        explanation:
+          "The echo command is used to output messages to the console.",
+      },
+      {
+        question:
+          "The _______ command will print a list of the commands that you've previously executed.",
+        options: ["eval", "history", "list", "exec"],
+        correctAnswer: "history",
+        explanation:
+          "The history command displays a list of previously executed commands.",
+      },
+      {
+        question:
+          "To execute the same command as previously executed five commands ago, you would type:",
+        options: ["@-5", "&5", "!-5", "!5"],
+        correctAnswer: "!-5",
+        explanation:
+          "The !-5 command recalls and executes the command from five commands ago.",
+      },
+      {
+        question:
+          "What one character treats the character that follows it as if it was surrounded by single quotes?",
+        options: ["%", "#", "/", "\\"],
+        correctAnswer: "\\",
+        explanation:
+          "The backslash (\\) is used as an escape character in the shell.",
+      },
+      {
+        question: "The echo command:",
+        options: [
+          "Is used for variable assignment",
+          "Tests a variable for duplication",
+          "Duplicates the input stream to the output stream",
+          "Is used to output text to the console",
+          "Copies variables from one to another",
+        ],
+        correctAnswer: "Is used to output text to the console",
+        explanation:
+          "The echo command prints text or variable values to the console.",
+      },
+      {
+        question:
+          "The most common shell used for Linux distributions is the ________ shell.",
+        options: ["Bash", "Fish", "Tsch", "Zsh"],
+        correctAnswer: "Bash",
+        explanation:
+          "Bash (Bourne Again Shell) is the default and most commonly used shell in Linux distributions.",
+      },
+      {
+        question: "HOME is an example of _________.",
+        options: [
+          "A local variable",
+          "An environment variable",
+          "An alias",
+          "A path variable",
+          "An internal command",
+        ],
+        correctAnswer: "An environment variable",
+        explanation:
+          "HOME is an environment variable that stores the path to the user's home directory.",
+      },
+      {
+        question: "The whatis command is the same as man -w.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation:
+          "The whatis command is used to get a short description of a command, but it is not the same as 'man -w'.",
+        correctAnswer: "False",
+      },
+      {
+        question:
+          "The directory where additional documentation for software packages most likely can be found is:",
+        img: "",
+        options: [
+          "/usr/share/doc",
+          "/usr/software/doc",
+          "/var/share/doc",
+          "/var/lib/doc",
+        ],
+        input: "false",
+        explanation:
+          "/usr/share/doc is the standard directory for documentation related to installed software packages.",
+        correctAnswer: "/usr/share/doc",
+      },
+      {
+        question:
+          "Commands typically executed by a user are covered in what section of the manual?",
+        img: "",
+        options: ["2", "1", "3", "5"],
+        input: "false",
+        explanation: "User commands are documented in Section 1 of the manual.",
+        correctAnswer: "1",
+      },
+      {
+        question:
+          "The statement that describes the difference between a man page and an info page is:",
+        img: "",
+        options: [
+          "The info page is like a guide; a man page is a more concise reference.",
+          "The man page is like a guide; the info page is a more concise reference.",
+          "The man page is a long detailed reference; the info page is very terse.",
+          "There is very little difference between them.",
+        ],
+        input: "false",
+        explanation:
+          "Info pages provide a more structured, guide-like format, while man pages are shorter reference documents.",
+        correctAnswer:
+          "The info page is like a guide; a man page is a more concise reference.",
+      },
+      {
+        question: "Section 5 of the manual pages covers:",
+        img: "",
+        options: [
+          "System administration commands",
+          "Games",
+          "User commands",
+          "File Formats",
+        ],
+        input: "false",
+        explanation:
+          "Section 5 of the manual covers file formats and configuration files.",
+        correctAnswer: "File Formats",
+      },
+      {
+        question: "To start searching a man page, the first key you press is:",
+        img: "",
+        options: ["/", "f", "s", "!"],
+        input: "false",
+        explanation:
+          "Pressing '/' allows you to search for a keyword inside a man page.",
+        correctAnswer: "/",
+      },
+      {
+        question:
+          "To get help on using the info command, execute: (choose two)",
+        img: "",
+        options: ["info -q", "info info", "help info", "man info"],
+        input: "false",
+        explanation:
+          "You can use 'info info' to open the info documentation and 'man info' to read the man page for info.",
+        correctAnswer: ["info info", "man info"],
+      },
+      {
+        question:
+          "The _____ command is normally executed daily to update the database of all files that are on the system.",
+        img: "",
+        options: ["search", "locate", "updatedb", "find"],
+        input: "false",
+        explanation:
+          "The 'updatedb' command updates the locate command's database of files, usually run automatically in the background.",
+        correctAnswer: "updatedb",
+      },
+      {
+        question:
+          "The info command merges all available documentation into a single 'book'.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation:
+          "False. The info command provides separate pages for different commands, but it does not merge them into a single 'book'.",
+        correctAnswer: "False",
+      },
+      {
+        question:
+          "The man command searches each of the sections in order until it finds a match.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation:
+          "True. The man command searches through each section in numerical order and stops at the first match.",
+        correctAnswer: "True",
+      },
+      {
+        question:
+          "What command lists all files, including hidden ones, in long format and recursively through subdirectories?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation:
+          "The `ls -aRl` command lists all files (including hidden ones) in long format and recursively through subdirectories.",
+        correctAnswer: "ls -aRl",
+      },
+      {
+        question: "Which command lists files in reverse order?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "The `ls -r` command lists files in reverse order.",
+        correctAnswer: "ls -r",
+      },
+      {
+        question: "How do you list files in reverse order and long format?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation:
+          "The `ls -rl` command lists files in reverse order in long format.",
+        correctAnswer: "ls -rl",
+      },
+      {
+        question: "What command lists files sorted by modification time?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "The `ls -t` command sorts files by modification time.",
+        correctAnswer: "ls -t",
+      },
+      {
+        question:
+          "What command lists files sorted by modification time in long format?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation:
+          "The `ls -tl` command sorts files by modification time and displays them in long format.",
+        correctAnswer: "ls -tl",
+      },
+      {
+        question: "What command lists files sorted by file size?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "The `ls -Sl` command lists files sorted by file size.",
+        correctAnswer: "ls -Sl",
+      },
+      {
+        question: "Which command lists files separated by commas?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "The `ls -m` command lists files separated by commas.",
+        correctAnswer: "ls -m",
+      },
+      {
+        question: "What command lists files with quotes around their names?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation:
+          "The `ls -Q` command lists files with quotes around their names.",
+        correctAnswer: "ls -Q",
+      },
+      {
+        question: "What command changes the directory to `dir1`?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "The `cd dir1` command changes the directory to `dir1`.",
+        correctAnswer: "cd dir1",
+      },
+      {
+        question: "Which command moves up one directory level?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "The `cd ..` command moves up one directory level.",
+        correctAnswer: "cd ..",
+      },
+      {
+        question: "What command changes the directory to `/etc/network`?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation:
+          "The `cd /etc/network` command changes the directory to `/etc/network`.",
+        correctAnswer: "cd /etc/network",
+      },
+      {
+        question: "Which command prints the current working directory?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "The `pwd` command prints the current working directory.",
+        correctAnswer: "pwd",
+      },
+      {
+        question: "What command creates a new directory named `dir2`?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation:
+          "The `mkdir dir2` command creates a new directory named `dir2`.",
+        correctAnswer: "mkdir dir2",
+      },
+      {
+        question: "How do you remove the `dir2` directory and its contents?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation:
+          "The `rm -r dir2` command removes `dir2` and its contents recursively.",
+        correctAnswer: "rm -r dir2",
+      },
+      {
+        question: "Which command copies `file1.txt` into the `dir1` directory?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation:
+          "The `cp file1.txt ./dir1/` command copies `file1.txt` into `dir1`.",
+        correctAnswer: "cp file1.txt ./dir1/",
+      },
+      {
+        question:
+          "What command displays the contents of the `dir1` directory in long format?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation:
+          "The `ls -l dir1` command lists the contents of `dir1` in long format.",
+        correctAnswer: "ls -l dir1",
+      },
+      {
+        question: "What command copies `file1.txt` to `file3.txt`?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation:
+          "The `cp file1.txt file3.txt` command creates a duplicate of `file1.txt` named `file3.txt`.",
+        correctAnswer: "cp file1.txt file3.txt",
+      },
+      {
+        question:
+          "Which command displays the contents of `file1.txt` one screen at a time?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation:
+          "The `less file1.txt` command allows viewing `file1.txt` one screen at a time.",
+        correctAnswer: "less file1.txt",
+      },
+      {
+        question: "What command moves `file1.txt` to `sample.txt`?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation:
+          "The `mv file1.txt sample.txt` command renames `file1.txt` to `sample.txt`.",
+        correctAnswer: "mv file1.txt sample.txt",
+      },
+      {
+        question:
+          "What command creates a symbolic link named `f2` pointing to `file2.txt`?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation:
+          "The `ln -s file2.txt f2` command creates a symbolic link named `f2` pointing to `file2.txt`.",
+        correctAnswer: "ln -s file2.txt f2",
+      },
+      {
+        question:
+          "Which command searches for the word 'Malcolm' in `file2.txt`?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation:
+          "The `grep 'Malcolm' file2.txt` command searches for the word 'Malcolm' in `file2.txt`.",
+        correctAnswer: "grep 'Malcolm' file2.txt",
+      },
+      {
+        question:
+          "What command shows the first few lines of `alternatives.log`?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation:
+          "The `head alternatives.log` command displays the first few lines of `alternatives.log`.",
+        correctAnswer: "head alternatives.log",
+      },
+      {
+        question:
+          "What command shows the last few lines of `alternatives.log`?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation:
+          "The `tail alternatives.log` command displays the last few lines of `alternatives.log`.",
+        correctAnswer: "tail alternatives.log",
+      },
+      {
+        question:
+          "Which command continuously updates the last lines of `alternatives.log` as they change?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation:
+          "The `tail -f alternatives.log` command follows the file in real-time, showing new lines as they appear.",
+        correctAnswer: "tail -f alternatives.log",
+      },
+      {
+        question: "Which command displays the manual page for `ls`?",
+        img: "",
+        options: [""],
+        input: "true",
+        explanation: "The `man ls` command displays the manual page for `ls`.",
+        correctAnswer: "man ls",
+      },
+    ];
+  </script>
+  <script src="../scripts/script.js"></script>
+</html>
