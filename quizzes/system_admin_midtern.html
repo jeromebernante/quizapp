@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../images/icon-logo.png" type="image/png" />
+    <link rel="manifest" href="../manifest.json" />
+    <link rel="stylesheet" href="../styles/style.css" />
+    <title>Quiz App By Jerome</title>
+  </head>
+  <body class="flex-col w-100">
+    <nav class="flex-col w-100 bg-white">
+      <div class="max-w-768 flex-row row-center p-1 border-cup-gray">
+        <img class="h-2pt5 me-1" src="../images/icon-quiz.png" alt="" />
+        <span>SYSTEM ADMIN MID TERM</span>
+        <a href="../index.html" class="ms-auto h-2pt5"
+          ><img class="h-100" src="../images/icon-home.png" alt=""
+        /></a>
+      </div>
+    </nav>
+
+    <main class="flex-col mt-1 max-w-768 border-gray">
+      <section class="section cover">
+        <header>
+          <p>SYSTEM ADMIN MID TERM</p>
+          <p id="p-total-question"></p>
+        </header>
+        <box>
+          <img id="btn-play" src="../images/icon-play.png" alt="" />
+        </box>
+      </section>
+
+      <section class="section">
+        <box class="nav-question">
+          <p id="progress">
+            <!-- progress here -->
+          </p>
+          <box id="status-answer"></box>
+          <div id="btn-skip" class="button">SKIP</div>
+        </box>
+
+        <p id="question" class="p-question">
+          <!-- question here -->
+        </p>
+
+        <p id="explanation" class="p-explanation">
+          <!-- explanation -->
+        </p>
+
+        <div class="flex-col">
+          <!-- image here -->
+          <img id="img" src="" alt="" />
+        </div>
+
+        <ul id="options" class="options p-1">
+          <!-- Options will be populated here -->
+        </ul>
+
+        <input
+          type="text"
+          id="input-answer"
+          placeholder="your answer here..."
+          autocomplete="off"
+        />
+
+        <box class="nav-question">
+          <div id="btn-answer" class="button">Answer</div>
+          <div id="btn-next" class="button">Next</div>
+        </box>
+      </section>
+
+      <section class="section result">
+        <p class="title">SCORE</p>
+        <p id="score" class="score"></p>
+        <box class="box-btn-replay">
+          <img id="btn-replay" src="../images/icon-replay.png" alt="" />
+        </box>
+      </section>
+    </main>
+  </body>
+  <script>
+    const questions = [
+      {
+        question: "What is the most popular Linux platform for mobile phones?",
+        img: "",
+        options: ["Ubuntu", "Fedora", "Android", "Debian"],
+        input: "false",
+        explanation:
+          "Android is built on the Linux kernel and is the most widely used mobile OS.",
+        correctAnswer: "Android",
+      },
+      {
+        question:
+          "What does a distribution provide to add and remove software from the system?",
+        img: "",
+        options: ["Kernel", "File Manager", "Boot Loader", "Package Manager"],
+        input: "false",
+        explanation:
+          "Package managers allow users to easily install, update, and remove software.",
+        correctAnswer: "Package Manager",
+      },
+      {
+        question: "What does the PATH environment variable contain?",
+        img: "",
+        options: [
+          "A list of users on the system",
+          "A list of system processes",
+          "A list of directories to search for commands",
+          "A list of installed applications",
+        ],
+        input: "false",
+        explanation:
+          "PATH is an environment variable that tells the shell where to look for executable files.",
+        correctAnswer: "A list of directories to search for commands",
+      },
+      {
+        question: "Which command reports the location of a command?",
+        img: "",
+        options: ["locate", "find", "which", "search"],
+        input: "false",
+        explanation:
+          "The 'which' command returns the path of the executable that would have been executed.",
+        correctAnswer: "which",
+      },
+      {
+        question: "What does the tilde (~) represent in Linux?",
+        img: "",
+        options: [
+          "Root directory",
+          "Temporary files",
+          "User's home directory",
+          "Current directory",
+        ],
+        input: "false",
+        explanation:
+          "The tilde (~) is a shortcut to the current user's home directory.",
+        correctAnswer: "User's home directory",
+      },
+      {
+        question:
+          "Lossy compression sacrifices some quality to achieve better compression ratios.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation:
+          "Lossy compression discards some data to reduce file size, often used with images and audio.",
+        correctAnswer: "True",
+      },
+      {
+        question:
+          "zip, gzip, and bzip2 are all commands used to compress files.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation:
+          "All three—zip, gzip, and bzip2—are command-line tools used to compress files, each with its own format and behavior.",
+        correctAnswer: "True",
+      },
+
+      {
+        question: "What does CLI stand for?",
+        img: "",
+        options: [
+          "Command Line Interface",
+          "Computer Logic Input",
+          "Client Local Interface",
+          "Code Line Interpreter",
+        ],
+        input: "false",
+        explanation:
+          "CLI stands for Command Line Interface, a way to interact with the OS via text commands.",
+        correctAnswer: "Command Line Interface",
+      },
+      {
+        question: "What command changes the current working directory?",
+        img: "",
+        options: ["ls", "pwd", "cd", "mv"],
+        input: "false",
+        explanation:
+          "The 'cd' command is used to change the current directory in the shell.",
+        correctAnswer: "cd",
+      },
+      {
+        question:
+          "The top-level directory on a Linux system is represented as:",
+        img: "",
+        options: ["/", "~", "/home", "/root"],
+        input: "false",
+        explanation:
+          "The root of the filesystem hierarchy is represented by a single forward slash (/).",
+        correctAnswer: "/",
+      },
+      {
+        question: "Which statement about lossy compression is correct?",
+        img: "",
+        options: [
+          "Lossy compression sacrifices some quality, is often used with images, and usually results in better compression than lossless.",
+          "Lossy compression preserves original quality and is rarely used for images.",
+        ],
+        input: "false",
+        explanation:
+          "Lossy compression removes some data to reduce file size. It is commonly used for media like images, where minor quality loss is acceptable, and generally achieves better compression ratios than lossless methods.",
+        correctAnswer:
+          "Lossy compression sacrifices some quality, is often used with images, and usually results in better compression than lossless.",
+      },
+      {
+        question:
+          "Which environment variable contains a list of directories that is searched for commands to execute?",
+        img: "",
+        options: [],
+        input: "true",
+        explanation:
+          "The `PATH` environment variable contains a list of directories that the shell searches through when you enter a command. This helps the system find the executable files for commands.",
+        correctAnswer: "PATH",
+      },
+      {
+        question: "What does a maintenance cycle describe?",
+        img: "",
+        options: [
+          "How often software is updated",
+          "How long a version of software will be supported",
+          "The time it takes to develop a software version",
+          "The cost of software updates",
+        ],
+        input: "false",
+        explanation:
+          "A maintenance cycle refers to the period during which a specific version of software receives updates, bug fixes, and support from the developer.",
+        correctAnswer: "How long a version of software will be supported",
+      },
+      {
+        question:
+          "When choosing a distribution of Linux, which of the following should you consider?",
+        img: "",
+        options: [
+          "Does the distribution offer a 'stable' version, if the application software is supported by the distribution, will users require a GUI, will commercial support be required for the OS, and does your organization require long-term support for the system?",
+          "If the distribution is open-source, its popularity, and how fast it can be installed.",
+        ],
+        input: "false",
+        explanation:
+          "When choosing a Linux distribution, it's important to consider factors like stability, software support, GUI needs, commercial support, and long-term support for your organization.",
+        correctAnswer:
+          "Does the distribution offer a 'stable' version, if the application software is supported by the distribution, will users require a GUI, will commercial support be required for the OS, and does your organization require long-term support for the system?",
+      },
+      {
+        question: "Which of the following are examples of desktop software?",
+        img: "",
+        options: [
+          "Music player and Web browser",
+          "Database server and Web server",
+        ],
+        input: "false",
+        explanation:
+          "Desktop software includes applications like music players and web browsers that are used directly by users on their computers, while database and web servers are typically used in server environments.",
+        correctAnswer: "Music player and Web browser",
+      },
+      {
+        question:
+          "Which of the following pieces of software deal with file sharing?",
+        img: "",
+        options: ["Samba, NFS, and Netatalk", "Bash, Python, and Git"],
+        input: "false",
+        explanation:
+          "Samba, NFS (Network File System), and Netatalk are all used for file sharing, enabling different operating systems to share files over a network.",
+        correctAnswer: "Samba, NFS, and Netatalk",
+      },
+      {
+        question:
+          "Which of the following statements about the Linux shell are true?",
+        img: "",
+        options: [
+          "It allows you to launch programs, has a scripting language, and is customizable",
+          "It is only used for file management and cannot launch programs",
+        ],
+        input: "false",
+        explanation:
+          "The Linux shell allows you to launch programs, has a built-in scripting language for automation, and can be customized to suit the user's needs.",
+        correctAnswer:
+          "It allows you to launch programs, has a scripting language, and is customizable",
+      },
+      {
+        question: "What does virtualization mean?",
+        img: "",
+        options: [
+          "A single host can be split up into multiple guests",
+          "A single host can only run one operating system at a time",
+        ],
+        input: "false",
+        explanation:
+          "Virtualization allows a single physical host to be divided into multiple virtual machines (guests), each running its own operating system independently.",
+        correctAnswer: "A single host can be split up into multiple guests",
+      },
+      {
+        question: "What does source code refer to?",
+        img: "",
+        options: [
+          "A human-readable version of computer software",
+          "A compiled version of software for execution",
+        ],
+        input: "false",
+        explanation:
+          "Source code is the human-readable set of instructions written in a programming language, which is then compiled into executable software.",
+        correctAnswer: "A human-readable version of computer software",
+      },
+      {
+        question: "What does a copyleft provision in a software license mean?",
+        img: "",
+        options: [
+          "If you redistribute the software, you must distribute the source to any changes you make",
+          "You can redistribute the software but cannot modify it",
+        ],
+        input: "false",
+        explanation:
+          "A copyleft provision ensures that if you redistribute modified software, you must also provide the source code, including any changes you made, to maintain the open-source nature of the software.",
+        correctAnswer:
+          "If you redistribute the software, you must distribute the source to any changes you make",
+      },
+      {
+        question: "Linux is distributed under which license?",
+        img: "",
+        options: ["GPLv2", "MIT License"],
+        input: "false",
+        explanation:
+          "Linux is distributed under the GNU General Public License version 2 (GPLv2), which ensures that the source code remains open and users can modify and redistribute it.",
+        correctAnswer: "GPLv2",
+      },
+      {
+        question: "Creative Commons licenses allow you to:",
+        img: "",
+        options: [
+          "Specify whether or not people may distribute changes, allow or disallow commercial use, specify whether or not changes must be shared",
+          "Specify the duration of content use, restrict modifications, and require attribution for distribution",
+        ],
+        input: "false",
+        explanation:
+          "Creative Commons licenses allow content creators to specify various permissions, such as whether others can make changes, whether the content can be used commercially, and whether modifications must be shared.",
+        correctAnswer:
+          "Specify whether or not people may distribute changes, allow or disallow commercial use, specify whether or not changes must be shared",
+      },
+      {
+        question:
+          'A pair of double quotes (" ") will prevent the shell from interpreting any metacharacter.',
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation:
+          'A pair of double quotes (" ") in the shell does **not** prevent all metacharacters from being interpreted. They allow variable expansion and command substitution, but they still interpret certain metacharacters like `$`, `\`, and `` ` ``.',
+        correctAnswer: "False",
+      },
+      {
+        question:
+          "The shell program interprets the commands you type into the terminal into instructions that the Linux operating system can execute.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation:
+          "The shell is responsible for interpreting the commands you type in the terminal and converting them into instructions that the Linux operating system can execute.",
+        correctAnswer: "True",
+      },
+      {
+        question:
+          "The most common shell used for Linux distributions is the ________ shell.",
+        img: "",
+        options: ["Bash", "Zsh"],
+        input: "false",
+        explanation:
+          "Bash (Bourne Again SHell) is the most common shell used in most Linux distributions. It is widely used due to its compatibility, flexibility, and rich feature set.",
+        correctAnswer: "Bash",
+      },
+      {
+        question:
+          "Which two pager commands are used by the man command to control movement within the document?",
+        img: "",
+        options: ["more and less", "cat and head"],
+        input: "false",
+        explanation:
+          "The `man` command typically uses pager commands like `more` and `less` to control movement within the document, allowing users to scroll through the manual pages.",
+        correctAnswer: "more and less",
+      },
+      {
+        question: "The following sections commonly appear on a man page:",
+        img: "",
+        options: ["SYNOPSIS, NAME, DESCRIPTION", "HEADER, EXAMPLES, COMMANDS"],
+        input: "false",
+        explanation:
+          "Man pages typically include sections like `SYNOPSIS`, `NAME`, and `DESCRIPTION` to provide an overview of the command, its usage, and its description. Other sections may also be present depending on the command.",
+        correctAnswer: "SYNOPSIS, NAME, DESCRIPTION",
+      },
+      {
+        question: "The `cd` command by itself will take you to what directory?",
+        img: "",
+        options: ["Your home directory", "The root directory"],
+        input: "false",
+        explanation:
+          "When you use the `cd` command without any arguments, it takes you to your home directory. This is a shortcut to quickly return to your personal directory.",
+        correctAnswer: "Your home directory",
+      },
+      {
+        question: "The first character in a long listing (ls -l) indicates:",
+        img: "",
+        options: [
+          "If something is a file, directory, or symbolic link",
+          "The file's owner and group",
+        ],
+        input: "false",
+        explanation:
+          "In the output of `ls -l`, the first character indicates the type of the file: a dash (`-`) for a regular file, a `d` for a directory, and an `l` for a symbolic link.",
+        correctAnswer: "If something is a file, directory, or symbolic link",
+      },
+      {
+        question:
+          "Which of the following commands can be used to rename a file?",
+        img: "",
+        options: ["mv", "cp"],
+        input: "false",
+        explanation:
+          "The `mv` command is used to move or rename files and directories in Linux. To rename a file, you simply specify the old filename and the new filename.",
+        correctAnswer: "mv",
+      },
+      {
+        question: "The touch command can be used to:",
+        img: "",
+        options: [
+          "Create new files and update the timestamp of existing files",
+          "Delete files and move files",
+        ],
+        input: "false",
+        explanation:
+          "The `touch` command is used to create new empty files and to update the timestamp of existing files without modifying their content.",
+        correctAnswer:
+          "Create new files and update the timestamp of existing files",
+      },
+      {
+        question: "Which of the following are glob characters?",
+        img: "",
+        options: [
+          "The asterisk *, the question mark ?, and the square brackets [ and ]",
+          "The dollar sign $, the ampersand &, and the exclamation mark !",
+        ],
+        input: "false",
+        explanation:
+          "Glob characters like the asterisk `*`, the question mark `?`, and square brackets `[ ]` are used in pattern matching to match filenames or strings in the shell. The asterisk represents any number of characters, the question mark represents a single character, and the square brackets are used to match a range or set of characters.",
+        correctAnswer:
+          "The asterisk *, the question mark ?, and the square brackets [ and ]",
+      },
+      {
+        question:
+          "The main purpose of using glob characters is to be able to provide a list of filenames to a command.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation:
+          "Glob characters are used to provide a pattern that matches a list of filenames. This allows commands to operate on multiple files that match the pattern, rather than requiring the user to specify each file individually.",
+        correctAnswer: "True",
+      },
+      {
+        question:
+          "The asterisk character is used to represent zero or more of any character in a filename.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation:
+          "The asterisk (`*`) is a glob character that matches zero or more of any characters in a filename. It allows you to refer to multiple files without specifying each one individually.",
+        correctAnswer: "True",
+      },
+      {
+        question: "The three main modes of tar are:",
+        img: "",
+        options: ["Create, List, Extract", "Compress, Decompress, Archive"],
+        input: "false",
+        explanation:
+          "The `tar` command is used for creating, listing, and extracting archive files. The three main modes are: `c` for creating an archive, `t` for listing the contents, and `x` for extracting the contents of an archive.",
+        correctAnswer: "Create, List, Extract",
+      },
+    ];
+  </script>
+
+  <script src="../scripts/script.js"></script>
+</html>
