@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../images/icon-logo.png" type="image/png" />
+    <link rel="manifest" href="../manifest.json" />
+    <link rel="stylesheet" href="../styles/style.css" />
+    <title>Quiz App By Jerome</title>
+  </head>
+  <body class="flex-col w-100">
+    <nav class="flex-col w-100 bg-white">
+      <div class="max-w-768 flex-row row-center p-1 border-cup-gray">
+        <img class="h-2pt5 me-1" src="../images/icon-quiz.png" alt="" />
+        <span>SYSTEM ADMIN FINALS</span>
+        <a href="../index.html" class="ms-auto h-2pt5"
+          ><img class="h-100" src="../images/icon-home.png" alt=""
+        /></a>
+      </div>
+    </nav>
+
+    <main class="flex-col mt-1 max-w-768 border-gray">
+      <section class="section cover">
+        <header>
+          <p>SYSTEM ADMIN FINALS</p>
+          <p id="p-total-question"></p>
+        </header>
+        <box>
+          <img id="btn-play" src="../images/icon-play.png" alt="" />
+        </box>
+      </section>
+
+      <section class="section">
+        <box class="nav-question">
+          <p id="progress">
+            <!-- progress here -->
+          </p>
+          <box id="status-answer"></box>
+          <div id="btn-skip" class="button">SKIP</div>
+        </box>
+
+        <p id="question" class="p-question">
+          <!-- question here -->
+        </p>
+
+        <p id="explanation" class="p-explanation">
+          <!-- explanation -->
+        </p>
+
+        <div class="flex-col">
+          <!-- image here -->
+          <img id="img" src="" alt="" />
+        </div>
+
+        <ul id="options" class="options p-1">
+          <!-- Options will be populated here -->
+        </ul>
+
+        <input
+          type="text"
+          id="input-answer"
+          placeholder="your answer here..."
+          autocomplete="off"
+        />
+
+        <box class="nav-question">
+          <div id="btn-answer" class="button">Answer</div>
+          <div id="btn-next" class="button">Next</div>
+        </box>
+      </section>
+
+      <section class="section result">
+        <p class="title">SCORE</p>
+        <p id="score" class="score"></p>
+        <box class="box-btn-replay">
+          <img id="btn-replay" src="../images/icon-replay.png" alt="" />
+        </box>
+      </section>
+    </main>
+  </body>
+  <script>
+    const questions = [
+      {
+        question: "Which section commonly does NOT appear on a man page?",
+        img: "",
+        options: ["NAME", "SYNOPSIS", "LICENSE", "DESCRIPTION"],
+        input: "false",
+        explanation:
+          "The LICENSE section is not typically included in a man page, which focuses on command usage and details.",
+        correctAnswer: "LICENSE",
+      },
+      {
+        question:
+          "How is the top-level directory on a Linux system represented?",
+        img: "",
+        options: ["/", "~", ".", "#"],
+        input: "false",
+        explanation:
+          "The top-level directory, also known as the root directory, is represented as '/' in a Linux system.",
+        correctAnswer: "/",
+      },
+      {
+        question: "Which commands have correct syntax to enable routing?",
+        img: "",
+        options: [
+          "router eigrp <AS>",
+          "router rip",
+          "Both router eigrp <AS> and router rip",
+          "None of the above",
+        ],
+        input: "false",
+        explanation:
+          "Both 'router eigrp <AS>' and 'router rip' are correct syntax for enabling routing protocols in certain network configurations.",
+        correctAnswer: "Both router eigrp <AS> and router rip",
+      },
+      {
+        question: "What can the 'touch' command be used for?",
+        img: "",
+        options: [
+          "Delete files",
+          "Create and update file timestamps",
+          "Move files",
+          "Edit file contents",
+        ],
+        input: "false",
+        explanation:
+          "The 'touch' command creates new empty files or updates the timestamp of existing files.",
+        correctAnswer: "Create and update file timestamps",
+      },
+      {
+        question: "Is the dash character (-) a glob character in Linux?",
+        img: "",
+        options: [
+          "Yes",
+          "No",
+          "Only in specific shells",
+          "Only with certain commands",
+        ],
+        input: "false",
+        explanation:
+          "The dash character (-) is not a glob character; glob characters include *, ?, and [].",
+        correctAnswer: "No",
+      },
+      {
+        question: "What does the tilde (~) represent in a Linux system?",
+        img: "",
+        options: [
+          "Root directory",
+          "Current directory",
+          "User's home directory",
+          "Temporary directory",
+        ],
+        input: "false",
+        explanation:
+          "The tilde (~) is a shorthand for the current user's home directory in Linux.",
+        correctAnswer: "User's home directory",
+      },
+      {
+        question: "What happens when you run the 'cd' command by itself?",
+        img: "",
+        options: [
+          "Changes to the root directory",
+          "Changes to the previous directory",
+          "Changes to the home directory",
+          "Lists directory contents",
+        ],
+        input: "false",
+        explanation:
+          "Running 'cd' without arguments takes the user to their home directory.",
+        correctAnswer: "Changes to the home directory",
+      },
+      {
+        question: "What is the most popular Linux platform for mobile phones?",
+        img: "",
+        options: ["Ubuntu", "Android", "Debian", "Fedora"],
+        input: "false",
+        explanation:
+          "Android, built on the Linux kernel, is the most widely used mobile operating system.",
+        correctAnswer: "Android",
+      },
+      {
+        question: "What does the release cycle of software dictate?",
+        img: "",
+        options: [
+          "How often software is updated",
+          "How long software is supported",
+          "The cost of software",
+          "The size of software",
+        ],
+        input: "false",
+        explanation:
+          "The release cycle determines how frequently new versions or updates of software are released.",
+        correctAnswer: "How often software is updated",
+      },
+      {
+        question: "What does a package manager do in a Linux distribution?",
+        img: "",
+        options: [
+          "Manages hardware",
+          "Adds and removes software",
+          "Configures the kernel",
+          "Monitors system performance",
+        ],
+        input: "false",
+        explanation:
+          "A package manager allows users to install, update, and remove software packages in a Linux distribution.",
+        correctAnswer: "Adds and removes software",
+      },
+      {
+        question:
+          "Is a built-in text editor a characteristic of a Linux shell?",
+        img: "",
+        options: [
+          "Yes",
+          "No",
+          "Only in specific shells",
+          "Only in graphical shells",
+        ],
+        input: "false",
+        explanation:
+          "A Linux shell does not typically include a built-in text editor; editors like 'vi' or 'nano' are separate tools.",
+        correctAnswer: "No",
+      },
+      {
+        question: "What does virtualization mean in the context of computing?",
+        img: "",
+        options: [
+          "Splitting a host into multiple guests",
+          "Running multiple physical servers",
+          "Encrypting data",
+          "Compressing files",
+        ],
+        input: "false",
+        explanation:
+          "Virtualization allows a single physical host to be divided into multiple virtual guest systems.",
+        correctAnswer: "Splitting a host into multiple guests",
+      },
+      {
+        question: "What is source code?",
+        img: "",
+        options: [
+          "Compiled binary files",
+          "Human-readable software code",
+          "System logs",
+          "Configuration files",
+        ],
+        input: "false",
+        explanation:
+          "Source code is the human-readable version of computer software written in a programming language.",
+        correctAnswer: "Human-readable software code",
+      },
+      {
+        question:
+          "What does a copyleft provision in a software license require?",
+        img: "",
+        options: [
+          "Paying for redistribution",
+          "Distributing source code for changes",
+          "Restricting software use",
+          "Hiding the source code",
+        ],
+        input: "false",
+        explanation:
+          "A copyleft provision requires that redistributed software, including any modifications, must include the source code.",
+        correctAnswer: "Distributing source code for changes",
+      },
+      {
+        question: "Under which license is Linux distributed?",
+        img: "",
+        options: ["MIT", "GPLv2", "Apache", "BSD"],
+        input: "false",
+        explanation:
+          "The Linux kernel is distributed under the GNU General Public License version 2 (GPLv2).",
+        correctAnswer: "GPLv2",
+      },
+      {
+        question: "What does a maintenance cycle describe?",
+        img: "",
+        options: [
+          "How often software is updated",
+          "How long a version is supported",
+          "The cost of software",
+          "The installation process",
+        ],
+        input: "false",
+        explanation:
+          "A maintenance cycle describes the duration for which a software version is supported with updates and patches.",
+        correctAnswer: "How long a version is supported",
+      },
+      {
+        question: "What is NOT considered when choosing a Linux distribution?",
+        img: "",
+        options: [
+          "Hardware compatibility",
+          "Popularity on social media",
+          "Package manager",
+          "Support cycle",
+        ],
+        input: "false",
+        explanation:
+          "Popularity on social media is not a primary factor when selecting a Linux distribution for use.",
+        correctAnswer: "Popularity on social media",
+      },
+      {
+        question: "What do Creative Commons licenses allow you to specify?",
+        img: "",
+        options: [
+          "Whether changes must be shared",
+          "The cost of the software",
+          "The hardware requirements",
+          "The programming language",
+        ],
+        input: "false",
+        explanation:
+          "Creative Commons licenses let creators specify if others can distribute changes and whether those changes must be shared.",
+        correctAnswer: "Whether changes must be shared",
+      },
+      {
+        question: "Which of the following is an example of desktop software?",
+        img: "",
+        options: ["Web browser", "Kernel", "Package manager", "Shell"],
+        input: "false",
+        explanation:
+          "A web browser is a common example of desktop software used for browsing the internet.",
+        correctAnswer: "Web browser",
+      },
+      {
+        question: "Which software is used for file sharing in Linux?",
+        img: "",
+        options: [
+          "Apache and Nginx",
+          "Samba and NFS",
+          "MySQL and PostgreSQL",
+          "Bash and Zsh",
+        ],
+        input: "false",
+        explanation:
+          "Samba and NFS are software tools designed for file sharing across networks in Linux systems.",
+        correctAnswer: "Samba and NFS",
+      },
+      {
+        question: "What does the PATH environment variable contain?",
+        img: "",
+        options: [
+          "A list of users",
+          "A list of directories to search for commands",
+          "A list of installed applications",
+          "A list of system processes",
+        ],
+        input: "false",
+        explanation:
+          "The PATH variable contains a list of directories the shell searches for executable commands.",
+        correctAnswer: "A list of directories to search for commands",
+      },
+      {
+        question: "What is a Decision Support System (DSS)?",
+        img: "",
+        options: [
+          "A system for file sharing",
+          "A system for analyzing data to make decisions",
+          "A system for managing hardware",
+          "A system for editing text",
+        ],
+        input: "false",
+        explanation:
+          "A DSS enables users to analyze data and gain insights for data-driven business decisions.",
+        correctAnswer: "A system for analyzing data to make decisions",
+      },
+      {
+        question: "What is the most common shell used in Linux distributions?",
+        img: "",
+        options: ["Zsh", "Fish", "Bash", "Ksh"],
+        input: "false",
+        explanation:
+          "The Bash shell (Bourne Again Shell) is the most commonly used shell in Linux distributions.",
+        correctAnswer: "Bash",
+      },
+      {
+        question:
+          "Which pager commands are used by the 'man' command to control document movement?",
+        img: "",
+        options: [
+          "cat and dog",
+          "more and less",
+          "top and bottom",
+          "head and tail",
+        ],
+        input: "false",
+        explanation:
+          "The 'more' and 'less' commands are pagers used by 'man' to navigate through documentation.",
+        correctAnswer: "more and less",
+      },
+      {
+        question:
+          "Which command reports the location of a command in the command line interface?",
+        img: "",
+        options: ["find", "locate", "which", "whereis"],
+        input: "false",
+        explanation:
+          "The 'which' command returns the full path of the executable that would be run in the current environment.",
+        correctAnswer: "which",
+      },
+      {
+        question:
+          "Which command reports the location of a command in the command line interface?",
+        img: "",
+        options: ["find", "locate", "which", "whereis"],
+        input: "false",
+        explanation:
+          "The 'which' command returns the full path of the executable that would be run in the current environment.",
+        correctAnswer: "which",
+      },
+      {
+        question: "What does the 'cd' command do in Linux?",
+        img: "",
+        options: [
+          "Lists directory contents",
+          "Changes the current working directory",
+          "Creates a new directory",
+          "Deletes a directory",
+        ],
+        input: "false",
+        explanation:
+          "The 'cd' command is used to change the current working directory in a Linux system.",
+        correctAnswer: "Changes the current working directory",
+      },
+      {
+        question:
+          "What does the first character in a long listing (ls -l) indicate?",
+        img: "",
+        options: [
+          "File size",
+          "File permissions",
+          "File, directory, or symbolic link",
+          "File owner",
+        ],
+        input: "false",
+        explanation:
+          "The first character in 'ls -l' output indicates whether the item is a file (-), directory (d), or symbolic link (l).",
+        correctAnswer: "File, directory, or symbolic link",
+      },
+      {
+        question: "What can the 'mv' command be used for?",
+        img: "",
+        options: [
+          "Copy files",
+          "Rename files",
+          "Delete files",
+          "Compress files",
+        ],
+        input: "false",
+        explanation:
+          "The 'mv' command is used to move or rename files and directories in Linux.",
+        correctAnswer: "Rename files",
+      },
+      {
+        question: "How does file compression work?",
+        img: "",
+        options: [
+          "By adding redundant data",
+          "By removing redundant information",
+          "By encrypting the file",
+          "By splitting the file",
+        ],
+        input: "false",
+        explanation:
+          "Compression reduces file size by removing redundant information, making it more efficient to store or transmit.",
+        correctAnswer: "By removing redundant information",
+      },
+      {
+        question: "What is true about lossy compression compared to lossless?",
+        img: "",
+        options: [
+          "Lossy sacrifices quality for better compression",
+          "Lossy preserves all quality",
+          "Lossy is slower",
+          "Lossy requires more storage",
+        ],
+        input: "false",
+        explanation:
+          "Lossy compression sacrifices some quality to achieve better compression ratios than lossless compression.",
+        correctAnswer: "Lossy sacrifices quality for better compression",
+      },
+      {
+        question: "Which commands can be used to compress a file?",
+        img: "",
+        options: ["tar and mv", "zip and bzip2", "cp and rm", "cat and less"],
+        input: "false",
+        explanation:
+          "The 'zip' and 'bzip2' commands are used to compress files in Linux.",
+        correctAnswer: "zip and bzip2",
+      },
+      {
+        question: "Is 'compress' one of the main modes of the 'tar' command?",
+        img: "",
+        options: [
+          "Yes",
+          "No",
+          "Only with certain flags",
+          "Only in specific distributions",
+        ],
+        input: "false",
+        explanation:
+          "The 'tar' command's main modes include create, extract, and list, but 'compress' is not one of them.",
+        correctAnswer: "No",
+      },
+      {
+        question: "What is a Management Information System (MIS)?",
+        img: "",
+        options: [
+          "A system for compressing files",
+          "A system for managing hardware",
+          "A system for supporting management decision-making",
+          "A system for editing text",
+        ],
+        input: "false",
+        explanation:
+          "An MIS collects, stores, processes, and presents data to support management decision-making.",
+        correctAnswer: "A system for supporting management decision-making",
+      },
+      {
+        question: "What does an Executive Information System (EIS) provide?",
+        img: "",
+        options: [
+          "Low-level operational data",
+          "High-level company performance information",
+          "File compression tools",
+          "Text editing capabilities",
+        ],
+        input: "false",
+        explanation:
+          "An EIS provides high-level information about financial performance, market trends, and competitive landscape.",
+        correctAnswer: "High-level company performance information",
+      },
+      {
+        question:
+          "How many usable IP addresses are in the network 192.168.254.0/25?",
+        img: "",
+        options: ["62", "126", "254", "30"],
+        input: "false",
+        explanation:
+          "A /25 subnet has 128 addresses, with 2 reserved (network and broadcast), leaving 126 usable IP addresses.",
+        correctAnswer: "126",
+      },
+      {
+        question:
+          "How many subnets can be created by borrowing 3 bits from the host bits?",
+        img: "",
+        options: ["2", "4", "8", "16"],
+        input: "false",
+        explanation: "Borrowing 3 bits creates 2^3 = 8 subnets.",
+        correctAnswer: "8",
+      },
+      {
+        question: "What is a Knowledge Work System (KWS)?",
+        img: "",
+        options: [
+          "A system for file sharing",
+          "A system for knowledge workers like researchers",
+          "A system for hardware management",
+          "A system for text editing",
+        ],
+        input: "false",
+        explanation:
+          "A KWS provides insights for knowledge workers such as researchers, analysts, and consultants.",
+        correctAnswer: "A system for knowledge workers like researchers",
+      },
+      {
+        question:
+          "In the command 'tar -czf foo.tar.gz bar', what does the 'f' flag do?",
+        img: "",
+        options: [
+          "Compresses the archive",
+          "Specifies the output file",
+          "Lists archive contents",
+          "Extracts the archive",
+        ],
+        input: "false",
+        explanation:
+          "The 'f' flag tells 'tar' to write to the file specified immediately after the flag.",
+        correctAnswer: "Specifies the output file",
+      },
+      {
+        question: "What happens when you run 'gzip myfile.tar'?",
+        img: "",
+        options: [
+          "Creates a new uncompressed file",
+          "Removes myfile.tar and creates myfile.tar.gz",
+          "Lists the contents of myfile.tar",
+          "Extracts myfile.tar",
+        ],
+        input: "false",
+        explanation:
+          "Running 'gzip myfile.tar' compresses the file, removes myfile.tar, and creates myfile.tar.gz.",
+        correctAnswer: "Removes myfile.tar and creates myfile.tar.gz",
+      },
+      {
+        question: "What does the '-c' flag do in the 'tar' command?",
+        img: "",
+        options: [
+          "Extracts an archive",
+          "Lists archive contents",
+          "Creates a new archive",
+          "Compresses an archive",
+        ],
+        input: "false",
+        explanation: "The '-c' flag in 'tar' is used to create a new archive.",
+        correctAnswer: "Creates a new archive",
+      },
+      {
+        question:
+          "In the command 'tar –cvjf homedirs.tbz /home', what is true?",
+        img: "",
+        options: [
+          "The output is uncompressed",
+          "Filenames are printed, and the output is compressed",
+          "The command fails",
+          "Only directories are archived",
+        ],
+        input: "false",
+        explanation:
+          "The '-v' flag prints filenames, and '-j' compresses the output with bzip2, creating a compressed archive.",
+        correctAnswer: "Filenames are printed, and the output is compressed",
+      },
+      {
+        question:
+          "What happens when you try to compress an already compressed file?",
+        img: "",
+        options: [
+          "It becomes smaller",
+          "It remains unchanged",
+          "It becomes larger",
+          "It is deleted",
+        ],
+        input: "false",
+        explanation:
+          "An already compressed file typically cannot be compressed further and remains unchanged.",
+        correctAnswer: "It remains unchanged",
+      },
+      {
+        question:
+          "How do you extract just the files for user 'fred' from backup.tar.gz?",
+        img: "",
+        options: [
+          "tar –xzf backup.tar.gz home/fred/",
+          "tar –czf backup.tar.gz home/fred/",
+          "tar –tzf backup.tar.gz home/fred/",
+          "tar –xzf backup.tar.gz /fred",
+        ],
+        input: "false",
+        explanation:
+          "The command 'tar –xzf backup.tar.gz home/fred/' extracts only the files under home/fred/ from the archive.",
+        correctAnswer: "tar –xzf backup.tar.gz home/fred/",
+      },
+      {
+        question:
+          "How do you extract just the files under ProjectX from documents.zip?",
+        img: "",
+        options: [
+          "unzip documents.zip ProjectX/*",
+          "unzip documents.zip /ProjectX",
+          "unzip documents.zip –ProjectX",
+          "unzip documents.zip ProjectX",
+        ],
+        input: "false",
+        explanation:
+          "The command 'unzip documents.zip ProjectX/*' extracts only the files under the ProjectX directory.",
+        correctAnswer: "unzip documents.zip ProjectX/*",
+      },
+      {
+        question:
+          "What is the largest difference between GPLv2 and BSD licenses?",
+        img: "",
+        options: [
+          "BSD is more restrictive",
+          "BSD has no copyleft provision",
+          "GPLv2 is not open source",
+          "BSD requires payment",
+        ],
+        input: "false",
+        explanation:
+          "The BSD license lacks a copyleft provision, unlike GPLv2, which requires derivative works to be shared.",
+        correctAnswer: "BSD has no copyleft provision",
+      },
+      {
+        question: "What does system configuration refer to?",
+        img: "",
+        options: [
+          "Compressing files",
+          "Creating a structure for desired functions",
+          "Editing text files",
+          "Monitoring network traffic",
+        ],
+        input: "false",
+        explanation:
+          "System configuration involves setting up a software system's structure to achieve desired functionality.",
+        correctAnswer: "Creating a structure for desired functions",
+      },
+      {
+        question:
+          "In the command 'tar -cvjf foo.tbz a b c', what are 'a', 'b', and 'c'?",
+        img: "",
+        options: [
+          "Compression levels",
+          "Output file names",
+          "Files to be added to the archive",
+          "Directory paths",
+        ],
+        input: "false",
+        explanation:
+          "'a', 'b', and 'c' are the names of files to be added to the archive in the 'tar' command.",
+        correctAnswer: "Files to be added to the archive",
+      },
+      {
+        question: "What is system configuration analysis?",
+        img: "",
+        options: [
+          "Compressing system files",
+          "Evaluating configuration to improve performance",
+          "Editing system logs",
+          "Installing new software",
+        ],
+        input: "false",
+        explanation:
+          "System configuration analysis evaluates a system's configuration to identify issues and enhance performance.",
+        correctAnswer: "Evaluating configuration to improve performance",
+      },
+      {
+        question:
+          "What is the subnet ID of the third subnet for 192.168.0.0/24 with 30 hosts per subnet?",
+        img: "",
+        options: [
+          "192.168.0.32/27",
+          "192.168.0.64/27",
+          "192.168.0.16/27",
+          "192.168.0.96/27",
+        ],
+        input: "false",
+        explanation:
+          "For 30 hosts, a /27 subnet is used (32 addresses, 30 usable). The third subnet ID is 192.168.0.64/27.",
+        correctAnswer: "192.168.0.64/27",
+      },
+      {
+        question:
+          "The semicolon (;) can be used to separate multiple commands to be executed in order.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation:
+          "True. The semicolon (;) separates commands, allowing them to execute sequentially in the order they are written.",
+        correctAnswer: "True",
+      },
+      {
+        question:
+          "Software with many untested new features is typically called beta software.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation:
+          "True. Beta software refers to a release with new features that have not been rigorously tested.",
+        correctAnswer: "True",
+      },
+      {
+        question:
+          "The double ampersand (&&) separates commands, executing the right command only if the left command succeeds.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation:
+          "True. The double ampersand (&&) ensures the command to the right runs only if the command to the left succeeds.",
+        correctAnswer: "True",
+      },
+      {
+        question:
+          "The 'info' command merges all available documentation into a single 'book'.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation:
+          "True. The 'info' command combines available documentation into a single navigable 'book' format.",
+        correctAnswer: "True",
+      },
+      {
+        question:
+          "The 'man' command searches each section in order until it finds a match.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation:
+          "True. The 'man' command searches manual page sections sequentially until a matching entry is found.",
+        correctAnswer: "True",
+      },
+      {
+        question:
+          "Single quotes (' ') prevent the shell from interpreting any metacharacters.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation:
+          "True. Single quotes (' ') treat all metacharacters as literal, preventing shell interpretation.",
+        correctAnswer: "True",
+      },
+      {
+        question:
+          "The shell program interprets commands typed into the terminal for the Linux operating system to execute.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation:
+          "True. The shell translates user commands into instructions that the Linux operating system can execute.",
+        correctAnswer: "True",
+      },
+      {
+        question:
+          "Improved performance and compliance are reasons for system configuration analysis.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation:
+          "True. System configuration analysis is conducted to enhance performance and ensure compliance.",
+        correctAnswer: "True",
+      },
+      {
+        question:
+          "Increased complexity and overhead is a main disadvantage of System Configuration Management.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation:
+          "True. System Configuration Management can introduce increased complexity and overhead.",
+        correctAnswer: "True",
+      },
+      {
+        question: "In classful addressing, the subnet mask is fixed.",
+        img: "",
+        options: ["True", "False"],
+        input: "false",
+        explanation:
+          "True. Classful addressing uses fixed subnet masks based on the address class (e.g., /8 for Class A).",
+        correctAnswer: "True",
+      },
+      {
+        question:
+          "Where are error messages generated by commands sent by default?",
+        img: "",
+        options: ["STDERR", "STDOUT"],
+        input: "false",
+        explanation:
+          "Error messages are sent to STDERR by default, separate from standard output.",
+        correctAnswer: "STDERR",
+      },
+      {
+        question: "Does a successful command always print output to STDOUT?",
+        img: "",
+        options: ["Yes", "No"],
+        input: "false",
+        explanation:
+          "A successful command may or may not print output to STDOUT, depending on the command.",
+        correctAnswer: "No",
+      },
+      {
+        question:
+          "What does the command 'ls /root 2> error.log' do with error messages?",
+        img: "",
+        options: ["Sends them to STDOUT", "Redirects them to error.log"],
+        input: "false",
+        explanation:
+          "The '2>' redirects error messages from the 'ls /root' command to the file error.log.",
+        correctAnswer: "Redirects them to error.log",
+      },
+      {
+        question:
+          "Which commands can sort the lines of list.file alphabetically and display on the screen?",
+        img: "",
+        options: ["cat list.file | sort", "sort < list.file"],
+        input: "false",
+        explanation:
+          "Both 'cat list.file | sort' and 'sort < list.file' sort the lines of list.file alphabetically and display the result.",
+        correctAnswer: "cat list.file | sort",
+      },
+      {
+        question: "What does the '-n 5' option do in the 'head' command?",
+        img: "",
+        options: [
+          "Displays the last five lines",
+          "Displays the first five lines",
+        ],
+        input: "false",
+        explanation:
+          "The '-n 5' option with 'head' displays only the first five lines of a file.",
+        correctAnswer: "Displays the first five lines",
+      },
+      {
+        question: "Can the 'grep' command be used with glob characters?",
+        img: "",
+        options: ["Yes", "No"],
+        input: "false",
+        explanation:
+          "The 'grep' command can be used with glob characters when combined with shell expansion.",
+        correctAnswer: "Yes",
+      },
+      {
+        question:
+          "Can the 'more' and 'less' commands be used to scroll through a text file?",
+        img: "",
+        options: ["Yes", "No"],
+        input: "false",
+        explanation:
+          "Both 'more' and 'less' allow scrolling through text files, with 'less' offering more features.",
+        correctAnswer: "Yes",
+      },
+      {
+        question: "What is the '-f' option used for in the 'cut' command?",
+        img: "",
+        options: ["Specifies the delimiter", "Specifies the field"],
+        input: "false",
+        explanation:
+          "The '-f' option in the 'cut' command is used to specify the field to extract.",
+        correctAnswer: "Specifies the field",
+      },
+      {
+        question: "What does the '-w' option do in the 'wc' command?",
+        img: "",
+        options: [
+          "Prints the total number of lines",
+          "Prints the total number of words",
+        ],
+        input: "false",
+        explanation:
+          "The '-w' option with 'wc' prints the total number of words in a file.",
+        correctAnswer: "Prints the total number of words",
+      },
+      {
+        question:
+          "Does 'echo \"text\" >> file.txt' overwrite file.txt if it already exists?",
+        img: "",
+        options: ["Yes", "No"],
+        input: "false",
+        explanation:
+          "The '>>' appends text to file.txt without overwriting it if the file already exists.",
+        correctAnswer: "No",
+      },
+      {
+        question:
+          "Is 'A=`pwd`' the correct way to save the current directory to a variable?",
+        img: "",
+        options: ["Yes", "No"],
+        input: "false",
+        explanation:
+          "Yes, 'A=`pwd`' correctly saves the output of 'pwd' (current directory) to the variable A.",
+        correctAnswer: "Yes",
+      },
+      {
+        question: "Does '$?' hold the exit code of the previous command?",
+        img: "",
+        options: ["Yes", "No"],
+        input: "false",
+        explanation:
+          "Yes, '$?' contains the exit code of the most recently executed command.",
+        correctAnswer: "Yes",
+      },
+      {
+        question:
+          "Do most of nano’s commands use Control and another character?",
+        img: "",
+        options: ["Yes", "No"],
+        input: "false",
+        explanation:
+          "Yes, most nano commands are executed using Control key combinations with another character.",
+        correctAnswer: "Yes",
+      },
+      {
+        question: "Are GPT and MBR valid partitioning types?",
+        img: "",
+        options: ["Yes", "No"],
+        input: "false",
+        explanation:
+          "Yes, GPT and MBR are valid disk partitioning schemes used in storage devices.",
+        correctAnswer: "Yes",
+      },
+      {
+        question: "Are USB and PCI common busing systems?",
+        img: "",
+        options: ["Yes", "No"],
+        input: "false",
+        explanation:
+          "Yes, USB and PCI are widely used busing systems for connecting peripherals and components.",
+        correctAnswer: "Yes",
+      },
+      {
+        question:
+          "Do the 'cfdisk', 'sfdisk', and 'fdisk' commands check hard disk MBR partitions?",
+        img: "",
+        options: ["Yes", "No"],
+        input: "false",
+        explanation:
+          "Yes, 'cfdisk', 'sfdisk', and 'fdisk' are tools that can manage and check MBR partitions on hard disks.",
+        correctAnswer: "Yes",
+      },
+      {
+        question:
+          "Do the 'sgdisk', 'gdisk', and 'cgdisk' commands check hard disk GPT partitions?",
+        img: "",
+        options: ["Yes", "No"],
+        input: "false",
+        explanation:
+          "Yes, 'sgdisk', 'gdisk', and 'cgdisk' are tools designed to manage and check GPT partitions on hard disks.",
+        correctAnswer: "Yes",
+      },
+    ];
+  </script>
+
+  <script src="../scripts/script.js"></script>
+</html>
