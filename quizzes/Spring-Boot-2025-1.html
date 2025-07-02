@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../images/icon-logo.png" type="image/png" />
+    <link rel="manifest" href="../manifest.json" />
+    <link rel="stylesheet" href="../styles/style.css" />
+    <title>Quiz App By Jerome</title>
+  </head>
+  <body class="flex-col w-100">
+    <nav class="flex-col w-100 bg-white">
+      <div class="max-w-768 flex-row row-center p-1 border-cup-gray">
+        <img class="h-2pt5 me-1" src="../images/icon-quiz.png" alt="" />
+        <span>Spring Boot 2025 #1</span>
+        <a href="../index.html" class="ms-auto h-2pt5"
+          ><img class="h-100" src="../images/icon-home.png" alt=""
+        /></a>
+      </div>
+    </nav>
+
+    <main class="flex-col mt-1 max-w-768 border-gray">
+      <section class="section cover">
+        <header>
+          <p>Spring Boot Tutorial for Beginners [2025]</p>
+          <p>By Programming with Mosh</p>
+          <p id="p-total-question"></p>
+        </header>
+        <box>
+          <img id="btn-play" src="../images/icon-play.png" alt="" />
+        </box>
+      </section>
+
+      <section class="section">
+        <box class="nav-question">
+          <p id="progress">
+            <!-- progress here -->
+          </p>
+          <box id="status-answer"></box>
+          <div id="btn-skip" class="button">SKIP</div>
+        </box>
+
+        <p id="question" class="p-question">
+          <!-- question here -->
+        </p>
+
+        <p id="explanation" class="p-explanation">
+          <!-- explanation -->
+        </p>
+
+        <div class="flex-col">
+          <!-- image here -->
+          <img id="img" src="" alt="" />
+        </div>
+
+        <ul id="options" class="options p-1">
+          <!-- Options will be populated here -->
+        </ul>
+
+        <input
+          type="text"
+          id="input-answer"
+          placeholder="your answer here..."
+          autocomplete="off"
+        />
+
+        <box class="nav-question">
+          <div id="btn-answer" class="button">Answer</div>
+          <div id="btn-next" class="button">Next</div>
+        </box>
+      </section>
+
+      <section class="section result">
+        <p class="title">SCORE</p>
+        <p id="score" class="score"></p>
+        <box class="box-btn-replay">
+          <img id="btn-replay" src="../images/icon-replay.png" alt="" />
+        </box>
+      </section>
+    </main>
+  </body>
+  <script>
+    const questions = [
+      {
+        question:
+          "What is the primary purpose of IntelliJ Ultimate's New Project Generator?",
+        img: "",
+        options: [
+          "To run unit tests automatically",
+          "To streamline project setup for Java applications",
+          "To deploy applications to a server",
+          "To generate database schemas",
+        ],
+        input: "false",
+        explanation:
+          "The New Project Generator in IntelliJ Ultimate simplifies the creation of Java projects, including Spring Boot, Maven, and Gradle projects, by providing templates and configuring project structure and dependencies.",
+        correctAnswer: "To streamline project setup for Java applications",
+      },
+      {
+        question:
+          "What is the role of the `.mvn/` directory in a Maven project?",
+        img: "",
+        options: [
+          "Stores compiled classes",
+          "Contains Maven configuration files",
+          "Holds test resources",
+          "Manages source code",
+        ],
+        input: "false",
+        explanation:
+          "The `.mvn/` directory contains Maven configuration files, such as `settings.xml`, which allows for custom configurations specific to the project.",
+        correctAnswer: "Contains Maven configuration files",
+      },
+      {
+        question: "What is the purpose of the `mvnw` and `mvnw.cmd` files?",
+        img: "",
+        options: [
+          "To compile Java code",
+          "To ensure the correct Maven version is used",
+          "To run the application server",
+          "To package the application",
+        ],
+        input: "false",
+        explanation:
+          "The `mvnw` (Unix) and `mvnw.cmd` (Windows) files are part of the Maven Wrapper, which ensures the correct Maven version is used for the project without requiring a local Maven installation.",
+        correctAnswer: "To ensure the correct Maven version is used",
+      },
+      {
+        question:
+          "What is the main difference between Gradle - Groovy and Gradle - Kotlin?",
+        img: "",
+        options: [
+          "Gradle - Groovy uses XML, while Gradle - Kotlin uses JSON",
+          "Gradle - Groovy uses Groovy scripts, while Gradle - Kotlin uses Kotlin scripts",
+          "Gradle - Groovy is for web apps, while Gradle - Kotlin is for mobile apps",
+          "Gradle - Groovy is deprecated, while Gradle - Kotlin is current",
+        ],
+        input: "false",
+        explanation:
+          "Gradle - Groovy uses Groovy scripts (`build.gradle`), while Gradle - Kotlin uses Kotlin scripts (`build.gradle.kts`) for build configuration, offering different syntaxes for the same build tool.",
+        correctAnswer:
+          "Gradle - Groovy uses Groovy scripts, while Gradle - Kotlin uses Kotlin scripts",
+      },
+      {
+        question:
+          "What is the purpose of the `pom.xml` file in a Maven project?",
+        img: "",
+        options: [
+          "To define project configuration and dependencies",
+          "To store application logs",
+          "To configure the application server",
+          "To hold unit test cases",
+        ],
+        input: "false",
+        explanation:
+          "The `pom.xml` file is the Project Object Model file in Maven, used to define project metadata, dependencies, build plugins, and repositories.",
+        correctAnswer: "To define project configuration and dependencies",
+      },
+      {
+        question: "What does the `spring-boot-starter-web` dependency include?",
+        img: "",
+        options: [
+          "Spring MVC, Tomcat, and Jackson",
+          "Database drivers and Hibernate",
+          "Security and authentication modules",
+          "Batch processing tools",
+        ],
+        input: "false",
+        explanation:
+          "The `spring-boot-starter-web` dependency includes Spring MVC for web development, Tomcat as an embedded web server, and Jackson for JSON processing.",
+        correctAnswer: "Spring MVC, Tomcat, and Jackson",
+      },
+      {
+        question: "What is the role of Maven Central in a Maven project?",
+        img: "",
+        options: [
+          "It compiles the project code",
+          "It serves as a default repository for downloading dependencies",
+          "It hosts the application server",
+          "It stores project documentation",
+        ],
+        input: "false",
+        explanation:
+          "Maven Central is a default repository where Maven downloads dependencies, such as libraries like Spring Boot, for use in projects.",
+        correctAnswer:
+          "It serves as a default repository for downloading dependencies",
+      },
+      {
+        question: "What does the Sync Maven Changes icon in IntelliJ do?",
+        img: "",
+        options: [
+          "Deploys the application",
+          "Re-imports Maven dependencies and updates project structure",
+          "Runs unit tests",
+          "Formats the source code",
+        ],
+        input: "false",
+        explanation:
+          "The Sync Maven Changes icon (circular arrow) in IntelliJ triggers re-importing of Maven dependencies and updates the project structure based on changes in `pom.xml`.",
+        correctAnswer:
+          "Re-imports Maven dependencies and updates project structure",
+      },
+      {
+        question:
+          "Why should you omit version tags for dependencies in a Spring Boot project?",
+        img: "",
+        options: [
+          "To reduce file size",
+          "To allow Spring Boot to manage dependency versions",
+          "To improve compilation speed",
+          "To enable automatic testing",
+        ],
+        input: "false",
+        explanation:
+          "Spring Boot manages dependency versions through its parent POM or dependency management block to ensure compatibility, so version tags should be omitted to avoid conflicts.",
+        correctAnswer: "To allow Spring Boot to manage dependency versions",
+      },
+      {
+        question: "What is Dependency Injection (DI)?",
+        img: "",
+        options: [
+          "A method to optimize database queries",
+          "A design pattern where dependencies are passed into an object",
+          "A way to compile code faster",
+          "A logging framework",
+        ],
+        input: "false",
+        explanation:
+          "Dependency Injection is a design pattern where dependencies are passed into an object rather than created by the object, promoting loose coupling and testability.",
+        correctAnswer:
+          "A design pattern where dependencies are passed into an object",
+      },
+      {
+        question:
+          "What is the main advantage of constructor injection over setter injection?",
+        img: "",
+        options: [
+          "It allows dynamic dependency changes",
+          "It ensures immutability and mandatory dependencies",
+          "It reduces code complexity",
+          "It improves application performance",
+        ],
+        input: "false",
+        explanation:
+          "Constructor injection ensures that dependencies are immutable and mandatory, as they are provided during object creation, unlike setter injection, which allows optional or changeable dependencies.",
+        correctAnswer: "It ensures immutability and mandatory dependencies",
+      },
+      {
+        question: "What is the Spring IoC Container responsible for?",
+        img: "",
+        options: [
+          "Managing database connections",
+          "Managing beans and their dependencies",
+          "Rendering web views",
+          "Running unit tests",
+        ],
+        input: "false",
+        explanation:
+          "The Spring IoC (Inversion of Control) Container manages beans (objects) and their dependencies, handling their creation, configuration, and lifecycle.",
+        correctAnswer: "Managing beans and their dependencies",
+      },
+      {
+        question:
+          "Which annotation marks a class as a Spring-managed bean for the service layer?",
+        img: "",
+        options: ["@Controller", "@Repository", "@Service", "@Component"],
+        input: "false",
+        explanation:
+          "@Service is a specialization of @Component used to mark classes in the service layer as Spring-managed beans, indicating their role in business logic.",
+        correctAnswer: "@Service",
+      },
+      {
+        question:
+          "How can you externalize configuration in a Spring Boot application?",
+        img: "",
+        options: [
+          "Using Java code in controllers",
+          "Using `application.properties` or `application.yml` files",
+          "Using Maven plugins",
+          "Using XML-based configurations only",
+        ],
+        input: "false",
+        explanation:
+          "Spring Boot allows externalizing configuration using `application.properties` or `application.yml` files to define settings like database URLs or ports.",
+        correctAnswer:
+          "Using `application.properties` or `application.yml` files",
+      },
+      {
+        question: "What is the default bean scope in Spring?",
+        img: "",
+        options: ["Prototype", "Singleton", "Request", "Session"],
+        input: "false",
+        explanation:
+          "The default bean scope in Spring is Singleton, meaning one instance of the bean is created per IoC container.",
+        correctAnswer: "Singleton",
+      },
+      {
+        question: "What does the `@Lazy` annotation do in Spring?",
+        img: "",
+        options: [
+          "Delays bean initialization until needed",
+          "Marks a bean as deprecated",
+          "Enables thread safety for beans",
+          "Reduces memory usage of beans",
+        ],
+        input: "false",
+        explanation:
+          "The `@Lazy` annotation delays bean initialization until the bean is first requested, reducing startup time for the application.",
+        correctAnswer: "Delays bean initialization until needed",
+      },
+      {
+        question:
+          "Which annotation is used to run a method after a bean is initialized?",
+        img: "",
+        options: ["@PreDestroy", "@PostConstruct", "@Autowired", "@Bean"],
+        input: "false",
+        explanation:
+          "The `@PostConstruct` annotation marks a method to be executed after a bean's initialization, allowing custom setup logic.",
+        correctAnswer: "@PostConstruct",
+      },
+      {
+        question:
+          "How can you prioritize a bean when multiple implementations exist?",
+        img: "",
+        options: [
+          "Using `@Bean`",
+          "Using `@Primary`",
+          "Using `@Scope`",
+          "Using `@Component`",
+        ],
+        input: "false",
+        explanation:
+          "The `@Primary` annotation is used to prioritize a bean when multiple implementations of the same type exist, ensuring it is selected by default.",
+        correctAnswer: "Using `@Primary`",
+      },
+      {
+        question: "What is Spring MVC primarily used for?",
+        img: "",
+        options: [
+          "Managing database transactions",
+          "Building web applications with the Model-View-Controller pattern",
+          "Running background jobs",
+          "Configuring security policies",
+        ],
+        input: "false",
+        explanation:
+          "Spring MVC is a framework within Spring for building web applications using the Model-View-Controller pattern, handling HTTP requests and rendering views.",
+        correctAnswer:
+          "Building web applications with the Model-View-Controller pattern",
+      },
+      {
+        question: "What does the Open-Closed Principle (OCP) state?",
+        img: "",
+        options: [
+          "Classes should be open for modification but closed for extension",
+          "Classes should be open for extension but closed for modification",
+          "Classes should be closed for both extension and modification",
+          "Classes should be open for both extension and modification",
+        ],
+        input: "false",
+        explanation:
+          "The Open-Closed Principle (OCP), part of SOLID principles, states that software entities should be open for extension but closed for modification, allowing new functionality without changing existing code.",
+        correctAnswer:
+          "Classes should be open for extension but closed for modification",
+      },
+    ];
+  </script>
+
+  <script src="../scripts/script.js"></script>
+</html>
