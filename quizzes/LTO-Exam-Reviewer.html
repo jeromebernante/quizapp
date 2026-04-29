@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,240 +9,416 @@
     <link rel="manifest" href="../manifest.json" />
     <link rel="stylesheet" href="../styles/style.css" />
     <title>Quiz App By Jerome</title>
-  </head>
-  <body class="flex-col w-100">
+</head>
+
+<body class="flex-col w-100">
     <nav class="flex-col w-100 bg-white">
-      <div class="max-w-768 flex-row row-center p-1 border-cup-gray">
-        <img class="h-2pt5 me-1" src="../images/icon-quiz.png" alt="" />
-        <span>LTO Exam Reviewer</span>
-        <a href="../index.html" class="ms-auto h-2pt5"><img class="h-100" src="../images/icon-home.png" alt=""/></a>
-      </div>
+        <div class="max-w-768 flex-row row-center p-1 border-cup-gray">
+            <img class="h-2pt5 me-1" src="../images/icon-quiz.png" alt="" />
+            <span>LTO Exam Reviewer</span>
+            <a href="../index.html" class="ms-auto h-2pt5"><img class="h-100" src="../images/icon-home.png"
+                    alt="" /></a>
+        </div>
     </nav>
 
     <main class="flex-col mt-1 max-w-768 border-gray">
-      <section class="section cover">
-        <header>
-          <p>LTO EXAM REVIEWER</p>
-          <p id="p-total-question"></p>
-        </header>
-        <box>
-          <img id="btn-play" src="../images/icon-play.png" alt="" />
-        </box>
-      </section>
+        <section class="section cover">
+            <header>
+                <p>LTO EXAM REVIEWER</p>
+                <p id="p-total-question"></p>
+            </header>
+            <box>
+                <img id="btn-play" src="../images/icon-play.png" alt="" />
+            </box>
+        </section>
 
-      <section class="section">
-        <box class="nav-question">
-          <p id="progress">
-            <!-- progress here -->
-          </p>
-          <box id="status-answer"></box>
-          <div id="btn-skip" class="button">SKIP</div>
-        </box>
+        <section class="section">
+            <box class="nav-question">
+                <p id="progress">
+                    <!-- progress here -->
+                </p>
+                <box id="status-answer"></box>
+                <div id="btn-skip" class="button">SKIP</div>
+            </box>
 
-        <p id="question" class="p-question">
-          <!-- question here -->
-        </p>
+            <p id="question" class="p-question">
+                <!-- question here -->
+            </p>
 
-        <p id="explanation" class="p-explanation">
-          <!-- explanation -->
-        </p>
+            <p id="explanation" class="p-explanation">
+                <!-- explanation -->
+            </p>
 
-        <div class="flex-col">
-          <!-- image here -->
-          <img id="img" src="" alt="" />
-        </div>
+            <div class="flex-col">
+                <!-- image here -->
+                <img id="img" src="" alt="" />
+            </div>
 
-        <ul id="options" class="options p-1">
-          <!-- Options will be populated here -->
-        </ul>
+            <ul id="options" class="options p-1">
+                <!-- Options will be populated here -->
+            </ul>
 
-        <input
-          type="text"
-          id="input-answer"
-          placeholder="your answer here..."
-          autocomplete="off"
-        />
+            <input type="text" id="input-answer" placeholder="your answer here..." autocomplete="off" />
 
-        <box class="nav-question">
-          <div id="btn-answer" class="button">Answer</div>
-          <div id="btn-next" class="button">Next</div>
-        </box>
-      </section>
+            <box class="nav-question">
+                <div id="btn-answer" class="button">Answer</div>
+                <div id="btn-next" class="button">Next</div>
+            </box>
+        </section>
 
-      <section class="section result">
-        <p class="title">SCORE</p>
-        <p id="score" class="score"></p>
-        <box class="box-btn-replay">
-          <img id="btn-replay" src="../images/icon-replay.png" alt="" />
-        </box>
-      </section>
+        <section class="section result">
+            <p class="title">SCORE</p>
+            <p id="score" class="score"></p>
+            <box class="box-btn-replay">
+                <img id="btn-replay" src="../images/icon-replay.png" alt="" />
+            </box>
+        </section>
     </main>
-  </body>
-  <script>
-    const questions = [
-      {
-        question: "What does LTO stand for?",
-        img: "",
-        options: ["Land Transportation Office", "Long Term Operation", "Light Traffic Officer", "Legal Traffic Ordinance"],
-        input: "false",
-        explanation: "",
-        correctAnswer: "Land Transportation Office",
-      },
-      {
-        question: "What is the minimum age requirement to obtain a driver's license in the Philippines?",
-        img: "",
-        options: ["16 years old", "17 years old", "18 years old", "21 years old"],
-        input: "false",
-        explanation: "",
-        correctAnswer: "17 years old",
-      },
-      {
-        question: "What does a solid white line on the road mean?",
-        img: "",
-        options: ["Do not cross", "You may cross when safe", "Speed limit zone", "Parking area"],
-        input: "false",
-        explanation: "",
-        correctAnswer: "Do not cross",
-      },
-      {
-        question: "What is the meaning of a yellow traffic light?",
-        img: "",
-        options: ["Proceed with caution", "Stop immediately", "Speed up", "Honk your horn"],
-        input: "false",
-        explanation: "",
-        correctAnswer: "Proceed with caution",
-      },
-      {
-        question: "In the Philippines, what is the blood alcohol content (BAC) limit for drivers?",
-        img: "",
-        options: ["0.03%", "0.05%", "0.08%", "0.10%"],
-        input: "false",
-        explanation: "",
-        correctAnswer: "0.05%",
-      },
-      {
-        question: "What should you do when you approach a red traffic light?",
-        img: "",
-        options: ["Stop before the stop line", "Slow down and cross if clear", "Honk and proceed", "Speed through quickly"],
-        input: "false",
-        explanation: "",
-        correctAnswer: "Stop before the stop line",
-      },
-      {
-        question: "What is the speed limit in residential areas in the Philippines?",
-        img: "",
-        options: ["20 km/h", "30 km/h", "40 km/h", "50 km/h"],
-        input: "false",
-        explanation: "",
-        correctAnswer: "20 km/h",
-      },
-      {
-        question: "What does a broken white line indicate on a roadway?",
-        img: "",
-        options: ["Do not cross", "You may cross when safe", "One-way traffic", "Pedestrian crossing"],
-        input: "false",
-        explanation: "",
-        correctAnswer: "You may cross when safe",
-      },
-      {
-        question: "How far should you maintain from the vehicle in front when driving?",
-        img: "",
-        options: ["At least 1 meter", "At least 2 meters", "A safe following distance (one second rule)", "No specific distance required"],
-        input: "false",
-        explanation: "",
-        correctAnswer: "A safe following distance (one second rule)",
-      },
-      {
-        question: "What is the proper hand signal for turning left?",
-        img: "",
-        options: ["Arm extended to the left", "Arm extended upward", "Hand pointing forward", "Arm extended to the right"],
-        input: "false",
-        explanation: "",
-        correctAnswer: "Arm extended to the left",
-      },
-      {
-        question: "When should you use your car horn?",
-        img: "",
-        options: ["Whenever you want to", "To warn others of danger or your presence", "To show anger or impatience", "Never use it"],
-        input: "false",
-        explanation: "",
-        correctAnswer: "To warn others of danger or your presence",
-      },
-      {
-        question: "What do you do if your vehicle's brakes fail?",
-        img: "",
-        options: ["Panic and honk", "Pump the brakes, shift to neutral, and use handbrake", "Turn off the engine", "Jump out of the vehicle"],
-        input: "false",
-        explanation: "",
-        correctAnswer: "Pump the brakes, shift to neutral, and use handbrake",
-      },
-      {
-        question: "What is the maximum speed limit on expressways in the Philippines?",
-        img: "",
-        options: ["60 km/h", "80 km/h", "100 km/h", "120 km/h"],
-        input: "false",
-        explanation: "",
-        correctAnswer: "100 km/h",
-      },
-      {
-        question: "When turning at an intersection, what should you check first?",
-        img: "",
-        options: ["Your mirrors and blind spots", "Your fuel gauge", "Your dashboard lights", "Your horn"],
-        input: "false",
-        explanation: "",
-        correctAnswer: "Your mirrors and blind spots",
-      },
-      {
-        question: "What does a yellow and black striped barrier indicate?",
-        img: "",
-        options: ["Do not enter", "Pedestrian crossing", "Dangerous area", "Loading zone"],
-        input: "false",
-        explanation: "",
-        correctAnswer: "Do not enter",
-      },
-      {
-        question: "How often should you renew your driver's license in the Philippines?",
-        img: "",
-        options: ["Every year", "Every 2 years", "Every 3 years", "Every 5 years"],
-        input: "false",
-        explanation: "",
-        correctAnswer: "Every 3 years",
-      },
-      {
-        question: "What is the proper way to signal a right turn?",
-        img: "",
-        options: ["Arm extended to the left", "Arm extended to the right", "Hand palm up extended upward", "Arm extended downward"],
-        input: "false",
-        explanation: "",
-        correctAnswer: "Hand palm up extended upward",
-      },
-      {
-        question: "When should seat belts be worn in a vehicle?",
-        img: "",
-        options: ["Only on highways", "Only for children", "Always while the vehicle is in motion", "Only in bad weather"],
-        input: "false",
-        explanation: "",
-        correctAnswer: "Always while the vehicle is in motion",
-      },
-      {
-        question: "What is the proper action when approaching a school zone?",
-        img: "",
-        options: ["Speed up", "Maintain speed", "Reduce speed and be alert", "Honk loudly"],
-        input: "false",
-        explanation: "",
-        correctAnswer: "Reduce speed and be alert",
-      },
-      {
-        question: "What does the triangular red and white sign indicate?",
-        img: "",
-        options: ["Warning sign", "Stop sign", "Speed limit", "Mandatory instruction"],
-        input: "false",
-        explanation: "",
-        correctAnswer: "Warning sign",
-      },
-    ];
-    
-  </script>
-  <script src="../scripts/script.js"></script>
 </body>
+<script>
+    const questions = [
+        {
+            "question": "What sign will constitute an offense if it will be disregarded?",
+            "img": "",
+            "options": [
+                "Regulatory sign",
+                "Warning sign",
+                "Informative sign"
+            ],
+            "input": "false",
+            "explanation": "",
+            "correctAnswer": "Regulatory sign"
+        },
+        {
+            "question": "A flashing green light means:",
+            "img": "",
+            "options": [
+                "full stop",
+                "proceed with caution",
+                "slow down and be ready to stop where a pedestrian cross the street"
+            ],
+            "input": "false",
+            "explanation": "",
+            "correctAnswer": "proceed with caution"
+        },
+        {
+            "question": "What does this traffic sign means?",
+            "img": "../quiz_images/lto_exam/image_976ca0.png",
+            "options": [
+                "Pedestrian crossing",
+                "Starting point for walking",
+                "Traffic light signals ahead"
+            ],
+            "input": "false",
+            "explanation": "",
+            "correctAnswer": "Traffic light signals ahead"
+        },
+        {
+            "question": "A pedestrian runs across the street when you are about to move off from a red light. What should you do?",
+            "img": "",
+            "options": [
+                "Blow horn once and allow the pedestrian to cross",
+                "Wait until the pedestrian crossed",
+                "Expect the pedestrian to walk back"
+            ],
+            "input": "false",
+            "explanation": "",
+            "correctAnswer": "Wait until the pedestrian crossed"
+        },
+        {
+            "question": "A driver while on a highway shall yield the right-of-way to:",
+            "img": "../quiz_images/lto_exam/image_976480.png",
+            "options": [
+                "pedestrians crossing within a crosswalk",
+                "pedestrians crossing at an intersection where the movement of traffic is being regulated by a traffic enforcer",
+                "vehicles about to enter the highway"
+            ],
+            "input": "false",
+            "explanation": "",
+            "correctAnswer": "pedestrians crossing within a crosswalk"
+        },
+        {
+            "question": "Among the list, who are exempted from speed limits?",
+            "img": "",
+            "options": [
+                "Drivers evading apprehension",
+                "Doctors or their drivers going to an emergency",
+                "Drivers of high ranking officials of the government"
+            ],
+            "input": "false",
+            "explanation": "",
+            "correctAnswer": "Doctors or their drivers going to an emergency"
+        },
+        {
+            "question": "When do you need to switch on your turn signal?",
+            "img": "",
+            "options": [
+                "After turning",
+                "While turning",
+                "Before turning"
+            ],
+            "input": "false",
+            "explanation": "",
+            "correctAnswer": "Before turning"
+        },
+        {
+            "question": "What is the maximum penalty for driving under the influence of liquor or prohibited drugs?",
+            "img": "",
+            "options": [
+                "6 months suspension",
+                "1 year suspension",
+                "Perpetual revocation of license"
+            ],
+            "input": "false",
+            "explanation": "",
+            "correctAnswer": "Perpetual revocation of license"
+        },
+        {
+        "question": "If the brake light of the vehicle in front of you lights up, you should:",
+        "img": "",
+        "options": [
+            "prepare to brake",
+            "press the horn",
+            "turn right or left"
+        ],
+        "input": "false",
+        "explanation": "",
+        "correctAnswer": "prepare to brake"
+        },
+        {
+        "question": "The primary objective of looking ahead while driving is:",
+        "img": "",
+        "options": [
+            "to check for the presence of traffic enforcers",
+            "to check the traffic ahead and changes of road condition",
+            "to check for road crash"
+        ],
+        "input": "false",
+        "explanation": "",
+        "correctAnswer": "to check the traffic ahead and changes of road condition"
+        },
+        {
+        "question": "What is the meaning of this traffic light?",
+        "img": "../quiz_images/lto_exam/image_090630.png",
+        "options": [
+            "Prepare to stop",
+            "Stop if the red light comes",
+            "Stop if necessary"
+        ],
+        "input": "false",
+        "explanation": "",
+        "correctAnswer": "Prepare to stop"
+        },
+        {
+        "question": "You are planning a long trip. Do you need to plan rest stops?",
+        "img": "",
+        "options": [
+            "No, you will arrive to your destination faster",
+            "No, only fuel stops will be needed",
+            "Yes, regular stops help avoid mental and physical fatigue"
+        ],
+        "input": "false",
+        "explanation": "",
+        "correctAnswer": "Yes, regular stops help avoid mental and physical fatigue"
+        },
+{
+  "question": "During period of illness, your ability to drive may be impaired. You must:",
+  "img": "",
+  "options": [
+    "only take smaller doses of any medicine at all times to ensure safety",
+    "see your doctor each time before you drive, especially for long trips",
+    "be physically and mentally fit and do not drive after taking medicine"
+  ],
+  "input": "false",
+  "explanation": "",
+  "correctAnswer": "be physically and mentally fit and do not drive after taking medicine"
+},
+{
+  "question": "Under R.A. 10666 also known as Children's Safety on Motorcycle Act, the child must grasp the rider's waist, can step and rest his/her feet comfortably on the foot peg, and ______________.",
+  "img": "",
+  "options": [
+    "he/she must be at least five (5) feet in height",
+    "he/she must wear standard protective helmet",
+    "he/she must have parent's consent"
+  ],
+  "input": "false",
+  "explanation": "",
+  "correctAnswer": "he/she must wear standard protective helmet"
+},
+{
+  "question": "A blinking yellow traffic light means?",
+  "img": "",
+  "options": [
+    "Slow down and proceed if there is no danger",
+    "Wait for the green light",
+    "Stop and wait for the traffic light to change"
+  ],
+  "input": "false",
+  "explanation": "",
+  "correctAnswer": "Slow down and proceed if there is no danger"
+},
+{
+  "question": "When do you need to check your engine oil level?",
+  "img": "",
+  "options": [
+    "When the engine is hot",
+    "When the engine is running",
+    "When the engine is cold"
+  ],
+  "input": "false",
+  "explanation": "",
+  "correctAnswer": "When the engine is cold"
+},
+[
+  {
+    "question": "What sign will constitute an offense if it will be disregarded?",
+    "img": "",
+    "options": [
+      "Regulatory sign",
+      "Warning sign",
+      "Informative sign"
+    ],
+    "input": "false",
+    "explanation": "",
+    "correctAnswer": "Regulatory sign"
+  },
+  {
+    "question": "A flashing green light means:",
+    "img": "",
+    "options": [
+      "full stop",
+      "proceed with caution",
+      "slow down and be ready to stop where a pedestrian cross the street"
+    ],
+    "input": "false",
+    "explanation": "",
+    "correctAnswer": "slow down and be ready to stop where a pedestrian cross the street"
+  },
+  {
+    "question": "What does this traffic sign means?",
+    "img": "",
+    "options": [
+      "Pedestrian crossing",
+      "Starting point for walking",
+      "Traffic light signals ahead"
+    ],
+    "input": "false",
+    "explanation": "",
+    "correctAnswer": "Traffic light signals ahead"
+  },
+  {
+    "question": "A pedestrian runs across the street when you are about to move off from a red light. What should you do?",
+    "img": "",
+    "options": [
+      "Blow horn once and allow the pedestrian to cross",
+      "Wait until the pedestrian crossed",
+      "Expect the pedestrian to walk back"
+    ],
+    "input": "false",
+    "explanation": "",
+    "correctAnswer": "Wait until the pedestrian crossed"
+  },
+  {
+    "question": "Yellow box pavement marking is painted within intersections where no vehicle is allowed to __________.",
+    "img": "",
+    "options": [
+      "pass",
+      "blow horn",
+      "stop"
+    ],
+    "input": "false",
+    "explanation": "",
+    "correctAnswer": "stop"
+  },
+  {
+    "question": "What should the driver do if he/she is already within the intersection when the yellow traffic light comes?",
+    "img": "",
+    "options": [
+      "Slow down to allow other vehicles to cross",
+      "Stop automatically on the road",
+      "The driver may continue driving with caution"
+    ],
+    "input": "false",
+    "explanation": "",
+    "correctAnswer": "The driver may continue driving with caution"
+  },
+  {
+  "question": "Why are rumble strips installed across the road?",
+  "img": "",
+  "options": [
+    "To help you keep the correct separation distance",
+    "To help you choose the correct lane",
+    "To make you alert and aware of your speed"
+  ],
+  "input": "false",
+  "explanation": "",
+  "correctAnswer": "To make you alert and aware of your speed"
+},
+{
+  "question": "Which one is a mandate of LTO?",
+  "img": "",
+  "options": [
+    "Issue certificate of emission compliance",
+    "Register roadworthy and emission compliant motor vehicles",
+    "Issue certificate of public convenience"
+  ],
+  "input": "false",
+  "explanation": "",
+  "correctAnswer": "Register roadworthy and emission compliant motor vehicles"
+},
+{
+  "question": "When a driver sees the yellow light signal changes to red, a vehicle is already in the intersection to turn left or right may __________.",
+  "img": "",
+  "options": [
+    "slow down to allow other vehicles to proceed",
+    "stop automatically on the road",
+    "continue to proceed through the intersection even if the light on the signal to the left / right is red"
+  ],
+  "input": "false",
+  "explanation": "",
+  "correctAnswer": "continue to proceed through the intersection even if the light on the signal to the left / right is red"
+},
+{
+  "question": "Motorcycle riders must exercise safety and care at all times. To do so, they are required to wear:",
+  "img": "",
+  "options": [
+    "helmets intended for construction works",
+    "standard protective helmets",
+    "a policeman cap or gloves"
+  ],
+  "input": "false",
+  "explanation": "",
+  "correctAnswer": "standard protective helmets"
+},
+{
+  "question": "Where would you see this sign?",
+  "img": "../quiz_images/lto_exam/image_092315.png",
+  "options": [
+    "At the side of the road",
+    "At playground areas",
+    "School pedestrian crossing"
+  ],
+  "input": "false",
+  "explanation": "",
+  "correctAnswer": "School pedestrian crossing"
+},
+{
+  "question": "How can you avoid wasting fuel?",
+  "img": "",
+  "options": [
+    "By filling up the saddle and top box",
+    "By servicing your vehicle less regularly",
+    "By having your vehicle properly serviced and maintained"
+  ],
+  "input": "false",
+  "explanation": "Proper vehicle maintenance, such as regular oil changes, air filter replacements, and ensuring correct tire pressure, optimizes engine efficiency and reduces fuel consumption. Adding extra weight to storage boxes or neglecting service would actually decrease fuel economy.",
+  "correctAnswer": "By having your vehicle properly serviced and maintained"
+}
+]
+    ];
+
+</script>
+<script src="../scripts/script.js"></script>
+</body>
+
 </html>
