@@ -2,420 +2,801 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="../images/icon-logo.png" type="image/png" />
-    <link rel="manifest" href="../manifest.json" />
-    <link rel="stylesheet" href="../styles/style.css" />
-    <title>Quiz App By Jerome</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="../images/icon-logo.png" type="image/png" />
+  <link rel="manifest" href="../manifest.json" />
+  <link rel="stylesheet" href="../styles/style.css" />
+  <title>Quiz App By Jerome</title>
 </head>
 
 <body class="flex-col w-100">
-    <nav class="flex-col w-100 bg-white">
-        <div class="max-w-768 flex-row row-center p-1 border-cup-gray">
-            <img class="h-2pt5 me-1" src="../images/icon-quiz.png" alt="" />
-            <span>LTO Exam Reviewer</span>
-            <a href="../index.html" class="ms-auto h-2pt5"><img class="h-100" src="../images/icon-home.png"
-                    alt="" /></a>
-        </div>
-    </nav>
+  <nav class="flex-col w-100 bg-white">
+    <div class="max-w-768 flex-row row-center p-1 border-cup-gray">
+      <img class="h-2pt5 me-1" src="../images/icon-quiz.png" alt="" />
+      <span>LTO Exam Reviewer</span>
+      <a href="../index.html" class="ms-auto h-2pt5"><img class="h-100" src="../images/icon-home.png" alt="" /></a>
+    </div>
+  </nav>
 
-    <main class="flex-col mt-1 max-w-768 border-gray">
-        <section class="section cover">
-            <header>
-                <p>LTO EXAM REVIEWER</p>
-                <p id="p-total-question"></p>
-            </header>
-            <box>
-                <img id="btn-play" src="../images/icon-play.png" alt="" />
-            </box>
-        </section>
+  <main class="flex-col mt-1 max-w-768 border-gray">
+    <section class="section cover">
+      <header>
+        <p>LTO EXAM REVIEWER</p>
+        <p id="p-total-question"></p>
+      </header>
+      <box>
+        <img id="btn-play" src="../images/icon-play.png" alt="" />
+      </box>
+    </section>
 
-        <section class="section">
-            <box class="nav-question">
-                <p id="progress">
-                    <!-- progress here -->
-                </p>
-                <box id="status-answer"></box>
-                <div id="btn-skip" class="button">SKIP</div>
-            </box>
+    <section class="section">
+      <box class="nav-question">
+        <p id="progress">
+          <!-- progress here -->
+        </p>
+        <box id="status-answer"></box>
+        <div id="btn-skip" class="button">SKIP</div>
+      </box>
 
-            <p id="question" class="p-question">
-                <!-- question here -->
-            </p>
+      <p id="question" class="p-question">
+        <!-- question here -->
+      </p>
 
-            <p id="explanation" class="p-explanation">
-                <!-- explanation -->
-            </p>
+      <p id="explanation" class="p-explanation">
+        <!-- explanation -->
+      </p>
 
-            <div class="flex-col">
-                <!-- image here -->
-                <img id="img" src="" alt="" />
-            </div>
+      <div class="flex-col">
+        <!-- image here -->
+        <img id="img" src="" alt="" />
+      </div>
 
-            <ul id="options" class="options p-1">
-                <!-- Options will be populated here -->
-            </ul>
+      <ul id="options" class="options p-1">
+        <!-- Options will be populated here -->
+      </ul>
 
-            <input type="text" id="input-answer" placeholder="your answer here..." autocomplete="off" />
+      <input type="text" id="input-answer" placeholder="your answer here..." autocomplete="off" />
 
-            <box class="nav-question">
-                <div id="btn-answer" class="button">Answer</div>
-                <div id="btn-next" class="button">Next</div>
-            </box>
-        </section>
+      <box class="nav-question">
+        <div id="btn-answer" class="button">Answer</div>
+        <div id="btn-next" class="button">Next</div>
+      </box>
+    </section>
 
-        <section class="section result">
-            <p class="title">SCORE</p>
-            <p id="score" class="score"></p>
-            <box class="box-btn-replay">
-                <img id="btn-replay" src="../images/icon-replay.png" alt="" />
-            </box>
-        </section>
-    </main>
+    <section class="section result">
+      <p class="title">SCORE</p>
+      <p id="score" class="score"></p>
+      <box class="box-btn-replay">
+        <img id="btn-replay" src="../images/icon-replay.png" alt="" />
+      </box>
+    </section>
+  </main>
 </body>
 <script>
-    const questions = [
-        {
-            "question": "What sign will constitute an offense if it will be disregarded?",
-            "img": "",
-            "options": [
-                "Regulatory sign",
-                "Warning sign",
-                "Informative sign"
-            ],
-            "input": "false",
-            "explanation": "",
-            "correctAnswer": "Regulatory sign"
-        },
-        {
-            "question": "A flashing green light means:",
-            "img": "",
-            "options": [
-                "full stop",
-                "proceed with caution",
-                "slow down and be ready to stop where a pedestrian cross the street"
-            ],
-            "input": "false",
-            "explanation": "",
-            "correctAnswer": "proceed with caution"
-        },
-        {
-            "question": "What does this traffic sign means?",
-            "img": "../quiz_images/lto_exam/image_976ca0.png",
-            "options": [
-                "Pedestrian crossing",
-                "Starting point for walking",
-                "Traffic light signals ahead"
-            ],
-            "input": "false",
-            "explanation": "",
-            "correctAnswer": "Traffic light signals ahead"
-        },
-        {
-            "question": "A pedestrian runs across the street when you are about to move off from a red light. What should you do?",
-            "img": "",
-            "options": [
-                "Blow horn once and allow the pedestrian to cross",
-                "Wait until the pedestrian crossed",
-                "Expect the pedestrian to walk back"
-            ],
-            "input": "false",
-            "explanation": "",
-            "correctAnswer": "Wait until the pedestrian crossed"
-        },
-        {
-            "question": "A driver while on a highway shall yield the right-of-way to:",
-            "img": "../quiz_images/lto_exam/image_976480.png",
-            "options": [
-                "pedestrians crossing within a crosswalk",
-                "pedestrians crossing at an intersection where the movement of traffic is being regulated by a traffic enforcer",
-                "vehicles about to enter the highway"
-            ],
-            "input": "false",
-            "explanation": "",
-            "correctAnswer": "pedestrians crossing within a crosswalk"
-        },
-        {
-            "question": "Among the list, who are exempted from speed limits?",
-            "img": "",
-            "options": [
-                "Drivers evading apprehension",
-                "Doctors or their drivers going to an emergency",
-                "Drivers of high ranking officials of the government"
-            ],
-            "input": "false",
-            "explanation": "",
-            "correctAnswer": "Doctors or their drivers going to an emergency"
-        },
-        {
-            "question": "When do you need to switch on your turn signal?",
-            "img": "",
-            "options": [
-                "After turning",
-                "While turning",
-                "Before turning"
-            ],
-            "input": "false",
-            "explanation": "",
-            "correctAnswer": "Before turning"
-        },
-        {
-            "question": "What is the maximum penalty for driving under the influence of liquor or prohibited drugs?",
-            "img": "",
-            "options": [
-                "6 months suspension",
-                "1 year suspension",
-                "Perpetual revocation of license"
-            ],
-            "input": "false",
-            "explanation": "",
-            "correctAnswer": "Perpetual revocation of license"
-        },
-        {
-        "question": "If the brake light of the vehicle in front of you lights up, you should:",
-        "img": "",
-        "options": [
-            "prepare to brake",
-            "press the horn",
-            "turn right or left"
-        ],
-        "input": "false",
-        "explanation": "",
-        "correctAnswer": "prepare to brake"
-        },
-        {
-        "question": "The primary objective of looking ahead while driving is:",
-        "img": "",
-        "options": [
-            "to check for the presence of traffic enforcers",
-            "to check the traffic ahead and changes of road condition",
-            "to check for road crash"
-        ],
-        "input": "false",
-        "explanation": "",
-        "correctAnswer": "to check the traffic ahead and changes of road condition"
-        },
-        {
-        "question": "What is the meaning of this traffic light?",
-        "img": "../quiz_images/lto_exam/image_090630.png",
-        "options": [
-            "Prepare to stop",
-            "Stop if the red light comes",
-            "Stop if necessary"
-        ],
-        "input": "false",
-        "explanation": "",
-        "correctAnswer": "Prepare to stop"
-        },
-        {
-        "question": "You are planning a long trip. Do you need to plan rest stops?",
-        "img": "",
-        "options": [
-            "No, you will arrive to your destination faster",
-            "No, only fuel stops will be needed",
-            "Yes, regular stops help avoid mental and physical fatigue"
-        ],
-        "input": "false",
-        "explanation": "",
-        "correctAnswer": "Yes, regular stops help avoid mental and physical fatigue"
-        },
-{
-  "question": "During period of illness, your ability to drive may be impaired. You must:",
-  "img": "",
-  "options": [
-    "only take smaller doses of any medicine at all times to ensure safety",
-    "see your doctor each time before you drive, especially for long trips",
-    "be physically and mentally fit and do not drive after taking medicine"
-  ],
-  "input": "false",
-  "explanation": "",
-  "correctAnswer": "be physically and mentally fit and do not drive after taking medicine"
-},
-{
-  "question": "Under R.A. 10666 also known as Children's Safety on Motorcycle Act, the child must grasp the rider's waist, can step and rest his/her feet comfortably on the foot peg, and ______________.",
-  "img": "",
-  "options": [
-    "he/she must be at least five (5) feet in height",
-    "he/she must wear standard protective helmet",
-    "he/she must have parent's consent"
-  ],
-  "input": "false",
-  "explanation": "",
-  "correctAnswer": "he/she must wear standard protective helmet"
-},
-{
-  "question": "A blinking yellow traffic light means?",
-  "img": "",
-  "options": [
-    "Slow down and proceed if there is no danger",
-    "Wait for the green light",
-    "Stop and wait for the traffic light to change"
-  ],
-  "input": "false",
-  "explanation": "",
-  "correctAnswer": "Slow down and proceed if there is no danger"
-},
-{
-  "question": "When do you need to check your engine oil level?",
-  "img": "",
-  "options": [
-    "When the engine is hot",
-    "When the engine is running",
-    "When the engine is cold"
-  ],
-  "input": "false",
-  "explanation": "",
-  "correctAnswer": "When the engine is cold"
-},
-[
-  {
-    "question": "What sign will constitute an offense if it will be disregarded?",
-    "img": "",
-    "options": [
-      "Regulatory sign",
-      "Warning sign",
-      "Informative sign"
-    ],
-    "input": "false",
-    "explanation": "",
-    "correctAnswer": "Regulatory sign"
-  },
-  {
-    "question": "A flashing green light means:",
-    "img": "",
-    "options": [
-      "full stop",
-      "proceed with caution",
-      "slow down and be ready to stop where a pedestrian cross the street"
-    ],
-    "input": "false",
-    "explanation": "",
-    "correctAnswer": "slow down and be ready to stop where a pedestrian cross the street"
-  },
-  {
-    "question": "What does this traffic sign means?",
-    "img": "",
-    "options": [
-      "Pedestrian crossing",
-      "Starting point for walking",
-      "Traffic light signals ahead"
-    ],
-    "input": "false",
-    "explanation": "",
-    "correctAnswer": "Traffic light signals ahead"
-  },
-  {
-    "question": "A pedestrian runs across the street when you are about to move off from a red light. What should you do?",
-    "img": "",
-    "options": [
-      "Blow horn once and allow the pedestrian to cross",
-      "Wait until the pedestrian crossed",
-      "Expect the pedestrian to walk back"
-    ],
-    "input": "false",
-    "explanation": "",
-    "correctAnswer": "Wait until the pedestrian crossed"
-  },
-  {
-    "question": "Yellow box pavement marking is painted within intersections where no vehicle is allowed to __________.",
-    "img": "",
-    "options": [
-      "pass",
-      "blow horn",
-      "stop"
-    ],
-    "input": "false",
-    "explanation": "",
-    "correctAnswer": "stop"
-  },
-  {
-    "question": "What should the driver do if he/she is already within the intersection when the yellow traffic light comes?",
-    "img": "",
-    "options": [
-      "Slow down to allow other vehicles to cross",
-      "Stop automatically on the road",
-      "The driver may continue driving with caution"
-    ],
-    "input": "false",
-    "explanation": "",
-    "correctAnswer": "The driver may continue driving with caution"
-  },
-  {
-  "question": "Why are rumble strips installed across the road?",
-  "img": "",
-  "options": [
-    "To help you keep the correct separation distance",
-    "To help you choose the correct lane",
-    "To make you alert and aware of your speed"
-  ],
-  "input": "false",
-  "explanation": "",
-  "correctAnswer": "To make you alert and aware of your speed"
-},
-{
-  "question": "Which one is a mandate of LTO?",
-  "img": "",
-  "options": [
-    "Issue certificate of emission compliance",
-    "Register roadworthy and emission compliant motor vehicles",
-    "Issue certificate of public convenience"
-  ],
-  "input": "false",
-  "explanation": "",
-  "correctAnswer": "Register roadworthy and emission compliant motor vehicles"
-},
-{
-  "question": "When a driver sees the yellow light signal changes to red, a vehicle is already in the intersection to turn left or right may __________.",
-  "img": "",
-  "options": [
-    "slow down to allow other vehicles to proceed",
-    "stop automatically on the road",
-    "continue to proceed through the intersection even if the light on the signal to the left / right is red"
-  ],
-  "input": "false",
-  "explanation": "",
-  "correctAnswer": "continue to proceed through the intersection even if the light on the signal to the left / right is red"
-},
-{
-  "question": "Motorcycle riders must exercise safety and care at all times. To do so, they are required to wear:",
-  "img": "",
-  "options": [
-    "helmets intended for construction works",
-    "standard protective helmets",
-    "a policeman cap or gloves"
-  ],
-  "input": "false",
-  "explanation": "",
-  "correctAnswer": "standard protective helmets"
-},
-{
-  "question": "Where would you see this sign?",
-  "img": "../quiz_images/lto_exam/image_092315.png",
-  "options": [
-    "At the side of the road",
-    "At playground areas",
-    "School pedestrian crossing"
-  ],
-  "input": "false",
-  "explanation": "",
-  "correctAnswer": "School pedestrian crossing"
-},
-{
-  "question": "How can you avoid wasting fuel?",
-  "img": "",
-  "options": [
-    "By filling up the saddle and top box",
-    "By servicing your vehicle less regularly",
-    "By having your vehicle properly serviced and maintained"
-  ],
-  "input": "false",
-  "explanation": "Proper vehicle maintenance, such as regular oil changes, air filter replacements, and ensuring correct tire pressure, optimizes engine efficiency and reduces fuel consumption. Adding extra weight to storage boxes or neglecting service would actually decrease fuel economy.",
-  "correctAnswer": "By having your vehicle properly serviced and maintained"
-}
-]
-    ];
+  const questions = [
+    {
+      "question": "What sign will constitute an offense if it will be disregarded?",
+      "img": "",
+      "options": [
+        "Regulatory sign",
+        "Warning sign",
+        "Informative sign"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Regulatory sign"
+    },
+    {
+      "question": "A flashing green light means:",
+      "img": "",
+      "options": [
+        "full stop",
+        "proceed with caution",
+        "slow down and be ready to stop where a pedestrian cross the street"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "proceed with caution"
+    },
+    {
+      "question": "What does this traffic sign means?",
+      "img": "../quiz_images/lto_exam/image_976ca0.png",
+      "options": [
+        "Pedestrian crossing",
+        "Starting point for walking",
+        "Traffic light signals ahead"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Traffic light signals ahead"
+    },
+    {
+      "question": "A pedestrian runs across the street when you are about to move off from a red light. What should you do?",
+      "img": "",
+      "options": [
+        "Blow horn once and allow the pedestrian to cross",
+        "Wait until the pedestrian crossed",
+        "Expect the pedestrian to walk back"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Wait until the pedestrian crossed"
+    },
+    {
+      "question": "A driver while on a highway shall yield the right-of-way to:",
+      "img": "../quiz_images/lto_exam/image_976480.png",
+      "options": [
+        "pedestrians crossing within a crosswalk",
+        "pedestrians crossing at an intersection where the movement of traffic is being regulated by a traffic enforcer",
+        "vehicles about to enter the highway"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "pedestrians crossing within a crosswalk"
+    },
+    {
+      "question": "Among the list, who are exempted from speed limits?",
+      "img": "",
+      "options": [
+        "Drivers evading apprehension",
+        "Doctors or their drivers going to an emergency",
+        "Drivers of high ranking officials of the government"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Doctors or their drivers going to an emergency"
+    },
+    {
+      "question": "When do you need to switch on your turn signal?",
+      "img": "",
+      "options": [
+        "After turning",
+        "While turning",
+        "Before turning"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Before turning"
+    },
+    {
+      "question": "What is the maximum penalty for driving under the influence of liquor or prohibited drugs?",
+      "img": "",
+      "options": [
+        "6 months suspension",
+        "1 year suspension",
+        "Perpetual revocation of license"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Perpetual revocation of license"
+    },
+    {
+      "question": "If the brake light of the vehicle in front of you lights up, you should:",
+      "img": "",
+      "options": [
+        "prepare to brake",
+        "press the horn",
+        "turn right or left"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "prepare to brake"
+    },
+    {
+      "question": "The primary objective of looking ahead while driving is:",
+      "img": "",
+      "options": [
+        "to check for the presence of traffic enforcers",
+        "to check the traffic ahead and changes of road condition",
+        "to check for road crash"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "to check the traffic ahead and changes of road condition"
+    },
+    {
+      "question": "What is the meaning of this traffic light?",
+      "img": "../quiz_images/lto_exam/image_090630.png",
+      "options": [
+        "Prepare to stop",
+        "Stop if the red light comes",
+        "Stop if necessary"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Prepare to stop"
+    },
+    {
+      "question": "You are planning a long trip. Do you need to plan rest stops?",
+      "img": "",
+      "options": [
+        "No, you will arrive to your destination faster",
+        "No, only fuel stops will be needed",
+        "Yes, regular stops help avoid mental and physical fatigue"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Yes, regular stops help avoid mental and physical fatigue"
+    },
+    {
+      "question": "During period of illness, your ability to drive may be impaired. You must:",
+      "img": "",
+      "options": [
+        "only take smaller doses of any medicine at all times to ensure safety",
+        "see your doctor each time before you drive, especially for long trips",
+        "be physically and mentally fit and do not drive after taking medicine"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "be physically and mentally fit and do not drive after taking medicine"
+    },
+    {
+      "question": "Under R.A. 10666 also known as Children's Safety on Motorcycle Act, the child must grasp the rider's waist, can step and rest his/her feet comfortably on the foot peg, and ______________.",
+      "img": "",
+      "options": [
+        "he/she must be at least five (5) feet in height",
+        "he/she must wear standard protective helmet",
+        "he/she must have parent's consent"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "he/she must wear standard protective helmet"
+    },
+    {
+      "question": "A blinking yellow traffic light means?",
+      "img": "",
+      "options": [
+        "Slow down and proceed if there is no danger",
+        "Wait for the green light",
+        "Stop and wait for the traffic light to change"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Slow down and proceed if there is no danger"
+    },
+    {
+      "question": "When do you need to check your engine oil level?",
+      "img": "",
+      "options": [
+        "When the engine is hot",
+        "When the engine is running",
+        "When the engine is cold"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "When the engine is cold"
+    },
+    {
+      "question": "Yellow box pavement marking is painted within intersections where no vehicle is allowed to __________.",
+      "img": "",
+      "options": [
+        "pass",
+        "blow horn",
+        "stop"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "stop"
+    },
+    {
+      "question": "What should the driver do if he/she is already within the intersection when the yellow traffic light comes?",
+      "img": "",
+      "options": [
+        "Slow down to allow other vehicles to cross",
+        "Stop automatically on the road",
+        "The driver may continue driving with caution"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "The driver may continue driving with caution"
+    },
+    {
+      "question": "Why are rumble strips installed across the road?",
+      "img": "",
+      "options": [
+        "To help you keep the correct separation distance",
+        "To help you choose the correct lane",
+        "To make you alert and aware of your speed"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "To make you alert and aware of your speed"
+    },
+    {
+      "question": "Which one is a mandate of LTO?",
+      "img": "",
+      "options": [
+        "Issue certificate of emission compliance",
+        "Register roadworthy and emission compliant motor vehicles",
+        "Issue certificate of public convenience"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Register roadworthy and emission compliant motor vehicles"
+    },
+    {
+      "question": "When a driver sees the yellow light signal changes to red, a vehicle is already in the intersection to turn left or right may __________.",
+      "img": "",
+      "options": [
+        "slow down to allow other vehicles to proceed",
+        "stop automatically on the road",
+        "continue to proceed through the intersection even if the light on the signal to the left / right is red"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "continue to proceed through the intersection even if the light on the signal to the left / right is red"
+    },
+    {
+      "question": "Motorcycle riders must exercise safety and care at all times. To do so, they are required to wear:",
+      "img": "",
+      "options": [
+        "helmets intended for construction works",
+        "standard protective helmets",
+        "a policeman cap or gloves"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "standard protective helmets"
+    },
+    {
+      "question": "Where would you see this sign?",
+      "img": "../quiz_images/lto_exam/image_092315.png",
+      "options": [
+        "At the side of the road",
+        "At playground areas",
+        "School pedestrian crossing"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "School pedestrian crossing"
+    },
+    {
+      "question": "How can you avoid wasting fuel?",
+      "img": "",
+      "options": [
+        "By filling up the saddle and top box",
+        "By servicing your vehicle less regularly",
+        "By having your vehicle properly serviced and maintained"
+      ],
+      "input": "false",
+      "explanation": "Proper vehicle maintenance, such as regular oil changes, air filter replacements, and ensuring correct tire pressure, optimizes engine efficiency and reduces fuel consumption. Adding extra weight to storage boxes or neglecting service would actually decrease fuel economy.",
+      "correctAnswer": "By having your vehicle properly serviced and maintained"
+    },
+    {
+      "question": "What does this traffic sign means?",
+      "img": "../quiz_images/lto_exam/image_093801.png",
+      "options": [
+        "Stop",
+        "Do not enter",
+        "No entry for all types of vehicles"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Stop"
+    },
+    {
+      "question": "In case a road crash involving physical injury, the first duty of the involved driver is:",
+      "img": "",
+      "options": [
+        "attend to the injured person and call for help",
+        "report the incident to a hospital",
+        "report the incident to the nearest police station"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "attend to the injured person and call for help"
+    },
+    {
+      "question": "You service your own vehicle. How should you get rid of the old engine oil?",
+      "img": "",
+      "options": [
+        "Tip it into a hole in the ground",
+        "Dispose it properly",
+        "Put it into your dust bin"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Dispose it properly"
+    },
+    {
+      "question": "What is the maximum and allowable width of the saddle box or bag?",
+      "img": "",
+      "options": [
+        "14 inches from both sides",
+        "16 inches from both sides",
+        "18 inches from both sides"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "14 inches from both sides"
+    },
+    {
+      "question": "When more than one driver arrived at a four-way stop, who has the right-of-way?",
+      "img": "",
+      "options": [
+        "The driver who arrived first should be the first to go",
+        "The last driver to arrive should be the first to go",
+        "The driver of the larger vehicle should be the first to go"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "The driver who arrived first should be the first to go"
+    },
+    {
+      "question": "How much is the imposed fine and penalty for the first offense if you violate the R.A. 10666 on Safety of Children Aboard Motorcycle?",
+      "img": "",
+      "options": [
+        "Php 1,500",
+        "Php 3,000",
+        "Php 5,000"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Php 3,000"
+    },
+    {
+      "question": "How does alcohol affect you?",
+      "img": "",
+      "options": [
+        "It speeds up your reaction",
+        "It improves your coordination",
+        "It reduces your concentration"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "It reduces your concentration"
+    },
+    {
+      "question": "What is the meaning of “beating the red light”?",
+      "img": "",
+      "options": [
+        "Driving faster upon seeing a yellow/amber light",
+        "Stopping on the green light",
+        "Stopping suddenly"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Driving faster upon seeing a yellow/amber light"
+    },
+    {
+      "question": "Under R.A. 10666, which of the following prohibits the rider to convey a child?",
+      "img": "",
+      "options": [
+        "Where a speed limit of more than 40 kph is imposed",
+        "Where a speed limit of more than 50 kph is imposed",
+        "Where a speed limit of more than 60 kph is imposed"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Where a speed limit of more than 60 kph is imposed"
+    },
+    {
+      "question": "What should you do whenever you are driving on a highway with a lot of potholes?",
+      "img": "",
+      "options": [
+        "Increase speed",
+        "Decrease speed",
+        "Always change lane"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Decrease speed"
+    },
+    {
+      "question": "Using a backbone motorcycle, which stand do you need to use when parking overnight?",
+      "img": "",
+      "options": [
+        "Side stand",
+        "Cross stand",
+        "Center stand"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Center stand"
+    },
+    {
+      "question": "What does this traffic sign means?",
+      "img": "../quiz_images/lto_exam/image_094808.png",
+      "options": [
+        "Dangerous right curve",
+        "Dangerous left curve",
+        "Dangerous curve"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Dangerous right curve"
+    },
+    {
+      "question": "Ahead of you is a vehicle with a flashing yellow light. This means it is:",
+      "img": "",
+      "options": [
+        "broken down vehicle",
+        "slow moving",
+        "a doctor’s car"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "slow moving"
+    },
+    {
+      "question": "What should you do if the road is wet?",
+      "img": "",
+      "options": [
+        "Increase your speed",
+        "Keep on swerving",
+        "Slow down"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Slow down"
+    },
+    {
+      "question": "What comes next after this traffic light?",
+      "img": "../quiz_images/lto_exam/image_095101.png",
+      "options": [
+        "Blue",
+        "Green",
+        "Red"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Red"
+    },
+    {
+      "question": "Which of the traffic lights requires you to prepare for a stop?",
+      "img": "",
+      "options": [
+        "Yellow/Amber",
+        "Green",
+        "Red"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Yellow/Amber"
+    },
+    {
+      "question": "A blue traffic light means:",
+      "img": "",
+      "options": [
+        "Go",
+        "Stop",
+        "None, there are no blue traffic lights"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "None, there are no blue traffic lights"
+    },
+    {
+      "question": "What does this traffic sign means?",
+      "img": "../quiz_images/lto_exam/image_100102.png",
+      "options": [
+        "No cars",
+        "Cars only",
+        "No motorcycles"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "No motorcycles"
+    },
+    {
+      "question": "You are entering an area of roadworks where there is a temporary “No Overtaking” sign. You must:",
+      "img": "",
+      "options": [
+        "obey the sign only during rush hour",
+        "follow the sign as advised",
+        "obey only when a traffic enforcer is on duty"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "follow the sign as advised"
+    },
+    {
+      "question": "How much is the penalty for the second offenses of R.A. 10666 Children’s Safety on Motorcycle Act of 2015?",
+      "img": "",
+      "options": [
+        "Php 1,000.00",
+        "Php 5,000.00",
+        "Php 7,000.00"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Php 5,000.00"
+    },
+    {
+      "question": "What should you do when you approach a roadwork with a temporary maximum speed limit sign?",
+      "img": "",
+      "options": [
+        "Comply with the sign at all times",
+        "Comply with the sign during the day",
+        "Comply with the sign when the lanes are narrow"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Comply with the sign at all times"
+    },
+    {
+      "question": "A “No Parking” sign means:",
+      "img": "",
+      "options": [
+        "a motorist can park provided that he/she is driving a private vehicle",
+        "a motorist cannot do a temporary stop otherwise he/she will be apprehended for disregarding traffic sign",
+        "a motorist can make a temporary stop, within a reasonable time to load or unload but must not obstruct other vehicles"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "a motorist can make a temporary stop, within a reasonable time to load or unload but must not obstruct other vehicles"
+    },
+    {
+      "question": "You approach an intersection with malfunctioning traffic signals. What should you do?",
+      "img": "",
+      "options": [
+        "Treat the intersection as if there were “Stop” signs in all directions",
+        "Increase your speed because the intersection is clear",
+        "Slow down and wait for a traffic enforcer"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Treat the intersection as if there were “Stop” signs in all directions"
+    },
+    {
+      "question": "If you encounter emergency vehicles such as an ambulance, a fire truck and police cars on the road with sirens on, what should you do?",
+      "img": "",
+      "options": [
+        "Ignore them since you have no business interfering with their jobs",
+        "Give way by pulling in to the left or right side of the road depending on the circumstances",
+        "Obstruct their passage and never allow them to pass through"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Give way by pulling in to the left or right side of the road depending on the circumstances"
+    },
+    {
+      "question": "What does this traffic sign means?",
+      "img": "../quiz_images/lto_exam/image_100803.png",
+      "options": [
+        "No parking",
+        "No overtaking",
+        "No entry on all types of vehicles"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "No overtaking"
+    },
+    {
+      "question": "It is the car’s turn and brake signals have failed, so the driver is using hand gestures to signal instead. What is the driver’s intention?",
+      "img": "../quiz_images/lto_exam/image_101004.png",
+      "options": [
+        "Increase speed",
+        "Turn left",
+        "Turn right"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Turn right"
+    },
+    {
+      "question": "What does this traffic sign means?",
+      "img": "../quiz_images/lto_exam/image_101105.png",
+      "options": [
+        "No swerving",
+        "Change lane",
+        "Dangerous curve ahead"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Dangerous curve ahead"
+    },
+    {
+      "question": "What is the authority granted by LTO to a person who desires to learn to operate a motor vehicle valid for a period of one year?",
+      "img": "",
+      "options": [
+        "Non-Professional Driver’s License",
+        "Professional Driver’s License",
+        "Student Driver’s Permit"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Student Driver’s Permit"
+    },
+    {
+      "question": "Signs that are round, inverted triangle or octagonal and with red colored border are called:",
+      "img": "",
+      "options": [
+        "regulatory signs",
+        "warning signs",
+        "informative signs"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "regulatory signs"
+    },
+    {
+      "question": "You arrive at a crossroad. You want to turn left, and you have a green arrow light. Can you proceed?",
+      "img": "",
+      "options": [
+        "Yes, you can turn left, as this is a “protected” turn where no other cars are allowed to enter the intersection",
+        "No, you cannot turn left unless you have a green left pointing arrow",
+        "Yes, you can turn left, however you may still need to yield to pedestrians and incoming traffic"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Yes, you can turn left, as this is a “protected” turn where no other cars are allowed to enter the intersection"
+    },
+    {
+      "question": "What should be done first before changing lanes?",
+      "img": "",
+      "options": [
+        "Make signal",
+        "Check the traffic ahead",
+        "Check mirrors for traffic behind"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Make signal"
+    },
+    {
+      "question": "When is it legal to use the shoulder of a road when overtaking another vehicle?",
+      "img": "",
+      "options": [
+        "When the vehicle in front of you is making a right turn",
+        "When the vehicle in front of you is visibly signaling to make a left turn",
+        "During normal circumstances, you are not legally allowed to pass using the shoulder of a road"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "During normal circumstances, you are not legally allowed to pass using the shoulder of a road"
+    },
+    {
+      "question": "This action can cause you to skid and lose control when you make an abrupt move especially on a wet and possibly slippery road.",
+      "img": "",
+      "options": [
+        "Improper braking",
+        "Turning too slow",
+        "Accelerating too slow"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Improper braking"
+    },
+    {
+      "question": "To help reduce air pollution using your brake, what should you do?",
+      "img": "",
+      "options": [
+        "Brake properly",
+        "Brake frequently",
+        "Brake suddenly"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "Brake properly"
+    },
+    {
+      "question": "What does this traffic sign means?",
+      "img": "../quiz_images/lto_exam/image_102206.png",
+      "options": [
+        "No U-turn",
+        "Dangerous left bend",
+        "Dangerous right bend"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "No U-turn"
+    },
+    {
+      "question": "You should not use a mobile phone while riding a motorcycle because:",
+      "img": "",
+      "options": [
+        "reception is poor when the engine is running",
+        "it will affect your vehicle’s electronic system",
+        "it is prohibited by law and it distracts your attention while driving"
+      ],
+      "input": "false",
+      "explanation": "",
+      "correctAnswer": "it is prohibited by law and it distracts your attention while driving"
+    }
+  ];
 
 </script>
 <script src="../scripts/script.js"></script>
