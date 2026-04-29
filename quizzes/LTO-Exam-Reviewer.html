@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../images/icon-logo.png" type="image/png" />
+    <link rel="manifest" href="../manifest.json" />
+    <link rel="stylesheet" href="../styles/style.css" />
+    <title>Quiz App By Jerome</title>
+  </head>
+  <body class="flex-col w-100">
+    <nav class="flex-col w-100 bg-white">
+      <div class="max-w-768 flex-row row-center p-1 border-cup-gray">
+        <img class="h-2pt5 me-1" src="../images/icon-quiz.png" alt="" />
+        <span>LTO Exam Reviewer</span>
+        <a href="../index.html" class="ms-auto h-2pt5"><img class="h-100" src="../images/icon-home.png" alt=""/></a>
+      </div>
+    </nav>
+
+    <main class="flex-col mt-1 max-w-768 border-gray">
+      <section class="section cover">
+        <header>
+          <p>LTO EXAM REVIEWER</p>
+          <p id="p-total-question"></p>
+        </header>
+        <box>
+          <img id="btn-play" src="../images/icon-play.png" alt="" />
+        </box>
+      </section>
+
+      <section class="section">
+        <box class="nav-question">
+          <p id="progress">
+            <!-- progress here -->
+          </p>
+          <box id="status-answer"></box>
+          <div id="btn-skip" class="button">SKIP</div>
+        </box>
+
+        <p id="question" class="p-question">
+          <!-- question here -->
+        </p>
+
+        <p id="explanation" class="p-explanation">
+          <!-- explanation -->
+        </p>
+
+        <div class="flex-col">
+          <!-- image here -->
+          <img id="img" src="" alt="" />
+        </div>
+
+        <ul id="options" class="options p-1">
+          <!-- Options will be populated here -->
+        </ul>
+
+        <input
+          type="text"
+          id="input-answer"
+          placeholder="your answer here..."
+          autocomplete="off"
+        />
+
+        <box class="nav-question">
+          <div id="btn-answer" class="button">Answer</div>
+          <div id="btn-next" class="button">Next</div>
+        </box>
+      </section>
+
+      <section class="section result">
+        <p class="title">SCORE</p>
+        <p id="score" class="score"></p>
+        <box class="box-btn-replay">
+          <img id="btn-replay" src="../images/icon-replay.png" alt="" />
+        </box>
+      </section>
+    </main>
+  </body>
+  <script>
+    const questions = [
+      {
+        question: "What does LTO stand for?",
+        img: "",
+        options: ["Land Transportation Office", "Long Term Operation", "Light Traffic Officer", "Legal Traffic Ordinance"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Land Transportation Office",
+      },
+      {
+        question: "What is the minimum age requirement to obtain a driver's license in the Philippines?",
+        img: "",
+        options: ["16 years old", "17 years old", "18 years old", "21 years old"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "17 years old",
+      },
+      {
+        question: "What does a solid white line on the road mean?",
+        img: "",
+        options: ["Do not cross", "You may cross when safe", "Speed limit zone", "Parking area"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Do not cross",
+      },
+      {
+        question: "What is the meaning of a yellow traffic light?",
+        img: "",
+        options: ["Proceed with caution", "Stop immediately", "Speed up", "Honk your horn"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Proceed with caution",
+      },
+      {
+        question: "In the Philippines, what is the blood alcohol content (BAC) limit for drivers?",
+        img: "",
+        options: ["0.03%", "0.05%", "0.08%", "0.10%"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "0.05%",
+      },
+      {
+        question: "What should you do when you approach a red traffic light?",
+        img: "",
+        options: ["Stop before the stop line", "Slow down and cross if clear", "Honk and proceed", "Speed through quickly"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Stop before the stop line",
+      },
+      {
+        question: "What is the speed limit in residential areas in the Philippines?",
+        img: "",
+        options: ["20 km/h", "30 km/h", "40 km/h", "50 km/h"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "20 km/h",
+      },
+      {
+        question: "What does a broken white line indicate on a roadway?",
+        img: "",
+        options: ["Do not cross", "You may cross when safe", "One-way traffic", "Pedestrian crossing"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "You may cross when safe",
+      },
+      {
+        question: "How far should you maintain from the vehicle in front when driving?",
+        img: "",
+        options: ["At least 1 meter", "At least 2 meters", "A safe following distance (one second rule)", "No specific distance required"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "A safe following distance (one second rule)",
+      },
+      {
+        question: "What is the proper hand signal for turning left?",
+        img: "",
+        options: ["Arm extended to the left", "Arm extended upward", "Hand pointing forward", "Arm extended to the right"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Arm extended to the left",
+      },
+      {
+        question: "When should you use your car horn?",
+        img: "",
+        options: ["Whenever you want to", "To warn others of danger or your presence", "To show anger or impatience", "Never use it"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "To warn others of danger or your presence",
+      },
+      {
+        question: "What do you do if your vehicle's brakes fail?",
+        img: "",
+        options: ["Panic and honk", "Pump the brakes, shift to neutral, and use handbrake", "Turn off the engine", "Jump out of the vehicle"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Pump the brakes, shift to neutral, and use handbrake",
+      },
+      {
+        question: "What is the maximum speed limit on expressways in the Philippines?",
+        img: "",
+        options: ["60 km/h", "80 km/h", "100 km/h", "120 km/h"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "100 km/h",
+      },
+      {
+        question: "When turning at an intersection, what should you check first?",
+        img: "",
+        options: ["Your mirrors and blind spots", "Your fuel gauge", "Your dashboard lights", "Your horn"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Your mirrors and blind spots",
+      },
+      {
+        question: "What does a yellow and black striped barrier indicate?",
+        img: "",
+        options: ["Do not enter", "Pedestrian crossing", "Dangerous area", "Loading zone"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Do not enter",
+      },
+      {
+        question: "How often should you renew your driver's license in the Philippines?",
+        img: "",
+        options: ["Every year", "Every 2 years", "Every 3 years", "Every 5 years"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Every 3 years",
+      },
+      {
+        question: "What is the proper way to signal a right turn?",
+        img: "",
+        options: ["Arm extended to the left", "Arm extended to the right", "Hand palm up extended upward", "Arm extended downward"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Hand palm up extended upward",
+      },
+      {
+        question: "When should seat belts be worn in a vehicle?",
+        img: "",
+        options: ["Only on highways", "Only for children", "Always while the vehicle is in motion", "Only in bad weather"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Always while the vehicle is in motion",
+      },
+      {
+        question: "What is the proper action when approaching a school zone?",
+        img: "",
+        options: ["Speed up", "Maintain speed", "Reduce speed and be alert", "Honk loudly"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Reduce speed and be alert",
+      },
+      {
+        question: "What does the triangular red and white sign indicate?",
+        img: "",
+        options: ["Warning sign", "Stop sign", "Speed limit", "Mandatory instruction"],
+        input: "false",
+        explanation: "",
+        correctAnswer: "Warning sign",
+      },
+    ];
+    
+    let currentQuestion = 0;
+    let score = 0;
+    let answered = 0;
+
+    const btnPlay = document.getElementById("btn-play");
+    const btnSkip = document.getElementById("btn-skip");
+    const btnAnswer = document.getElementById("btn-answer");
+    const btnNext = document.getElementById("btn-next");
+    const btnReplay = document.getElementById("btn-replay");
+    const p_total_question = document.getElementById("p-total-question");
+
+    btnPlay.addEventListener("click", function () {
+      document.querySelector(".cover").style.display = "none";
+      document.querySelector(".section:nth-of-type(2)").style.display = "flex";
+      showQuestion();
+      p_total_question.textContent = "Total Questions: " + questions.length;
+    });
+
+    function showQuestion() {
+      const question = questions[currentQuestion];
+      document.getElementById("question").textContent = question.question;
+      document.getElementById("explanation").textContent = question.explanation;
+      document.getElementById("progress").textContent =
+        "Q" + (currentQuestion + 1) + "/" + questions.length;
+
+      // Show/Hide options and input based on input value
+      if (question.input === "true") {
+        document.getElementById("options").style.display = "none";
+        document.getElementById("input-answer").style.display = "block";
+        document.getElementById("input-answer").value = "";
+      } else {
+        document.getElementById("options").style.display = "flex";
+        document.getElementById("input-answer").style.display = "none";
+
+        // Populate options
+        const optionsList = document.getElementById("options");
+        optionsList.innerHTML = "";
+        question.options.forEach((option) => {
+          const li = document.createElement("li");
+          li.textContent = option;
+          li.addEventListener("click", function () {
+            selectOption(li);
+          });
+          optionsList.appendChild(li);
+        });
+      }
+
+      // Reset status answer
+      document.getElementById("status-answer").innerHTML = "";
+      document.getElementById("btn-answer").style.display = "block";
+      document.getElementById("btn-next").style.display = "none";
+
+      // Show/Hide image
+      if (question.img) {
+        document.getElementById("img").src = question.img;
+        document.getElementById("img").style.display = "block";
+      } else {
+        document.getElementById("img").style.display = "none";
+      }
+    }
+
+    function selectOption(element) {
+      // Remove previous selection
+      document
+        .querySelectorAll("#options li")
+        .forEach((li) => li.classList.remove("selected"));
+
+      // Add selection to clicked option
+      element.classList.add("selected");
+    }
+
+    btnAnswer.addEventListener("click", function () {
+      const question = questions[currentQuestion];
+      let userAnswer = "";
+
+      if (question.input === "true") {
+        userAnswer = document.getElementById("input-answer").value;
+      } else {
+        const selectedOption = document.querySelector("#options li.selected");
+        userAnswer = selectedOption ? selectedOption.textContent : "";
+      }
+
+      if (userAnswer === "") {
+        alert("Please select an answer");
+        return;
+      }
+
+      answered++;
+
+      if (userAnswer === question.correctAnswer) {
+        score++;
+        document.getElementById("status-answer").innerHTML =
+          "<span style='color: green;'>✓ Correct</span>";
+      } else {
+        document.getElementById("status-answer").innerHTML =
+          "<span style='color: red;'>✗ Incorrect</span><br><span>Correct Answer: " +
+          question.correctAnswer +
+          "</span>";
+      }
+
+      document.getElementById("btn-answer").style.display = "none";
+      document.getElementById("btn-next").style.display = "block";
+    });
+
+    btnNext.addEventListener("click", function () {
+      currentQuestion++;
+
+      if (currentQuestion < questions.length) {
+        showQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    btnSkip.addEventListener("click", function () {
+      currentQuestion++;
+
+      if (currentQuestion < questions.length) {
+        showQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    function showResult() {
+      document.querySelector(".section:nth-of-type(2)").style.display = "none";
+      document.querySelector(".result").style.display = "flex";
+      document.getElementById("score").textContent =
+        score + " / " + questions.length;
+    }
+
+    btnReplay.addEventListener("click", function () {
+      currentQuestion = 0;
+      score = 0;
+      answered = 0;
+      document.querySelector(".result").style.display = "none";
+      document.querySelector(".cover").style.display = "flex";
+    });
+  </script>
+</body>
+</html>
